@@ -27,6 +27,7 @@
         <activity android:name="com.bitspilani.apogeear.LoginActivity">
 
         </activity>
+        <activity android:name=".Vuforia"/>
         <activity android:name="com.bitspilani.apogeear.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
