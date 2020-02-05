@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bitspilani.apogeear.Fragments.Home;
+import com.bitspilani.apogeear.Fragments.Leaderboard;
 import com.bitspilani.apogeear.Fragments.Map;
 import com.bitspilani.apogeear.Fragments.More;
 import com.bitspilani.apogeear.Fragments.Profile;
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +28,11 @@ import de.blox.graphview.ViewHolder;
 public class MainActivity extends AppCompatActivity {
 
     private int nodeCount = 1;
-    BottomNavigationView bottomNavigationView;
+    //BottomNavigationView bottomNavigationView;
+    MeowBottomNavigation bottomNavigationView;
+    Fragment fragment;
+    ArrayList<Fragment> fragments;
+    int selected=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +43,64 @@ public class MainActivity extends AppCompatActivity {
         //GraphView graphView = findViewById(R.id.graph);
         final ArrayList<String> ev=new ArrayList<String>();
 
+        fragment = new Home();
+        fragments=new ArrayList<>();
+
         loadFragment(new Home());
 
-        bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView=findViewById(R.id.bottom_navigation1);
+        //bottomNavigationView.setSelectedItemId(R.id.home);
+
+        bottomNavigationView.add(new MeowBottomNavigation.Model(0,R.drawable.ic_launcher_foreground));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(1,R.drawable.ic_launcher_foreground));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(2,R.drawable.ic_launcher_foreground));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(3,R.drawable.ic_launcher_foreground));
+        bottomNavigationView.add(new MeowBottomNavigation.Model(4,R.drawable.ic_launcher_foreground));
+
+        fragments.add(new Profile());
+        fragments.add(new Home());
+        fragments.add(new Map());
+        fragments.add(new Leaderboard());
+        fragments.add(new More());
+
+        bottomNavigationView.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+            @Override
+            public void onClickItem(MeowBottomNavigation.Model item) {
+                selected=item.getId();
+                loadFragment(fragments.get(selected));
+            }
+
+        });
+
+        bottomNavigationView.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+            @Override
+            public void onShowItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()){
+                    case 1 :
+                        fragment=new Home();
+                        break;
+
+                    case 2:
+                        fragment=new Map();
+                        break;
+                    case 0:
+                        fragment=new Profile();
+                        break;
+
+                    case 4:
+                        fragment=new More();
+                        break;
+                    case 3:
+                        fragment=new Leaderboard();
+                        break;
+                }
+
+            }
+        });
+
+        loadFragment(fragments.get(selected));
+        bottomNavigationView.show(1,true);
+
 
         //Button filter=findViewById(R.id.filter);
 //        filter.setOnClickListener(new View.OnClickListener() {
@@ -90,31 +150,34 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                Fragment fragment=new Home();
-                switch (menuItem.getItemId()){
-                    case R.id.home :
-                        fragment=new Home();
-                        break;
-
-                    case R.id.map:
-                        fragment=new Map();
-                        break;
-                    case R.id.profile:
-                        fragment=new Profile();
-                        break;
-
-                    case R.id.more:
-                        fragment=new More();
-                        break;
-                }
-
-                return loadFragment(fragment);
-            }
-        });
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//
+//                Fragment fragment=new Home();
+//                switch (menuItem.getItemId()){
+//                    case R.id.home :
+//                        fragment=new Home();
+//                        break;
+//
+//                    case R.id.map:
+//                        fragment=new Map();
+//                        break;
+//                    case R.id.profile:
+//                        fragment=new Profile();
+//                        break;
+//
+//                    case R.id.more:
+//                        fragment=new More();
+//                        break;
+//                    case R.id.leaderboard:
+//                        fragment=new Leaderboard();
+//                        break;
+//                }
+//
+//                return loadFragment(fragment);
+//            }
+//        });
 
 
 

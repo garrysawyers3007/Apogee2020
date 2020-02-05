@@ -19,6 +19,11 @@
         android:id="@+id/map"/>
     <item
         android:color="#1A237E"
+        android:title="Leaderboard"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:id="@+id/leaderboard"/>
+    <item
+        android:color="#1A237E"
         android:title="More"
         android:icon="@drawable/ic_launcher_foreground"
         android:id="@+id/more"/>
