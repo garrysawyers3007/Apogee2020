@@ -137,6 +137,8 @@ public class Map extends Fragment implements OnMapReadyCallback {
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng) {
+
+                // on click marker appereance
                 markerOptions1 = new MarkerOptions();
                 markerOptions1.position(latLng);
                 map.clear();
@@ -339,16 +341,4 @@ public class Map extends Fragment implements OnMapReadyCallback {
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
 }
