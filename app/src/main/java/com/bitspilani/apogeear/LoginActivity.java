@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -36,10 +38,13 @@ import java.util.StringTokenizer;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 9001;
+    private EditText userEmail,userPassword;
+    private SignInButton button;
+    private Button loginBtn;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-    SignInButton button;
+
+    private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
 
     @Override
@@ -179,8 +184,6 @@ public class LoginActivity extends AppCompatActivity {
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
-
-
                     }
                 }
             });
