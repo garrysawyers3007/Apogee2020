@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':arapogee-debug', ':VuforiaWrapper'
 rootProject.name='Apogee AR'

@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.bitspilani.apogeear.MainActivity;
 import com.bitspilani.apogeear.R;
-import com.bitspilani.apogeear.Vuforia;
+import com.bitspilani.arapogee.UnityPlayerActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.vuforia.Vuforia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,7 +216,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(@NonNull Marker marker) {
-                    Intent intent = new Intent(getActivity(), Vuforia.class);
+                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                     startActivity(intent);
                     return true;
                 }
