@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bitspilani.apogeear.Adapters.VerticalAdapter;
+import com.bitspilani.apogeear.Models.Event_Details;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

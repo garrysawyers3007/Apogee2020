@@ -3,9 +3,11 @@ package com.bitspilani.apogeear;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.bitspilani.apogeear.Adapters.ViewPagerAdapter;
 import com.bitspilani.apogeear.Fragments.Home;
 import com.bitspilani.apogeear.Fragments.Leaderboard;
 import com.bitspilani.apogeear.Fragments.Map;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     ArrayList<Fragment> fragments;
     int selected=1;
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelected(1,true);
+
+        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
+       // viewPager=findViewById(R.id.viewpager);
+        //viewPager.setAdapter(viewPagerAdapter);
 
         bottomNavigationView.addBubbleListener(
                 new OnBubbleClickListener() {
@@ -78,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        //bottomNavigationView.setupBubbleTabBar(viewPager);
 
 
 

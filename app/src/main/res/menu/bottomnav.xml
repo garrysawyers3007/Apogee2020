@@ -8,6 +8,10 @@
         android:iconTint="#fff"
         android:id="@+id/profile"/>
 
+        android:id="@+id/profile"
+        android:iconTint="#ffffff"/>
+
+
     <item
         android:color="#1A237E"
         android:title="Home"
@@ -15,23 +19,29 @@
         android:icon="@drawable/ic_launcher_background"
         android:iconTint="#fff"
         android:id="@+id/home"/>
+        android:icon="@drawable/ic_home"
+        android:id="@+id/home"
+        android:iconTint="#ffffff"/>
+
     <item
         android:color="#1A237E"
         android:title="Map"
         android:icon="@drawable/ic_launcher_foreground"
+
         android:iconTint="#fff"
         android:id="@+id/map"/>
     <item
         android:color="#1A237E"
         android:title="Leaderboard"
-        android:iconTint="#fff"
         android:icon="@drawable/ic_launcher_foreground"
-        android:id="@+id/leaderboard"/>
+        android:id="@+id/leaderboard"
+        android:iconTint="#ffffff"/>
+
     <item
         android:color="#1A237E"
-        android:iconTint="#fff"
         android:title="More"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:id="@+id/more"/>
+        android:icon="@drawable/ic_more"
+        android:id="@+id/more"
+        android:iconTint="#ffffff"/>
 
 </menu>

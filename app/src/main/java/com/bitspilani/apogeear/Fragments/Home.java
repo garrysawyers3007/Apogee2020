@@ -1,7 +1,6 @@
 package com.bitspilani.apogeear.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,9 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bitspilani.apogeear.Event_Details;
+import com.bitspilani.apogeear.Models.Event_Details;
 import com.bitspilani.apogeear.R;
-import com.bitspilani.apogeear.VerticalAdapter;
+import com.bitspilani.apogeear.Adapters.VerticalAdapter;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

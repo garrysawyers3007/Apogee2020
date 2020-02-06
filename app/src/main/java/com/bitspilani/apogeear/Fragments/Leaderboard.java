@@ -1,7 +1,5 @@
 package com.bitspilani.apogeear.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bitspilani.apogeear.LeaderBoardAdapter;
+import com.bitspilani.apogeear.Adapters.LeaderBoardAdapter;
 import com.bitspilani.apogeear.R;
-import com.bitspilani.apogeear.Rank;
+import com.bitspilani.apogeear.Models.Rank;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
