@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.bitspilani.apogeear.Fragments.Home;
 import com.bitspilani.apogeear.Fragments.Leaderboard;
@@ -15,6 +12,8 @@ import com.bitspilani.apogeear.Fragments.Map;
 import com.bitspilani.apogeear.Fragments.More;
 import com.bitspilani.apogeear.Fragments.Profile;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.fxn.BubbleTabBar;
+import com.fxn.OnBubbleClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int nodeCount = 1;
     //BottomNavigationView bottomNavigationView;
-    MeowBottomNavigation bottomNavigationView;
+    BubbleTabBar bottomNavigationView;
     Fragment fragment;
     ArrayList<Fragment> fragments;
     int selected=1;
@@ -44,111 +43,44 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<String> ev=new ArrayList<String>();
 
         fragment = new Home();
+
+        loadFragment(fragment);
         fragments=new ArrayList<>();
 
-        loadFragment(new Home());
 
-        bottomNavigationView=findViewById(R.id.bottom_navigation1);
-        //bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView=findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelected(1,true);
 
-        bottomNavigationView.add(new MeowBottomNavigation.Model(0,R.drawable.ic_launcher_foreground));
-        bottomNavigationView.add(new MeowBottomNavigation.Model(1,R.drawable.ic_launcher_foreground));
-        bottomNavigationView.add(new MeowBottomNavigation.Model(2,R.drawable.ic_launcher_foreground));
-        bottomNavigationView.add(new MeowBottomNavigation.Model(3,R.drawable.ic_launcher_foreground));
-        bottomNavigationView.add(new MeowBottomNavigation.Model(4,R.drawable.ic_launcher_foreground));
-
-        fragments.add(new Profile());
-        fragments.add(new Home());
-        fragments.add(new Map());
-        fragments.add(new Leaderboard());
-        fragments.add(new More());
-
-        bottomNavigationView.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
+        bottomNavigationView.addBubbleListener(
+                new OnBubbleClickListener() {
             @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                selected=item.getId();
-                loadFragment(fragments.get(selected));
-            }
-
-        });
-
-        bottomNavigationView.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case 1 :
+            public void onBubbleClick(int i) {
+                switch (i){
+                    case R.id.home :
                         fragment=new Home();
                         break;
 
-                    case 2:
+                    case R.id.map:
                         fragment=new Map();
                         break;
-                    case 0:
+                    case R.id.profile:
                         fragment=new Profile();
                         break;
 
-                    case 4:
+                    case R.id.more:
                         fragment=new More();
                         break;
-                    case 3:
+                    case R.id.leaderboard:
                         fragment=new Leaderboard();
                         break;
                 }
-
+                loadFragment(fragment);
             }
+
         });
 
-        loadFragment(fragments.get(selected));
-        bottomNavigationView.show(1,true);
 
 
-        //Button filter=findViewById(R.id.filter);
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                try
-//                {
-//                    AlertDialog.Builder dialog1=new AlertDialog.Builder(MainActivity.this);
-//                    final String[] Types={"coding and fintech","quizzing and strategy"};
-//                    final boolean[] _selections = {false,false};
-//                    dialog1.setTitle("Categories");
-//                    //dialog1.setMessage("Pick your category");
-//                    dialog1.setMultiChoiceItems(Types, _selections, new DialogInterface.OnMultiChoiceClickListener()
-//                    {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which, boolean isChecked)
-//                        {
-//                            if(isChecked)
-//                            {
-//                                ev.add(Types [which]);
-//                                Toast.makeText(getApplicationContext(),"You have selected " + Types [which],Toast.LENGTH_SHORT).show();
-//
-//                            }
-//                        }
-//                    });
-//
-//                    dialog1.setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            Toast.makeText(getApplicationContext(),"SAVED",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                    dialog1.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            Toast.makeText(getApplicationContext(),"CANCELED",Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                    dialog1.show();
-//                }
-//                catch(Exception ex)
-//                {
-//                    Toast.makeText(getApplicationContext(),ex.toString(),Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
 
 //        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 //            @Override
@@ -181,20 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//            final BaseGraphAdapter<ViewHolder> adapter=new BaseGraphAdapter<ViewHolder>(graph) {
-//
-//                    @NonNull
-//                    @Override
-//                    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.node, parent, false);
-//                        return new SimpleViewHolder(view);
-//                    }
-//
-//                    @Override
-//                    public void onBindViewHolder(ViewHolder viewHolder, Object data, int position) {
-//                        ((SimpleViewHolder)viewHolder).textView.setText(data.toString());
-//                    }
-//            };
 
 //
 //        FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -292,24 +210,12 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //
 //                });
-//        graphView.setAdapter(adapter);
-//        adapter.setAlgorithm(new FruchtermanReingoldAlgorithm(100));
-//        graphView.setZoomEnabled(true);
 
 
 
     }
 
 
-    private String getNodeText() {
-        return "Node " + nodeCount++;
-    }
-    private String toDate(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String currentTime = sdf.format(new Date());
-        return currentTime.trim();
-
-    }
     private boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
@@ -324,16 +230,6 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-class SimpleViewHolder extends ViewHolder {
-    TextView textView;
 
-    SimpleViewHolder(View itemView) {
-        super(itemView);
-        textView = itemView.findViewById(R.id.textView);
-    }
-
-
-
-}
 
 
