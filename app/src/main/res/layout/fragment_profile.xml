@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_exit"
+            android:id="@+id/logout"
+            android:layout_alignParentRight="true"/>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/yyyy"
             android:layout_width="160dp"
@@ -92,8 +99,8 @@
             android:layout_height="170dip"
             android:layout_centerVertical="true"
             android:indeterminate="false"
-            android:outlineSpotShadowColor="#fff"
-            android:outlineAmbientShadowColor="#fff"
+            android:outlineSpotShadowColor="#ffffff"
+            android:outlineAmbientShadowColor="#ffffff"
             android:progressDrawable="@drawable/circle"
             android:background="@drawable/circle_shape"
             style="?android:attr/progressBarStyleHorizontal"

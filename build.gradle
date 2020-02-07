@@ -4,11 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-<<<<<<< Updated upstream
         maven(){ url 'https://jitpack.io'}
-=======
-        maven { url 'https://jitpack.io' }
->>>>>>> Stashed changes
         
     }
     dependencies {

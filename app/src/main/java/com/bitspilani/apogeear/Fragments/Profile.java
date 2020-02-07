@@ -1,6 +1,7 @@
 package com.bitspilani.apogeear.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,14 +12,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bitspilani.apogeear.LoginActivity;
 import com.bitspilani.apogeear.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,10 +42,14 @@ public class Profile extends Fragment {
     private long totalTimeCountInMilliseconds;
     private long startTime,endTime;
     TextView showtime;
+    ImageView logout;
+    FirebaseAuth mAuth;
     ProgressBar timer;
     private long timeBlinkInMilliseconds; // start time of start blinking
     private boolean blink;
     Calendar c;
+    GoogleSignInOptions gso;
+    GoogleSignInClient googleSignInClient;
 
 
     public Profile() {
@@ -53,9 +64,28 @@ public class Profile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         showtime = view.findViewById(R.id.tvTimeCount);
         timer = view.findViewById(R.id.progressbar);
+        logout=view.findViewById(R.id.logout);
+        mAuth=FirebaseAuth.getInstance();
+
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         c=Calendar.getInstance();
         c.getTimeInMillis();
+        gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .build();
+        googleSignInClient= GoogleSignIn.getClient(getActivity(),gso);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleSignInClient.signOut();
+                mAuth.signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+                Toast.makeText(getContext(),"Signed Out",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         db.collection("Coins").document("Universal Coins").get()
@@ -106,8 +136,12 @@ public class Profile extends Fragment {
                 int hours = (int) ((leftTimeInMilliseconds/ (1000 * 60 * 60)) % 24);
                 //i++;
                 //Setting the Progress Bar to decrease wih the timer
-                if(endTime!=startTime)
-                timer.setProgress((int) (100*(1-(totalTimeCountInMilliseconds / (endTime-startTime)))));
+                Log.d("total count",""+(endTime-startTime));
+                Log.d("lefttt",""+leftTimeInMilliseconds);
+                if(endTime!=startTime) {
+                    timer.setMax((int)(endTime-startTime));
+                    timer.setProgress((int) (endTime-startTime-leftTimeInMilliseconds));
+                }
                 else
                     timer.setProgress(0);
 

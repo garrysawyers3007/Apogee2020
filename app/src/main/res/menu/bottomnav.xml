@@ -4,44 +4,34 @@
     <item
         android:color="#1A237E"
         android:title="Profile"
-        android:icon="@drawable/ic_launcher_background"
-        android:iconTint="#fff"
+        android:icon="@drawable/ic_person"
+        android:iconTint="#ffffff"
         android:id="@+id/profile"/>
-
-        android:id="@+id/profile"
-        android:iconTint="#ffffff"/>
-
 
     <item
         android:color="#1A237E"
         android:title="Home"
         android:checked="true"
-        android:icon="@drawable/ic_launcher_background"
-        android:iconTint="#fff"
-        android:id="@+id/home"/>
         android:icon="@drawable/ic_home"
-        android:id="@+id/home"
-        android:iconTint="#ffffff"/>
-
+        android:iconTint="#ffffff"
+        android:id="@+id/home"/>
     <item
         android:color="#1A237E"
         android:title="Map"
         android:icon="@drawable/ic_launcher_foreground"
-
-        android:iconTint="#fff"
+        android:iconTint="#ffffff"
         android:id="@+id/map"/>
     <item
         android:color="#1A237E"
         android:title="Leaderboard"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:id="@+id/leaderboard"
-        android:iconTint="#ffffff"/>
-
+        android:iconTint="#ffffff"
+        android:icon="@drawable/ic_leaderboard"
+        android:id="@+id/leaderboard"/>
     <item
         android:color="#1A237E"
+        android:iconTint="#ffffff"
         android:title="More"
         android:icon="@drawable/ic_more"
-        android:id="@+id/more"
-        android:iconTint="#ffffff"/>
+        android:id="@+id/more"/>
 
 </menu>

@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Intent i = new Intent(LoginActivity.this,  EventList.class);
+                                    Intent i = new Intent(LoginActivity.this,  MainActivity.class);
                                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
 
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                     else{
-                        Intent i = new Intent(LoginActivity.this, EventList.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();

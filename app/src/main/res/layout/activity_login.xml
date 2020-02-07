@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="#151515">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="#a6a6a6"
+        android:elevation="7dp"
         android:layout_centerInParent="true">
 
         <RelativeLayout
@@ -93,7 +96,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/line"
             android:background="@drawable/round_btn"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp">
 
         </com.google.android.gms.common.SignInButton>
 
