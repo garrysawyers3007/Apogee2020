@@ -60,9 +60,9 @@ public class Leaderboard extends Fragment {
                 Comparator<Rank> comparebycoins=(Rank o1,Rank o2)-> (int)(o2.getCoins()-o1.getCoins());
                 Collections.sort(list,comparebycoins);
 
-                leaderBoardAdapter=new LeaderBoardAdapter(list,getContext());
-                leaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
-                leaderboard.setAdapter(leaderBoardAdapter);
+//                leaderBoardAdapter=new LeaderBoardAdapter(list,getContext());
+//                leaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
+//                leaderboard.setAdapter(leaderBoardAdapter);
             }
         });
         return view;

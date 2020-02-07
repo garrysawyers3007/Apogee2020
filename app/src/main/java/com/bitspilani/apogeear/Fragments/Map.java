@@ -87,8 +87,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

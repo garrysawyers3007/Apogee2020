@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //                        break;
 //
 //                    case R.id.more:
-//                        fragment=new More();
+//                        fragment=new MoreModel();
 //                        break;
 //                    case R.id.leaderboard:
 //                        fragment=new Leaderboard();
