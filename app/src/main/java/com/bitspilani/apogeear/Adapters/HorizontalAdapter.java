@@ -39,6 +39,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.text.setText(event_details.get(position).getName());
         Log.d("Event",event_details.get(position).getName());
+        if(position==event_details.size()-1)
+            holder.hor.setVisibility(View.GONE);
     }
 
 
@@ -50,9 +52,11 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView text;
+        View hor;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text=itemView.findViewById(R.id.horizontal_item_text);
+            hor=itemView.findViewById(R.id.hor);
         }
     }
 }
