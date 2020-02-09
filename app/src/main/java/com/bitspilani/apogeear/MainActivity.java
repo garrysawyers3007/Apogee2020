@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.bitspilani.apogeear.Adapters.ViewPagerAdapter;
 import com.bitspilani.apogeear.Fragments.Home;
@@ -17,6 +18,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.fxn.BubbleTabBar;
 import com.fxn.OnBubbleClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ramotion.foldingcell.FoldingCell;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         final Graph graph = new Graph();
         //GraphView graphView = findViewById(R.id.graph);

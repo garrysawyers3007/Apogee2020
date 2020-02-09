@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="#fff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/coinimage"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="Android Name"
+            android:layout_marginLeft="15dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textSize="30sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

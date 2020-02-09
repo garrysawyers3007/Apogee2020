@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.bitspilani.apogeear.Adapters.MoreAdapter;
 import com.bitspilani.apogeear.Models.MoreModel;
 import com.bitspilani.apogeear.R;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,8 @@ public class More extends Fragment {
         recyclerView = view.findViewById(R.id.more_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+      //  recyclerView.setLayoutManager(new CardSliderLayoutManager(getActivity()));
+      //    new CardSnapHelper().attachToRecyclerView(recyclerView);
 
         list = new ArrayList<>();
         list.add(new MoreModel("Contact Us",R.drawable.next));

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#292929"
+android:orientation="vertical"
+tools:context="com.bitspilani.apogeear.CharacterSelection">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/character_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_weight="2"
+    android:layout_height="0dp"
+    android:clipChildren="false"
+    android:overScrollMode="never"
+    android:scrollbars="horizontal"/>
+
+</LinearLayout>
