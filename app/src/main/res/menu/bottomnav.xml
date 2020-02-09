@@ -2,34 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:color="#1A237E"
         android:title="Profile"
         android:icon="@drawable/ic_person"
-        android:iconTint="#ffffff"
         android:id="@+id/profile"/>
 
     <item
-        android:color="#1A237E"
         android:title="Home"
         android:checked="true"
         android:icon="@drawable/ic_home"
-        android:iconTint="#ffffff"
         android:id="@+id/home"/>
     <item
-        android:color="#1A237E"
         android:title="Map"
         android:icon="@drawable/ic_launcher_foreground"
-        android:iconTint="#ffffff"
         android:id="@+id/map"/>
     <item
-        android:color="#1A237E"
         android:title="Leaderboard"
-        android:iconTint="#ffffff"
         android:icon="@drawable/ic_leaderboard"
         android:id="@+id/leaderboard"/>
     <item
-        android:color="#1A237E"
-        android:iconTint="#ffffff"
         android:title="More"
         android:icon="@drawable/ic_more"
         android:id="@+id/more"/>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.bitspilani.apogeear.Adapters.ViewPagerAdapter;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int nodeCount = 1;
     //BottomNavigationView bottomNavigationView;
-    BubbleTabBar bottomNavigationView;
+    BottomNavigationView bottomNavigationView;
     Fragment fragment;
     ArrayList<Fragment> fragments;
     int selected=1;
@@ -44,90 +45,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bottomNavigationView=findViewById(R.id.bottom_nav);
 
-        final Graph graph = new Graph();
-        //GraphView graphView = findViewById(R.id.graph);
         final ArrayList<String> ev=new ArrayList<String>();
 
         fragment = new Home();
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         loadFragment(fragment);
         fragments=new ArrayList<>();
-
-
-        bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelected(1,true);
 
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
        // viewPager=findViewById(R.id.viewpager);
         //viewPager.setAdapter(viewPagerAdapter);
 
-        bottomNavigationView.addBubbleListener(
-                new OnBubbleClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onBubbleClick(int i) {
-                switch (i){
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
                     case R.id.home :
                         fragment=new Home();
-                        break;
-
+                        loadFragment(fragment);
+                        return true;
                     case R.id.map:
                         fragment=new Map();
-                        break;
+                        loadFragment(fragment);
+                        return true;
                     case R.id.profile:
                         fragment=new Profile();
-                        break;
-
+                        loadFragment(fragment);
+                        return true;
                     case R.id.more:
                         fragment=new More();
-                        break;
+                        loadFragment(fragment);
+                        return true;
                     case R.id.leaderboard:
                         fragment=new Leaderboard();
-                        break;
+                        loadFragment(fragment);
+                        return true;
                 }
-                loadFragment(fragment);
-            }
+                return false;
+            }});
 
-        });
-
-        //bottomNavigationView.setupBubbleTabBar(viewPager);
-
-
-
-
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//
-//                Fragment fragment=new Home();
-//                switch (menuItem.getItemId()){
-//                    case R.id.home :
-//                        fragment=new Home();
-//                        break;
-//
-//                    case R.id.map:
-//                        fragment=new Map();
-//                        break;
-//                    case R.id.profile:
-//                        fragment=new Profile();
-//                        break;
-//
-//                    case R.id.more:
-//                        fragment=new MoreModel();
-//                        break;
-//                    case R.id.leaderboard:
-//                        fragment=new Leaderboard();
-//                        break;
-//                }
-//
-//                return loadFragment(fragment);
-//            }
-//        });
-
-
-
-
-//
 //        FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        ArrayList<Event_Details> list=new ArrayList<>();
 //        ArrayList<String> ev=new ArrayList<>();
@@ -224,10 +183,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                });
 
-
-
     }
-
 
     private boolean loadFragment(Fragment fragment) {
         //switching fragment
