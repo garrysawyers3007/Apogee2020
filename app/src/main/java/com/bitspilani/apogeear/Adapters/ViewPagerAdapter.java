@@ -20,32 +20,20 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
-        Fragment fragment;
         switch (position){
-            case R.id.home :
-                fragment=new Home();
-                break;
-
-            case R.id.map:
-                fragment=new Map();
-                break;
-            case R.id.profile:
-                fragment=new Profile();
-                break;
-
-            case R.id.more:
-                fragment=new More();
-                break;
-            case R.id.leaderboard:
-                fragment=new Leaderboard();
-                break;
+            case 0:
+                return new Profile();
+            case 1:
+                return new Map();
+            case 2 :
+                return new Home();
+            case 3:
+                return new Leaderboard();
+            case 4:
+                return new More();
             default:
-                fragment=new Home();
-                break;
+                return new Home();
         }
-
-        return fragment;
     }
 
     @Override
