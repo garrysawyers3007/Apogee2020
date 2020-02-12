@@ -37,7 +37,7 @@ public class CharSelect extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setPadding(100,400,100,0);
 
-        Integer[] colors_temp = {getResources().getColor(R.color.gold),getResources().getColor(R.color.dark),getResources().getColor(R.color.custom_yellow),getResources().getColor(R.color.colorAccent)};
+        Integer[] colors_temp = {getResources().getColor(R.color.gold),getResources().getColor(R.color.BACKGROUND),getResources().getColor(R.color.PRIMARY_VARIANT),getResources().getColor(R.color.PRIMARY_VARIANT)};
         colors = colors_temp;
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

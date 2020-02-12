@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         signIn();
+                        Log.d("here", "here");
                     }
                 });
     }
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        Log.d("here", "here");
     }
 
     @Override
