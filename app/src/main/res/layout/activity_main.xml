@@ -15,23 +15,72 @@
         android:layout_above="@id/bottom_nav"
         android:id="@+id/viewpager"/>
 
-    <devlight.io.library.ntb.NavigationTabBar
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:elevation="15dp"
+    <com.gauravk.bubblenavigation.BubbleNavigationLinearView
         android:id="@+id/bottom_nav"
-        android:layout_width="300dp"
-        android:layout_height="54.5dp"
-        app:ntb_animation_duration="400"
-        app:ntb_preview_colors="@array/red_wine"
-        app:ntb_corners_radius="25dp"
-        app:ntb_scaled="false"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:ntb_bg_color="@color/back_shade4"
-        app:ntb_badge_bg_color="@color/gold"
-        app:ntb_badged="true" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/profile_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/app_yellow"
+            app:bt_icon="@drawable/ic_person"
+            app:bt_title="Profile"
+            app:bt_padding="5dp"
+            app:bt_titlePadding="5dp" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/map_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/app_yellow"
+            app:bt_icon="@drawable/maps_icon"
+            app:bt_title="Map"
+            app:bt_padding="5dp"
+            app:bt_titlePadding="5dp" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/home_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/app_yellow"
+            app:bt_icon="@drawable/ic_home"
+            app:bt_title="Home"
+            app:bt_padding="5dp"
+            app:bt_titlePadding="5dp" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/leaderboard_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/app_yellow"
+            app:bt_icon="@drawable/ic_leaderboard"
+            app:bt_title="Leaderboard"
+            app:bt_padding="5dp"
+            app:bt_titlePadding="5dp" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/more_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/gold"
+            app:bt_colorInactive="@color/app_yellow"
+            app:bt_icon="@drawable/ic_more"
+            app:bt_title="More"
+            app:bt_padding="5dp"
+            app:bt_titlePadding="5dp" />
+
+    </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 
 
 <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
