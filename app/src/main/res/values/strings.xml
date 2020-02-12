@@ -8,4 +8,12 @@
     naman api: AIzaSyBwKtf-xrcvpcMRO-Z3EZoY12fwua9u16I
     anubhav api: AIzaSyCXE5YpbQxXCNN2ejvNn2aXV0fPCfpuXmQ
     -->
+
+    <string-array name="red_wine">
+        <item>#ff670729</item>
+        <item>#ff7a0c2d</item>
+        <item>#ff96092d</item>
+        <item>#ffa10a37</item>
+        <item>#ffbf013b</item>
+    </string-array>
 </resources>

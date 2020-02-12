@@ -2,6 +2,7 @@ package com.bitspilani.apogeear;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -28,10 +29,11 @@ import java.util.Locale;
 
 import de.blox.graphview.Graph;
 import de.blox.graphview.ViewHolder;
+import devlight.io.library.ntb.NavigationTabBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    //BottomNavigationView bottomNavigationView;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
 
@@ -40,57 +42,131 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView=findViewById(R.id.bottom_nav);
-        viewPager=findViewById(R.id.viewpager);
+        final NavigationTabBar bottomNavigationView = (NavigationTabBar) findViewById(R.id.bottom_nav);
 
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        final ArrayList<NavigationTabBar.Model> models5 = new ArrayList<>();
+        models5.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_person), ContextCompat.getColor(this, R.color.back_shade1))
+                        .badgeTitle("Profile")
+                        .title("title")
+                        .build()
+        );
+        models5.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.maps_icon), ContextCompat.getColor(this, R.color.back_shade1))
+                        .badgeTitle("Map")
+                        .title("title")
+                        .build()
+        );
+        models5.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_home), ContextCompat.getColor(this, R.color.back_shade1))
+                        .badgeTitle("Home")
+                        .title("title")
+                        .build()
+        );
+        models5.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_leaderboard), ContextCompat.getColor(this, R.color.back_shade1))
+                        .badgeTitle("Leaderboard")
+                        .title("title")
+                        .build()
+        );
+        models5.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_more), ContextCompat.getColor(this, R.color.back_shade1)
+                )
+                        .badgeTitle("More")
+                        .title("title")
+                        .build()
+        );
+        bottomNavigationView.setModels(models5);
 
-        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
+        // bottomNavigationView=findViewById(R.id.bottom_nav);
+        viewPager = findViewById(R.id.viewpager);
+
+        //  bottomNavigationView.setSelectedItemId(R.id.home);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(2);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home :
-                        viewPager.setCurrentItem(2);
-                        break;
-                    case R.id.map:
-                        viewPager.setCurrentItem(1);
-                        break;
-                    case R.id.profile:
-                        viewPager.setCurrentItem(0);
-                        break;
-                    case R.id.more:
-                        viewPager.setCurrentItem(4);
-                        break;
-                    case R.id.leaderboard:
-                        viewPager.setCurrentItem(3);
-                        break;
-                }
-                return false;
-            }});
+        bottomNavigationView.setViewPager(viewPager, 1);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
             }
+
             @Override
-            public void onPageSelected(int position) {
-//                if (prevMenuItem != null)
-//                    prevMenuItem.setChecked(false);
-//                else
-//                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
-              //  prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+            public void onPageSelected(final int position) {
+                for (int i = 0; i < bottomNavigationView.getModels().size(); i++) {
+                    bottomNavigationView.getModels().get(i).showBadge();
+                }
+                bottomNavigationView.getModels().get(position).hideBadge();
             }
+
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(final int state) {
 
             }
         });
+
+        bottomNavigationView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < bottomNavigationView.getModels().size(); i++) {
+                    final NavigationTabBar.Model model = bottomNavigationView.getModels().get(i);
+                    bottomNavigationView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            model.showBadge();
+                        }
+                    }, i * 100);
+                }
+            }
+        }, 500);
+        viewPager.setCurrentItem(2);
     }
+
+
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.home :
+//                        viewPager.setCurrentItem(2);
+//                        break;
+//                    case R.id.map:
+//                        viewPager.setCurrentItem(1);
+//                        break;
+//                    case R.id.profile:
+//                        viewPager.setCurrentItem(0);
+//                        break;
+//                    case R.id.more:
+//                        viewPager.setCurrentItem(4);
+//                        break;
+//                    case R.id.leaderboard:
+//                        viewPager.setCurrentItem(3);
+//                        break;
+//                }
+//                return false;
+//            }});
+//
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//            @Override
+//            public void onPageSelected(int position) {
+//                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+//            }
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//    }
 
 //    private boolean loadFragment(Fragment fragment) {
 //        //switching fragment
@@ -103,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        return false;
 //    }
-
 }
 
 

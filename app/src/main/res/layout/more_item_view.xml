@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:background="@color/dark"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Android Name"
+        android:layout_toLeftOf="@+id/mark"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/convergence"
+        android:textStyle="normal"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="15sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:id="@+id/sub_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="10dp"
+        android:layout_toLeftOf="@+id/mark"
+        android:text="t"
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/convergence"
+        android:layout_below="@+id/more"
+        android:textStyle="normal"
+        android:textColor="@color/dark_grey"
+        android:textSize="9sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <ImageView
+        android:id="@+id/mark"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/next"/>
+
+</RelativeLayout>

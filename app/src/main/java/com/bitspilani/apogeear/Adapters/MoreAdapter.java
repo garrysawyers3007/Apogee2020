@@ -30,7 +30,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
     @Override
     public MoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.more_card_view,null);
+        View view = inflater.inflate(R.layout.more_item_view,null);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +46,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
 
         holder.textView.setText(moreModel.getName());
         holder.imageView.setImageDrawable(context.getResources().getDrawable(moreModel.getImage()));
+        holder.textView2.setText(moreModel.getSubName());
 
     }
 
@@ -56,14 +57,15 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
 
     class MoreViewHolder extends RecyclerView.ViewHolder{
 
-        TextView textView;
+        TextView textView,textView2;
         ImageView imageView;
 
-        public MoreViewHolder(@NonNull View itemView) {
+        MoreViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.more);
             imageView = itemView.findViewById(R.id.mark);
+            textView2 = itemView.findViewById(R.id.sub_more);
         }
     }
 }
