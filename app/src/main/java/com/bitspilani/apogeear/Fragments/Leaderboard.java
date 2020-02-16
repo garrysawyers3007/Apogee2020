@@ -1,5 +1,6 @@
 package com.bitspilani.apogeear.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,10 +18,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
 
 
 /**
@@ -67,5 +70,4 @@ public class Leaderboard extends Fragment {
         });
         return view;
     }
-
 }
