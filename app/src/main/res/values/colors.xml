@@ -66,4 +66,6 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
 
+    <color name="green_hue">#00fdbc</color>
+
 </resources>

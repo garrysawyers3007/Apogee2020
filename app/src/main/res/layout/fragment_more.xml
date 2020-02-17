@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,9 +8,59 @@
     android:layout_marginBottom="?attr/actionBarSize"
     android:scrollbars="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/frag_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginTop="20dp"
+        android:alpha=".90"
+        app:cardBackgroundColor="@color/green_hue"
+        app:cardCornerRadius="20.5dp"
+        app:cardElevation="6dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            app:cardBackgroundColor="@color/back_shade4"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:id="@+id/tv_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:shadowRadius="8"
+                android:text="More"
+                android:textStyle="bold"
+                android:fontFamily="@font/convergence"
+                android:textColor="@color/green_hue"
+                android:textSize="30sp" />
+
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -45,7 +96,7 @@
                         android:fontFamily="@font/convergence"
                         android:paddingStart="12dp"
                         android:background="@drawable/more_heading_bg"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/green_hue"
                         android:text="My Account"/>
 
                     <View
@@ -65,8 +116,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -101,7 +150,7 @@
                         android:textSize="13dp"
                         android:paddingStart="12dp"
                         android:background="@drawable/more_heading_bg"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/green_hue"
                         android:text="Notifications"/>
 
                     <View
@@ -155,7 +204,7 @@
                         android:paddingEnd="12dp"
                         android:paddingStart="12dp"
                         android:background="@drawable/more_heading_bg"
-                        android:textColor="@color/textColorPrimary"
+                        android:textColor="@color/green_hue"
                         android:text="About"/>
 
                     <View
@@ -180,3 +229,8 @@
     </LinearLayout>
 
     </ScrollView>
+    </RelativeLayout>
+
+
+
+    </RelativeLayout>
