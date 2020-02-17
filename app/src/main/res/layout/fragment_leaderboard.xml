@@ -11,13 +11,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="#000">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/leaderboard_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="18dp"
         android:elevation="15dp">
 
         <RelativeLayout
@@ -44,7 +44,7 @@
                 android:layout_toLeftOf="@+id/user_image"
                 android:fontFamily="@font/convergence"
                 android:layout_below="@+id/leader_board"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="40dp"
                 android:textSize="20sp"
                 android:text="Rank"/>
@@ -53,7 +53,7 @@
                 android:id="@+id/user_coins"
                 android:layout_toRightOf="@+id/user_image"
                 android:layout_below="@+id/leader_board"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="35dp"
                 android:text="Coins"
                 android:layout_marginStart="40dp"
                 android:fontFamily="@font/convergence"
@@ -64,11 +64,11 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/user_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:src="@drawable/char_one"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_below="@+id/leader_board"
 
@@ -88,160 +88,11 @@
 
     </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/top_3"
-            android:layout_below="@id/leaderboard_header"
-            android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp"
-                android:gravity="end">
-
-                <TextView
-                    android:id="@+id/second"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:fontFamily="@font/convergence"
-                    android:text="2"
-                    android:gravity="center"
-                    android:textColor="@color/silver"/>
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/rank_2_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/hacker"
-
-                    app:civ_circle_color="@color/white"
-                    app:civ_circle_color_start="@color/silver"
-                    app:civ_circle_color_end="@color/silver"
-                    app:civ_border_color_direction="top_to_bottom"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/silver"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="2dp"
-                    app:civ_shadow_gravity="center"
-                    app:civ_shadow_color="@color/silver"/>
-
-                <TextView
-                    android:id="@+id/second_name"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Naman"
-                    android:gravity="center"
-                    android:textColor="@color/silver"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/first"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/convergence"
-                    android:textSize="30sp"
-                    android:gravity="center"
-                    android:text="1"
-                    android:textColor="@color/gold"/>
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/rank_1_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/spider"
-
-                    app:civ_circle_color="@color/white"
-                    app:civ_circle_color_start="@color/gold"
-                    app:civ_circle_color_end="@color/gold"
-                    app:civ_border_color_direction="top_to_bottom"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/gold"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="2dp"
-                    app:civ_shadow_gravity="center"
-                    app:civ_shadow_color="@color/gold"/>
-
-                <TextView
-                    android:id="@+id/first_name"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Anubhav"
-                    android:gravity="center"
-                    android:textColor="@color/gold"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/third"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:fontFamily="@font/convergence"
-                    android:text="3"
-                    android:gravity="center"
-                    android:textColor="@color/bronze"/>
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/rank_3_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/thor"
-                    android:layout_weight="1"
-
-                    app:civ_circle_color="@color/white"
-                    app:civ_circle_color_start="@color/bronze"
-                    app:civ_circle_color_end="@color/bronze"
-                    app:civ_border_color_direction="top_to_bottom"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/bronze"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="1dp"
-                    app:civ_shadow_gravity="center"
-                    app:civ_shadow_color="@color/bronze"/>
-
-                <TextView
-                    android:id="@+id/third_name"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/convergence"
-                    android:text="Gauransh"
-                    android:gravity="center"
-                    android:textColor="@color/bronze"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/top_3">
+            android:layout_below="@+id/leaderboard_header">
 
             <LinearLayout
                 android:id="@+id/heading"
