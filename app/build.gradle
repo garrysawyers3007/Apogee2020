@@ -51,7 +51,6 @@ dependencies {
     implementation 'com.android.support:design:27.0.0'
     implementation 'devlight.io:navigationtabbar:1.2.5'
     implementation project(':arapogee-debug')
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.fxn769:bubbletabbar:1.0.3'
 
     implementation project(':VuforiaWrapper')
@@ -61,4 +60,6 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 }

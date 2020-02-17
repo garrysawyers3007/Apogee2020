@@ -1,19 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#292929"
+    android:orientation="vertical"
     tools:context=".Fragments.Leaderboard">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#292929">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/leaderboard_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp"
+        android:elevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bg_leaderboards">
+
+            <TextView
+                android:id="@+id/leader_board"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LeaderBoard"
+                android:fontFamily="@font/convergence"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/user_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/user_image"
+                android:fontFamily="@font/convergence"
+                android:layout_below="@+id/leader_board"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="40dp"
+                android:textSize="20sp"
+                android:text="Rank"/>
+
+            <TextView
+                android:id="@+id/user_coins"
+                android:layout_toRightOf="@+id/user_image"
+                android:layout_below="@+id/leader_board"
+                android:layout_marginTop="50dp"
+                android:text="Coins"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/convergence"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/user_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/char_one"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/leader_board"
+
+                app:civ_circle_color="@color/white"
+                app:civ_circle_color_start="@color/black"
+                app:civ_circle_color_end="@color/custom_red"
+                app:civ_border_color_direction="top_to_bottom"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/black"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="1dp"
+                app:civ_shadow_gravity="center"
+                app:civ_shadow_color="@color/color_red"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/top_3"
+            android:layout_below="@id/leaderboard_header"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/second"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/convergence"
+                    android:text="2"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/rank_2_img"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/hacker"
+
+                    app:civ_circle_color="@color/white"
+                    app:civ_circle_color_start="@color/black"
+                    app:civ_circle_color_end="@color/custom_red"
+                    app:civ_border_color_direction="top_to_bottom"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/black"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="1dp"
+                    app:civ_shadow_gravity="center"
+                    app:civ_shadow_color="@color/color_red"/>
+
+                <TextView
+                    android:id="@+id/second_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/convergence"
+                    android:text="Naman"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/first"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/convergence"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"/>
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/rank_1_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/spider"
+
+                    app:civ_circle_color="@color/white"
+                    app:civ_circle_color_start="@color/black"
+                    app:civ_circle_color_end="@color/custom_red"
+                    app:civ_border_color_direction="top_to_bottom"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/black"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="1dp"
+                    app:civ_shadow_gravity="center"
+                    app:civ_shadow_color="@color/color_red"/>
+
+                <TextView
+                    android:id="@+id/first_name"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/convergence"
+                    android:text="Anubhav"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/third"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/convergence"
+                    android:text="3"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/rank_3_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/thor"
+                    android:layout_weight="1"
+
+                    app:civ_circle_color="@color/white"
+                    app:civ_circle_color_start="@color/black"
+                    app:civ_circle_color_end="@color/custom_red"
+                    app:civ_border_color_direction="top_to_bottom"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/black"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="1dp"
+                    app:civ_shadow_gravity="center"
+                    app:civ_shadow_color="@color/color_red"/>
+
+                <TextView
+                    android:id="@+id/third_name"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/convergence"
+                    android:text="Gauransh"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/leader_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/top_3" />
 
-</FrameLayout>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

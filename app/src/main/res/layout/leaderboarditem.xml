@@ -1,93 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:id="@+id/constraint_leaderboard_item"
     android:layout_margin="4dp"
-    android:background="#000022">
+    app:cardBackgroundColor="#000022"
+    app:cardMaxElevation="0dp"
+    app:cardCornerRadius="10dp">
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.17" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
     <TextView
         android:id="@+id/player_rank"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_centerVertical="true"
         android:background="@drawable/circle"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
+        android:fontFamily="@font/convergence"
         android:text="Rank"
         android:textColor="#ffffff"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textStyle="bold" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/dice"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/player_rank"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/dice" />
 
     <TextView
         android:id="@+id/player_name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/cerapro_light"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/convergence"
         android:maxLines="3"
         android:text="Name"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:layout_toRightOf="@+id/circleImageView"
         android:textColor="#ffffff"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/coinimage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="65dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/player_score"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/convergence"
         android:text="Score"
+        android:layout_centerVertical="true"
         android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="17dp"
+        android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
