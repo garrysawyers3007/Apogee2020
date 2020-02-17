@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.bitspilani.apogeear.Models.Event_Details;
 import com.bitspilani.apogeear.R;
 import com.bitspilani.apogeear.Adapters.VerticalAdapter;
+import com.github.vipulasri.timelineview.TimelineView;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

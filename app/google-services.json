@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "141275889773-o5vmi1o9iqb7hr57u0ismcb610q6vnit.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitspilani.myapplication",
+            "certificate_hash": "f11ecf190af33e5e9d02632c2d7ade9bc54cdc58"
+          }
+        },
+        {
           "client_id": "141275889773-3im2b326ltnhqg5klrb3a3faucgarf6f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
