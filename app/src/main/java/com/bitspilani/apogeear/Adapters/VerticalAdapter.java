@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,9 +60,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
 
         holder.horizontalrv.setRecycledViewPool(recycledViewPool);
         holder.horizontalrv.setHasFixedSize(true);
-        holder.horizontalrv.setLayoutManager(new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false));
+        holder.horizontalrv.setLayoutManager(new LinearLayoutManager(context,RecyclerView.VERTICAL,false));
         HorizontalAdapter horizontalAdapter = new HorizontalAdapter(lists.get(position),context);
         holder.horizontalrv.setAdapter(horizontalAdapter);
+
+        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.ClickListener() {
+            @Override
+            public void onItemClicked(int position, View v) {
+                Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if(position==1)
             holder.timelineView.setMarker(holder.fail);

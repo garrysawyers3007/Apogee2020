@@ -40,10 +40,29 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     BubbleNavigationLinearView bubbleNavigationLinearView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        fluidBottomNavigation.items =
+//                listOf(
+//                        FluidBottomNavigationItem(
+//                                getString(R.string.news),
+//                                ContextCompat.getDrawable(this, R.drawable.ic_news)),
+//                        FluidBottomNavigationItem(
+//                                getString(R.string.inbox),
+//                                ContextCompat.getDrawable(this, R.drawable.ic_inbox)),
+//                        FluidBottomNavigationItem(
+//                                getString(R.string.calendar),
+//                                ContextCompat.getDrawable(this, R.drawable.ic_calendar)),
+//                        FluidBottomNavigationItem(
+//                                getString(R.string.chat),
+//                                ContextCompat.getDrawable(this, R.drawable.ic_chat)),
+//                        FluidBottomNavigationItem(
+//                                getString(R.string.profile),
+//                                ContextCompat.getDrawable(this, R.drawable.ic_profile)));
 
 
         // bottomNavigationView=findViewById(R.id.bottom_nav);
@@ -115,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-
+//
 //    private boolean loadFragment(Fragment fragment) {
 //        //switching fragment
 //        if (fragment != null) {

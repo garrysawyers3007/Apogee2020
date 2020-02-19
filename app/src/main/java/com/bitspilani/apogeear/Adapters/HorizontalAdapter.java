@@ -21,6 +21,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     Context context;
     private static ClickListener clickListener;
 
+
     public HorizontalAdapter(ArrayList<Event_Details> event_details, Context context) {
         this.event_details=event_details;
         this.context=context;
@@ -40,11 +41,26 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.text.setText(event_details.get(position).getName());
         Log.d("Event",event_details.get(position).getName());
-        if(position==event_details.size()-1) {
+
+        if(event_details.size()==1) {
             holder.hor.setVisibility(View.GONE);
+            holder.or.setVisibility(View.INVISIBLE);
+            holder.or1.setVisibility(View.INVISIBLE);
             holder.hor1.setVisibility(View.GONE);
-            holder.or.setVisibility(View.GONE);
+            holder.hor2.setVisibility(View.VISIBLE);
         }
+        else if(position==0) {
+            holder.or.setVisibility(View.INVISIBLE);
+            holder.hor1.setVisibility(View.GONE);
+            holder.hor2.setVisibility(View.VISIBLE);
+            holder.hor.setVisibility(View.GONE);
+        }
+        else if(position==event_details.size()-1) {
+            holder.hor.setVisibility(View.INVISIBLE);
+            holder.or1.setVisibility(View.INVISIBLE);
+        }
+        else
+            holder.hor.setVisibility(View.INVISIBLE);
     }
 
 
@@ -55,14 +71,16 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text,or;
-        View hor,hor1;
+        TextView text;
+        View hor,hor1,hor2,or,or1;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text=itemView.findViewById(R.id.horizontal_item_text);
             hor=itemView.findViewById(R.id.hor);
             hor1=itemView.findViewById(R.id.hor1);
+            hor2=itemView.findViewById(R.id.hor2);
             or=itemView.findViewById(R.id.or);
+            or1=itemView.findViewById(R.id.or1);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
