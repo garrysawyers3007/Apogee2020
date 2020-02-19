@@ -19,7 +19,7 @@
         android:textStyle="normal"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 

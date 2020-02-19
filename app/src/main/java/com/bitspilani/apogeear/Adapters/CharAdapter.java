@@ -19,7 +19,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CharAdapter extends PagerAdapter {
 
     private List<CharacterModel> list;
-    private LayoutInflater layoutInflater;
     private Context context;
 
     public CharAdapter(List<CharacterModel> list, Context context) {
@@ -40,7 +39,7 @@ public class CharAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.char_select,container,false);
 
         TextView textView = view.findViewById(R.id.user_name1);

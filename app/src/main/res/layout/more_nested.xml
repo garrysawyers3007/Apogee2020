@@ -23,7 +23,7 @@
             android:layout_height="3dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:background="@drawable/line_divider_left" />
+            android:background="@drawable/line_divider_grey_left" />
 
         <TextView
             android:id="@+id/more_item_heading"
@@ -43,7 +43,7 @@
             android:layout_height="3dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:background="@drawable/line_divider_right" />
+            android:background="@drawable/line_divider_grey_right" />
 
     </LinearLayout>
 

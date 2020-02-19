@@ -83,6 +83,11 @@ public class More extends Fragment {
         list3.add(new MoreModel("About Us",R.drawable.next,"Get in touch with Coding Club !!!"));
         list3.add(new MoreModel("Privacy Policy",R.drawable.next));
         list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
+        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
+        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
+        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
+        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
+        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
 
         list.add(new MoreNestedModel("My Account",list1));
         list.add(new MoreNestedModel("Notifications",list2));

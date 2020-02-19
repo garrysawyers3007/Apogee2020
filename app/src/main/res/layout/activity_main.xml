@@ -21,79 +21,79 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_nav_bg"
-        android:backgroundTint="@color/dark"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
+
         android:elevation="8dp"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
         android:orientation="horizontal"
-        app:bnc_mode="inside"
+        app:bnc_mode="spread"
         android:padding="10dp">
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/profile_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1.2"
             app:bt_colorActive="@color/gold"
             app:bt_colorInactive="@color/gold"
-            app:bt_badgeBackgroundColor="@color/gold"
-            android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/ic_person"
             app:bt_title="Profile"
-            app:bt_padding="10dp"
-            app:bt_titlePadding="8dp" />
+            app:bt_titleSize="10sp"
+            app:bt_badgeText="Profile"
+            app:bt_padding="8dp"
+            app:bt_titlePadding="2dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/map_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bt_colorActive="@color/colorNegAmount"
-            app:bt_colorInactive="@color/colorNegAmount"
-            app:bt_badgeBackgroundColor="@color/colorNegAmount"
-            android:layout_marginEnd="5dp"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            app:bt_colorActive="@color/green_hue"
+            app:bt_colorInactive="@color/green_hue"
             app:bt_icon="@drawable/maps_icon"
             app:bt_title="Map"
-            app:bt_padding="10dp"
-            app:bt_titlePadding="8dp" />
+            app:bt_titleSize="10sp"
+            app:bt_padding="8dp"
+            app:bt_titlePadding="2dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/home_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1.1"
             app:bt_colorActive="@color/light_gray"
             app:bt_colorInactive="@color/light_gray"
-            app:bt_badgeBackgroundColor="@color/light_gray"
-            android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/ic_home"
             app:bt_title="Home"
-            app:bt_padding="10dp"
-            app:bt_titlePadding="8dp" />
+            app:bt_padding="8dp"
+            app:bt_titleSize="10sp"
+            app:bt_titlePadding="2dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/leaderboard_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1.5"
             app:bt_colorActive="@color/color_green"
             app:bt_colorInactive="@color/color_green"
-            app:bt_badgeBackgroundColor="@color/color_green"
-            android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/ic_leaderboard"
             app:bt_title="Leaderboard"
-            app:bt_padding="10dp"
-            app:bt_titlePadding="8dp" />
+            app:bt_padding="8dp"
+            app:bt_titleSize="10sp"
+            app:bt_titlePadding="2dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/more_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
             app:bt_colorActive="@color/custom_red"
             app:bt_colorInactive="@color/custom_red"
-            app:bt_badgeBackgroundColor="@color/custom_red"
             app:bt_icon="@drawable/ic_more"
             app:bt_title="More"
-            app:bt_padding="10dp"
-            app:bt_titlePadding="8dp" />
+            app:bt_titleSize="10sp"
+            app:bt_padding="8dp"
+            app:bt_titlePadding="2dp" />
 
     </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 
