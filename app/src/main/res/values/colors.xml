@@ -22,6 +22,74 @@
     <color name ="white_text">#FFFFFF</color>
     <color name ="purple_text">#BB86FC</color>
     <color name ="blue_text">#ac9bf9</color>
+    <color name ="green_text">#61D800</color>
+
+
+    <color name="dark">#000000</color>
+    <color name="colorPrimary">#dd8833</color>
+    <color name="colorPrimaryDark">@android:color/transparent</color>
+    <color name="colorAccent">#ffb862</color>
+
+    <color name="colorNegAmount">#E30202</color>
+    <color name="colorPosAmount">#18FFFF</color>
+
+    <color name="color_grey">#F1EEEE</color>
+    <color name="app_yellow">#DD8833</color>
+    <color name="color_header_text">#4D4D4D</color>
+    <color name="color_green">#18B7AF</color>
+
+    <color name="background">#121212</color>
+    <color name="purple_background">#2c293d</color>
+    <color name="back_shade1">#4a4662</color>
+    <color name="back_shade2">#66627f</color>
+    <color name="back_shade3">#201c38</color>
+    <color name="back_shade4">#130f2b</color>
+    <color name="back_shade5">#a4a2b2</color>
+    <color name="back_shade6">#bcbcc1</color>
+
+    <color name="dark_grey">#9C9C9C</color>
+
+
+    <color name="bronze">#A57164</color>
+    <color name="silver">#C0C0C0</color>
+
+    <color name="card_bg_more">#2F2E2E</color>
+
+
+
+    <color name="bid">#C89228</color>
+    <color name="bid_dark">#99701E</color>
+    <color name="power_bid_active">#FF8100</color>
+    <color name="power_bid_active_dark">#CC6600</color>
+    <color name="slot">#82BA73</color>
+    <color name="bosm_roulette">#80BC40</color>
+
+    <color name="errorColor">#DD2C00</color>
+    <color name="custom_dark_grey">#202020</color>
+    <color name="custom_white_grey">#A0A0A0</color>
+    <color name="custom_middle_grey">#606060</color>
+    <color name="custom_teal">#f0f0f0</color>
+    <color name="custom_red">#F44336</color>
+    <color name="defaultColor">#330000</color>
+    <color name="custom_yellow"> #FFEB3B</color>
+    <color name="buttonTextColor">@android:color/white</color>
+    <color name="grey">#CCC</color>
+    <color name="blue">#00B0FF</color>
+    <color name="color_red">#EF5350</color>
+    <color name="black">#000000</color>
+    <color name="fav_green">#5FBB46</color>
+
+    <color name="background2">#f7ca42</color>
+    <color name="shade3">#18ffff</color>
+    <color name="shade4">#78bf33</color>
+
+    <color name="light_gray">#66627f</color>
+
+    <color name="orange_shade">#E64A19</color>
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
 
 
     <color name="green_hue">#00fdbc</color>

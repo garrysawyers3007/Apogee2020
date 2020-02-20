@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:background="@android:color/transparent"
+    android:alpha="0.80"
     android:layout_height="wrap_content">
 
     <TextView
@@ -19,7 +20,7 @@
         android:textStyle="normal"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/green_text"
         android:textSize="15sp"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
