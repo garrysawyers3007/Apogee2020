@@ -64,7 +64,7 @@
         android:layout_marginTop="20dp"
         app:cardBackgroundColor="@color/PRIMARY_VARIANT"
         app:cardCornerRadius="30dp"
-    app:cardElevation="20dp">
+        app:cardElevation="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
