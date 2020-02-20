@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
@@ -26,8 +27,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -41,19 +45,27 @@ public class Profile extends Fragment {
     private CountDownTimer countDownTimer;
     private long totalTimeCountInMilliseconds;
     private long startTime,endTime;
-    TextView showtime;
-    ImageView logout;
-    FirebaseAuth mAuth;
-    ProgressBar timer;
+    private TextView showtime,coins,name;
+    private ImageView logout;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private ProgressBar timer;
     private long timeBlinkInMilliseconds; // start time of start blinking
     private boolean blink;
-    Calendar c;
-    GoogleSignInOptions gso;
-    GoogleSignInClient googleSignInClient;
+    private Calendar c;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient googleSignInClient;
 
 
     public Profile() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //user=mAuth.getCurrentUser();
+
     }
 
 
@@ -62,10 +74,14 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
         showtime = view.findViewById(R.id.tvTimeCount);
+        coins=view.findViewById(R.id.total);
         timer = view.findViewById(R.id.progressbar);
         logout=view.findViewById(R.id.logout);
-        mAuth=FirebaseAuth.getInstance();
+        name=view.findViewById(R.id.zzzz);
+
+        Log.d("user",mAuth+"");
 
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         c=Calendar.getInstance();
@@ -75,6 +91,10 @@ public class Profile extends Fragment {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .build();
         googleSignInClient= GoogleSignIn.getClient(getActivity(),gso);
+
+        String userid=mAuth.getCurrentUser().getUid();
+        Log.d("user",userid);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +106,15 @@ public class Profile extends Fragment {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        db.collection("Users").document(userid)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        coins.setText(documentSnapshot.getDouble("score").toString());
+                        name.setText(documentSnapshot.get("name").toString());
+                    }
+                });
 
 
         db.collection("Coins").document("Universal Coins").get()
