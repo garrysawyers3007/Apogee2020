@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:alpha=".80"
-    app:cardElevation="6dp"
-    app:cardBackgroundColor="@color/green_hue"
+    android:elevation="6dp"
+    android:background="@drawable/leaderboard_title_bg"
     android:layout_marginEnd="15dp"
     android:layout_marginStart="15dp"
     android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    app:cardCornerRadius="12dp">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="1dp"
-        app:cardBackgroundColor="@color/back_shade4"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+    android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +67,5 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+</RelativeLayout>
 
-</androidx.cardview.widget.CardView>

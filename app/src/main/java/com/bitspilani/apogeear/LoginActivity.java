@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                     .build();
             db.setFirestoreSettings(settings);
 
-            db.collection("Users").whereEqualTo("email", user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            db.collection("Users").whereEqualTo("username", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.getResult().getDocuments().isEmpty()) {

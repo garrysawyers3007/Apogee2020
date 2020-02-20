@@ -93,5 +93,10 @@
 
 
     <color name="green_hue">#00fdbc</color>
+    <color name="blue_hue">#0e7eeb</color>
+    <color name="violet_hue">#6a4ab9</color>
+    <color name="purple_hue">#7775df</color>
+
+    <color name="dark_alpha">#4d000000</color>
 
 </resources>
