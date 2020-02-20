@@ -40,6 +40,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.vuforia.Vuforia;
 
 import java.util.ArrayList;
@@ -61,16 +63,14 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private boolean rmvMark = false;
     private Marker m;
     private Button navBtn,removeMarkerBtn;
+    FirebaseFirestore db;
+    FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
     private static final String TAG = "MapFragment";
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE =1234;
     private static final float DEFAULT_ZOOM = 17.5f;
 
     private Boolean mLocationPermissionsGranted = false;
-
-
     public Map() {
         // Required empty public constructor
     }
@@ -83,6 +83,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         navBtn = rootView.findViewById(R.id.nav_btn);
         removeMarkerBtn = rootView.findViewById(R.id.remove_marker);
+        db=FirebaseFirestore.getInstance();
+
+        db.collection("Events").get()
+
         getLocationPermission();
         return rootView;
     }

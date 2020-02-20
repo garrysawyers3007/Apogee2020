@@ -53,9 +53,9 @@ public class Leaderboard extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_leaderboard, container, false);
         leaderboard=view.findViewById(R.id.leader_rv);
-        rank=view.findViewById(R.id.player_rank);
-        name=view.findViewById(R.id.player_name);
-        coins=view.findViewById(R.id.player_score);
+        rank=view.findViewById(R.id.user_rank);
+        name=view.findViewById(R.id.user_name);
+        coins=view.findViewById(R.id.user_score);
         db=FirebaseFirestore.getInstance();
 
         String userid=mAuth.getCurrentUser().getUid();
