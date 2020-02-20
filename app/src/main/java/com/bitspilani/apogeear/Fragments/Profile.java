@@ -2,6 +2,7 @@ package com.bitspilani.apogeear.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+
 import java.sql.Time;
 import java.util.Calendar;
 
@@ -44,10 +46,10 @@ public class Profile extends Fragment {
 
     private CountDownTimer countDownTimer;
     private long totalTimeCountInMilliseconds;
-    private long startTime,endTime;
-    private TextView showtime,coins,name;
+    private long startTime, endTime;
+    private TextView showtime, coins, name;
     private ImageView logout;
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ProgressBar timer;
     private long timeBlinkInMilliseconds; // start time of start blinking
     private boolean blink;
@@ -76,24 +78,24 @@ public class Profile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         showtime = view.findViewById(R.id.tvTimeCount);
-        coins=view.findViewById(R.id.total);
+        coins = view.findViewById(R.id.total);
         timer = view.findViewById(R.id.progressbar);
-        logout=view.findViewById(R.id.logout);
-        name=view.findViewById(R.id.zzzz);
+        logout = view.findViewById(R.id.logout);
+        name = view.findViewById(R.id.zzzz);
 
-        Log.d("user",mAuth+"");
+        Log.d("user", mAuth + "");
 
-        FirebaseFirestore db=FirebaseFirestore.getInstance();
-        c=Calendar.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        c = Calendar.getInstance();
         c.getTimeInMillis();
-        gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .build();
-        googleSignInClient= GoogleSignIn.getClient(getActivity(),gso);
+        googleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        String userid=mAuth.getCurrentUser().getUid();
-        Log.d("user",userid);
+        String userid = mAuth.getCurrentUser().getUid();
+        Log.d("user", userid);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +104,7 @@ public class Profile extends Fragment {
                 mAuth.signOut();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
-                Toast.makeText(getContext(),"Signed Out",
+                Toast.makeText(getContext(), "Signed Out",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -121,24 +123,27 @@ public class Profile extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot documentSnapshot=task.getResult();
-                        totalTimeCountInMilliseconds=documentSnapshot.getTimestamp("Expire Time").getSeconds()-c.getTimeInMillis()/1000;
-                        startTime=documentSnapshot.getTimestamp("Start Time").getSeconds()*1000;
-                        endTime=documentSnapshot.getTimestamp("Expire Time").getSeconds()*1000;
-                        if(startTime>c.getTimeInMillis())
-                            totalTimeCountInMilliseconds=0;
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        totalTimeCountInMilliseconds = documentSnapshot.getTimestamp("Expire Time").getSeconds() - c.getTimeInMillis() / 1000;
+                        startTime = documentSnapshot.getTimestamp("Start Time").getSeconds() * 1000;
+                        endTime = documentSnapshot.getTimestamp("Expire Time").getSeconds() * 1000;
+                        if (startTime > c.getTimeInMillis())
+                            totalTimeCountInMilliseconds = 0;
                         setTimer();
                     }
                 });
+
+
         return view;
+
     }
 
     private void setTimer() {
         int time = 0;
         //Toast.makeText(getContext(), "Please Enter Minutes...",
-          //      Toast.LENGTH_LONG).show();
+        //      Toast.LENGTH_LONG).show();
 
-        totalTimeCountInMilliseconds=totalTimeCountInMilliseconds*1000;
+        totalTimeCountInMilliseconds = totalTimeCountInMilliseconds * 1000;
 
         //totalTimeCountInMilliseconds = 60 * time * 1000;
 
@@ -164,16 +169,15 @@ public class Profile extends Fragment {
                 //Log.d("Time left",""+leftTimeInMilliseconds);
                 int minutes = (int) ((leftTimeInMilliseconds / (1000 * 60)) % 60);
                 int seconds = (int) (leftTimeInMilliseconds / 1000) % 60;
-                int hours = (int) ((leftTimeInMilliseconds/ (1000 * 60 * 60)) % 24);
+                int hours = (int) ((leftTimeInMilliseconds / (1000 * 60 * 60)) % 24);
                 //i++;
                 //Setting the Progress Bar to decrease wih the timer
-                Log.d("total count",""+(endTime-startTime));
-                Log.d("lefttt",""+leftTimeInMilliseconds);
-                if(endTime!=startTime) {
-                    timer.setMax((int)(endTime-startTime));
-                    timer.setProgress((int) (endTime-startTime-leftTimeInMilliseconds));
-                }
-                else
+                Log.d("total count", "" + (endTime - startTime));
+                Log.d("lefttt", "" + leftTimeInMilliseconds);
+                if (endTime != startTime) {
+                    timer.setMax((int) (endTime - startTime));
+                    timer.setProgress((int) (endTime - startTime - leftTimeInMilliseconds));
+                } else
                     timer.setProgress(0);
 
 
@@ -191,7 +195,7 @@ public class Profile extends Fragment {
                     blink = !blink; // toggle the value of blink
                 }
 
-                showtime.setText(hours+" hrs "+minutes+" min "+seconds+" sec");
+                showtime.setText(hours + " hrs " + minutes + " min " + seconds + " sec");
                 // format the textview to show the easily readable format
 
             }
