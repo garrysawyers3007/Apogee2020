@@ -98,21 +98,21 @@
     </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottom_nav"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:background="@drawable/bottom_nav_bg"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        app:menu="@menu/bottomnav"-->
-<!--        app:itemIconTint="@drawable/bottom_nav_colors"-->
-<!--        app:itemTextColor="@android:color/holo_green_light"-->
-<!--        android:layout_marginLeft="8dp"-->
-<!--        android:layout_marginRight="8dp"-->
-<!--        android:layout_marginBottom="12dp"-->
-<!--        app:itemRippleColor="@android:color/white"-->
-<!--        app:labelVisibilityMode="labeled"-->
-<!--        android:elevation="10dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottom_nav"-->
+    <!--        android:layout_gravity="bottom"-->
+    <!--        android:background="@drawable/bottom_nav_bg"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        app:menu="@menu/bottomnav"-->
+    <!--        app:itemIconTint="@drawable/bottom_nav_colors"-->
+    <!--        app:itemTextColor="@android:color/holo_green_light"-->
+    <!--        android:layout_marginLeft="8dp"-->
+    <!--        android:layout_marginRight="8dp"-->
+    <!--        android:layout_marginBottom="12dp"-->
+    <!--        app:itemRippleColor="@android:color/white"-->
+    <!--        app:labelVisibilityMode="labeled"-->
+    <!--        android:elevation="10dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
 
 </RelativeLayout>

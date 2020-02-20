@@ -12,7 +12,12 @@ import com.bitspilani.apogeear.Fragments.More;
 import com.bitspilani.apogeear.Fragments.Profile;
 import com.bitspilani.apogeear.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    private List<Fragment> Fragment = new ArrayList<>();
+
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
@@ -34,6 +39,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             default:
                 return new Home();
         }
+    }
+
+    public void add(Fragment Frag) {
+        Fragment.add(Frag);
     }
 
     @Override

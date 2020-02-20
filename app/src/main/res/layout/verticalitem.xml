@@ -1,56 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp">
 
-    <View
-        android:id="@+id/pole"
-        android:layout_width="8dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="29dp"
-        android:background="#000000" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#151515">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    <TextView
+        android:id="@+id/course_item_name_tv"
+        android:layout_width="wrap_content"
+        android:textColor="#D0D3D4"
+        android:text="Time"
+        android:layout_marginTop="23dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/convergence"
+        android:textSize="12sp"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="20dp"
+        app:markerInCenter="false"
+        app:markerPaddingTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:lineWidth="2dp"
+        app:linePadding="12dp"
+        app:lineStyle="normal"
+        app:lineOrientation="vertical"
+        app:startLineColor="#D0D3D4"
+        app:endLineColor="#D0D3D4"
+        />
+
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
         android:id="@+id/card"
-        android:layout_below="@id/pole">
+        android:layout_weight="1.5">
 
         <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-
-        app:cardBackgroundColor="#000000">
+        app:cardBackgroundColor="#151515">
 
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+            android:paddingBottom="8dp"
             android:layout_alignParentLeft="true">
 
-        <TextView
-            android:id="@+id/course_item_name_tv"
-            android:layout_width="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Time"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content" />
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/horizontal_list"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:visibility="visible" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
 
-    </LinearLayout>
+            android:visibility="visible" />
+            </LinearLayout>
+
     </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,15 +29,8 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == 0){
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_top_1,parent,false);
-        }else if (viewType == 1){
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_top_2,parent,false);
-        }else if (viewType == 2){
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_top_3,parent,false);
-        }else{
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboarditem,parent,false);
-        }
+
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboarditem,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
         return viewHolder;
     }
@@ -44,10 +38,30 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.name.setText(list.get(position).getUsername());
-        holder.score.setText(String.valueOf(list.get(position).getCoins()));
-        holder.rank.setText(""+(position+1));
-
+        switch (position){
+            case 0:holder.name.setText(list.get(position).getUsername());
+                holder.name.setTextColor(Color.parseColor("#D4AF37"));
+                holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.rank.setText(""+(position+1));
+                holder.rank.setTextColor(Color.parseColor("#D4AF37"));
+                break;
+            case 1:holder.name.setText(list.get(position).getUsername());
+                holder.name.setTextColor(Color.parseColor("#C0C0C0"));
+                holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.rank.setText(""+(position+1));
+                holder.rank.setTextColor(Color.parseColor("#C0C0C0"));
+                break;
+            case 2:holder.name.setText(list.get(position).getUsername());
+                holder.name.setTextColor(Color.parseColor("#A57164"));
+                holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.rank.setText(""+(position+1));
+                holder.rank.setTextColor(Color.parseColor("#A57164"));
+                break;
+            default:  holder.name.setText(list.get(position).getUsername());
+                holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.rank.setText(""+(position+1));
+                break;
+        }
     }
 
     @Override

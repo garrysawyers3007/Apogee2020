@@ -96,6 +96,8 @@ public class Profile extends Fragment {
                         totalTimeCountInMilliseconds=documentSnapshot.getTimestamp("Expire Time").getSeconds()-c.getTimeInMillis()/1000;
                         startTime=documentSnapshot.getTimestamp("Start Time").getSeconds()*1000;
                         endTime=documentSnapshot.getTimestamp("Expire Time").getSeconds()*1000;
+                        if(startTime>c.getTimeInMillis())
+                            totalTimeCountInMilliseconds=0;
                         setTimer();
                     }
                 });

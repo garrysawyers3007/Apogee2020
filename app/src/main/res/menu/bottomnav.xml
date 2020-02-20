@@ -4,7 +4,8 @@
     <item
         android:title="Profile"
         android:icon="@drawable/ic_person"
-        android:id="@+id/profile"/>
+        android:id="@+id/profile"
+        />
     <item
         android:title="Map"
         android:icon="@drawable/ic_launcher_foreground"
