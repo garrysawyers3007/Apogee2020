@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg_app_black"
+    android:background="#151515"
     tools:context=".Fragments.Profile">
 
     <androidx.cardview.widget.CardView
@@ -14,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:alpha=".90"
         android:layout_marginTop="15dp"
+        android:alpha=".90"
         app:cardBackgroundColor="@color/green_hue"
         app:cardCornerRadius="20.5dp"
         app:cardElevation="6dp">
@@ -33,146 +32,168 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/convergence"
                 android:gravity="center"
                 android:paddingStart="40dp"
-                android:paddingEnd="40dp"
                 android:paddingTop="5dp"
+                android:paddingEnd="40dp"
                 android:paddingBottom="5dp"
                 android:text="Profile"
-                android:textStyle="bold"
-                android:fontFamily="@font/convergence"
                 android:textColor="@color/green_hue"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 
     <ImageView
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_exit"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:id="@+id/logout"
-        android:layout_alignParentRight="true"/>
+        android:src="@drawable/ic_exit" />
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/user_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/frag_profile"
-        android:layout_marginTop="10dp">
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/PRIMARY_VARIANT"
+        app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/yyyy"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/spider"/>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/yyyy">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:id="@+id/zzzz"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/gold"
-            android:text="Name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/zzzz"
-            android:textColor="@color/gold"
-            android:text="The HackerMan"
-            />
-        </RelativeLayout>
-    </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/yyyy"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/spider" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toEndOf="@+id/yyyy"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/zzzz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Name"
+                    android:textColor="@color/gold"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/zzzz"
+                    android:layout_centerHorizontal="true"
+                    android:text="The HackerMan"
+                    android:textColor="@color/gold"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <LinearLayout
         android:id="@+id/coins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="30dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/user_img"
-        android:orientation="horizontal"
-        android:background="@android:color/transparent">
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:background="#151515"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/text_coins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Coins :"
             android:gravity="end"
+            android:text="Total Coins :"
+            android:textColor="#a6a6a6"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#a6a6a6" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
             android:layout_marginStart="10dp"
             android:gravity="center"
+            android:text="0"
             android:textColor="@color/gold"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:layout_below="@id/coins"
-        android:background="@android:color/transparent">
+        android:layout_marginTop="80dp"
+        android:background="#151515"
+        android:orientation="horizontal">
 
         <ProgressBar
             android:id="@+id/progressbar"
-            android:layout_width="170dip"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
             android:layout_height="170dip"
             android:layout_centerVertical="true"
-            android:indeterminate="false"
-            android:outlineSpotShadowColor="#ffffff"
-            android:outlineAmbientShadowColor="#ffffff"
-            android:progressDrawable="@drawable/circle"
+            android:layout_weight="1"
             android:background="@drawable/circle_shape"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progress="0" />
+            android:indeterminate="false"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:outlineSpotShadowColor="#ffffff"
+            android:progress="0"
+            android:progressDrawable="@drawable/circle" />
 
-        <TextView
-            android:id="@+id/univ_coin"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Universal Coins"
-            android:layout_marginRight="25dp"
-            android:textSize="25sp"
-            android:textColor="#fff"
-            android:layout_marginTop="50dp"
-            android:layout_alignParentRight="true" />
-        <TextView
-            android:id="@+id/tvTimeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/univ_coin"
-            android:layout_alignParentRight="true"
-            android:text="0 hrs 0 min 0 sec"
-            android:layout_marginRight="35dp"
-            android:textColor="@color/gold"
-            android:textSize="20sp"/>
-    </RelativeLayout>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/univ_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Universal Coins"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvTimeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/univ_coin"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:text="0 hrs 0 min 0 sec"
+                android:textColor="@color/gold"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

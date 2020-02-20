@@ -85,7 +85,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
         removeMarkerBtn = rootView.findViewById(R.id.remove_marker);
         db=FirebaseFirestore.getInstance();
 
-        db.collection("Events").get()
+        db.collection("Events").get();
 
         getLocationPermission();
         return rootView;
