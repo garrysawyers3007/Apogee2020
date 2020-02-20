@@ -70,7 +70,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
-                android:background="#000" />
+                android:background="@drawable/line_divider_grey_left" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:background="#000" />
+                android:background="@drawable/line_divider_grey_right" />
 
             </LinearLayout>
 

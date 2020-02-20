@@ -53,7 +53,7 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:clipToPadding="false"
-        android:paddingTop="100dp"
+        android:paddingTop="70dp"
         android:scrollbars="none" />
 
 </RelativeLayout>

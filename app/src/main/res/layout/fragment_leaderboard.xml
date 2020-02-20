@@ -131,13 +131,22 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/leaderboard_list_bg">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/leader_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="25dp"
-                android:divider="@android:color/transparent"
-                android:overScrollMode="never" />
+                <com.andexert.library.RippleView
+                    android:id="@+id/more"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:rv_color="@color/green_hue">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/leader_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="25dp"
+                        android:paddingBottom="10dp"
+                        android:divider="@android:color/transparent"
+                        android:overScrollMode="never" />
+
+                </com.andexert.library.RippleView>
 
             </RelativeLayout>
 

@@ -39,9 +39,12 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.vuforia.Vuforia;
 
 import java.util.ArrayList;
@@ -126,7 +129,30 @@ public class Map extends Fragment implements OnMapReadyCallback {
             map.getUiSettings().setMyLocationButtonEnabled(true);
             map.getUiSettings().setCompassEnabled(false);
 
-            setMarkers();
+            //setMarkers();
+            db.collection("Events").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot document:queryDocumentSnapshots){
+                        double lat = document.getDouble("lat");
+                        double lng = document.getDouble("long");
+
+                        LatLng latLng = new LatLng(lat,lng);
+                        map.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                startActivity(intent);
+                                return true;
+                            }
+                        });
+                    }
+                }
+            });
 
         }else{
             showGPSDisabledAlertToUser();
@@ -204,27 +230,27 @@ public class Map extends Fragment implements OnMapReadyCallback {
         });
     }
 
-    private void setMarkers(){
-        List<LatLng> locationList = new ArrayList<>();
-        locationList.add(new LatLng(28.362334, 75.585614));
-        locationList.add(new LatLng(28.362230, 75.585002));
-        locationList.add(new LatLng(28.361645, 75.585753));
-
-        for (int i = 0; i < 3; i++) {
-            map.addMarker(new MarkerOptions()
-                    .position(locationList.get(i))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-            map.moveCamera(CameraUpdateFactory.newLatLng(locationList.get(i)));
-            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(@NonNull Marker marker) {
-                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-            });
-        }
-    }
+//    private void setMarkers(){
+//        List<LatLng> locationList = new ArrayList<>();
+//        locationList.add(new LatLng(28.362334, 75.585614));
+//        locationList.add(new LatLng(28.362230, 75.585002));
+//        locationList.add(new LatLng(28.361645, 75.585753));
+//
+//        for (int i = 0; i < 3; i++) {
+//            map.addMarker(new MarkerOptions()
+//                    .position(locationList.get(i))
+//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+//            map.moveCamera(CameraUpdateFactory.newLatLng(locationList.get(i)));
+//            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                @Override
+//                public boolean onMarkerClick(@NonNull Marker marker) {
+//                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+//                    startActivity(intent);
+//                    return true;
+//                }
+//            });
+//        }
+//    }
 
     private void addImages(){
         List<LatLng> locationList = new ArrayList<>();

@@ -2,10 +2,12 @@ package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
         view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboarditem,parent,false);
         ViewHolder viewHolder=new ViewHolder(view);
+
         return viewHolder;
     }
 
@@ -43,22 +46,23 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 holder.name.setTextColor(Color.parseColor("#D4AF37"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
                 holder.rank.setText(""+(position+1));
-                holder.rank.setTextColor(Color.parseColor("#D4AF37"));
+                holder.img.setImageDrawable(context.getDrawable(R.drawable.top1));
                 break;
             case 1:holder.name.setText(list.get(position).getUsername());
                 holder.name.setTextColor(Color.parseColor("#C0C0C0"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.img.setImageDrawable(context.getDrawable(R.drawable.top2));
                 holder.rank.setText(""+(position+1));
-                holder.rank.setTextColor(Color.parseColor("#C0C0C0"));
                 break;
             case 2:holder.name.setText(list.get(position).getUsername());
                 holder.name.setTextColor(Color.parseColor("#A57164"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.img.setImageDrawable(context.getDrawable(R.drawable.top3));
                 holder.rank.setText(""+(position+1));
-                holder.rank.setTextColor(Color.parseColor("#A57164"));
                 break;
             default:  holder.name.setText(list.get(position).getUsername());
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
+                holder.img.setImageDrawable(context.getDrawable(R.drawable.top1));
                 holder.rank.setText(""+(position+1));
                 break;
         }
@@ -72,11 +76,13 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,rank,score;
+        ImageView img;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.player_name);
             rank=itemView.findViewById(R.id.player_rank);
             score=itemView.findViewById(R.id.player_score);
+            img = itemView.findViewById(R.id.badge);
         }
     }
 
