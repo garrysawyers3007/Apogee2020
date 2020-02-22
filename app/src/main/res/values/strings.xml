@@ -4,6 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map_API_KEY">AIzaSyCXE5YpbQxXCNN2ejvNn2aXV0fPCfpuXmQ</string>
+    <string name="default_notification_channel_id">apogee2020</string>
     <!--
     naman api: AIzaSyBwKtf-xrcvpcMRO-Z3EZoY12fwua9u16I
     anubhav api: AIzaSyCXE5YpbQxXCNN2ejvNn2aXV0fPCfpuXmQ

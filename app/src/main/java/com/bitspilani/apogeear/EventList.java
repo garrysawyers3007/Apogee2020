@@ -114,8 +114,8 @@ public class EventList extends AppCompatActivity {
                             Log.d("Date",list.get(i).getTime().toDate().toString());
                             Log.d("Time",""+list.get(i).getTime().getSeconds());
                         }
-                        adapter=new VerticalAdapter(lists, EventList.this);
-                        vertical.setAdapter(adapter);
+                        //adapter=new VerticalAdapter(lists, EventList.this, attended);
+                       // vertical.setAdapter(adapter);
                     }
                 });
 

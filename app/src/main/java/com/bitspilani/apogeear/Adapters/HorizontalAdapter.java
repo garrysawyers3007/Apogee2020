@@ -1,6 +1,7 @@
 package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,19 @@ import java.util.ArrayList;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.ViewHolder> {
 
-    ArrayList<Event_Details> event_details;
-    Context context;
+    private ArrayList<Event_Details> event_details;
+    private String attend;
+    private Context context;
     private static ClickListener clickListener;
+    private boolean check,exists;
 
 
-    public HorizontalAdapter(ArrayList<Event_Details> event_details, Context context) {
+    public HorizontalAdapter(ArrayList<Event_Details> event_details, Context context,String attend,boolean exists) {
         this.event_details=event_details;
         this.context=context;
+        this.attend=attend;
+        check=false;
+        this.exists=exists;
     }
 
     @NonNull
@@ -42,25 +48,62 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
         holder.text.setText(event_details.get(position).getName());
         Log.d("Event",event_details.get(position).getName());
 
-        if(event_details.size()==1) {
-            holder.hor.setVisibility(View.GONE);
-            holder.or.setVisibility(View.INVISIBLE);
-            holder.or1.setVisibility(View.INVISIBLE);
-            holder.hor1.setVisibility(View.GONE);
-            holder.hor2.setVisibility(View.VISIBLE);
-        }
-        else if(position==0) {
-            holder.or.setVisibility(View.INVISIBLE);
-            holder.hor1.setVisibility(View.GONE);
-            holder.hor2.setVisibility(View.VISIBLE);
-            holder.hor.setVisibility(View.GONE);
-        }
-        else if(position==event_details.size()-1) {
-            holder.hor.setVisibility(View.INVISIBLE);
-            holder.or1.setVisibility(View.INVISIBLE);
-        }
-        else
-            holder.hor.setVisibility(View.INVISIBLE);
+
+            if (event_details.get(position).getName().equals(attend))
+                check = true;
+
+            if (event_details.size() == 1) {
+
+                holder.hor.setVisibility(View.GONE);
+                holder.or.setVisibility(View.INVISIBLE);
+                holder.or1.setVisibility(View.INVISIBLE);
+                holder.hor1.setVisibility(View.GONE);
+                holder.hor2.setVisibility(View.VISIBLE);
+                if(exists) {
+                    holder.hor2.setBackgroundColor(Color.parseColor("#00fdbc"));
+                    holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                }
+
+            } else if (position == 0) {
+                holder.or.setVisibility(View.INVISIBLE);
+//            holder.hor1.setVisibility(View.GONE);
+//            holder.hor2.setVisibility(View.VISIBLE);
+//            holder.hor.setVisibility(View.GONE);
+                if(exists) {
+                    if (event_details.get(position).getName().equals(attend)) {
+                        holder.hor.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                    } else if (!check) {
+                        holder.or1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.hor.setBackgroundColor(Color.parseColor("#00fdbc"));
+                    }
+                }
+            } else if (position == event_details.size() - 1) {
+                holder.hor.setVisibility(View.INVISIBLE);
+                holder.or1.setVisibility(View.INVISIBLE);
+
+                if(exists) {
+                    if (event_details.get(position).getName().equals(attend)) {
+                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                    }
+                }
+            } else {
+                holder.hor.setVisibility(View.INVISIBLE);
+                if(exists) {
+                    if (!check) {
+                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.or1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                    } else if (event_details.get(position).getName().equals(attend)) {
+                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                    }
+                }
+            }
+
     }
 
 

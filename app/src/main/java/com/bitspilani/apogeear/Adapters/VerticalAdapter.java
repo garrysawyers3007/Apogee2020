@@ -1,9 +1,9 @@
 package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +17,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bitspilani.apogeear.Models.Event_Details;
 import com.bitspilani.apogeear.R;
 import com.github.vipulasri.timelineview.TimelineView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHolder> {
 
     private ArrayList<ArrayList<Event_Details>> lists;
+    private ArrayList<String> attended;
     private Context context;
+    private String attend;
+    private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private RecyclerView.RecycledViewPool recycledViewPool;
 
 
-    public VerticalAdapter(ArrayList<ArrayList<Event_Details>> lists, Context context) {
+    public VerticalAdapter(ArrayList<ArrayList<Event_Details>> lists, Context context, ArrayList<String> attended) {
         this.lists=lists;
         this.context=context;
         recycledViewPool=new RecyclerView.RecycledViewPool();
+        this.attended=attended;
     }
+
 
     @NonNull
     @Override
@@ -56,34 +66,42 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
         else
             holder.text.setText(c1.get(Calendar.DATE)+" "+"Mar"+" "+c1.get(Calendar.HOUR)+":"+(c1.get(Calendar.MINUTE)==0?"00":c1.get(Calendar.MINUTE))+" "+(c1.get(Calendar.AM_PM)==0?"AM":"PM")+"-"+c2.get(Calendar.HOUR)+":"+(c2.get(Calendar.MINUTE)==0?"00":c2.get(Calendar.MINUTE))+" "+(c2.get(Calendar.AM_PM)==0?"AM":"PM"));
 
-        //holder.text.setText(""+position);
+        SharedPreferences sharedPref=context.getSharedPreferences("userinfo",MODE_PRIVATE);
+        String user=sharedPref.getString("username","");
 
-        holder.horizontalrv.setRecycledViewPool(recycledViewPool);
-        holder.horizontalrv.setHasFixedSize(true);
-        holder.horizontalrv.setLayoutManager(new LinearLayoutManager(context,RecyclerView.VERTICAL,false));
-        HorizontalAdapter horizontalAdapter = new HorizontalAdapter(lists.get(position),context);
-        holder.horizontalrv.setAdapter(horizontalAdapter);
+                attend="";
+                for(int i=0;i<lists.get(position).size();i++)
+                if(attended.contains(lists.get(position).get(i).getName()))
+                    attend=lists.get(position).get(i).getName();
 
-        horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.ClickListener() {
-            @Override
-            public void onItemClicked(int position, View v) {
-                Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show();
-            }
-        });
+                holder.horizontalrv.setRecycledViewPool(recycledViewPool);
+                holder.horizontalrv.setHasFixedSize(true);
+                holder.horizontalrv.setLayoutManager(new LinearLayoutManager(context,RecyclerView.VERTICAL,false));
+                HorizontalAdapter horizontalAdapter = new HorizontalAdapter(lists.get(position),context,attend,!attend.equals(""));
+                holder.horizontalrv.setAdapter(horizontalAdapter);
+                horizontalAdapter.setOnItemClickListener(new HorizontalAdapter.ClickListener() {
+                    @Override
+                    public void onItemClicked(int position, View v) {
+                        Toast.makeText(context,"Clicked",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-        if(position==1)
-            holder.timelineView.setMarker(holder.fail);
 
-        if(position==5 || position==6)
-            holder.timelineView.setMarker(holder.incomplete);
+                if(attend.equals(""))
+                    holder.timelineView.setMarker(holder.fail);
+                if(position==5 || position==6)
+                    holder.timelineView.setMarker(holder.incomplete);
+                if(position<4) {
+                    holder.timelineView.setEndLineColor(Color.parseColor("#262626"), holder.getItemViewType());
+                    holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
+                }
+                if(position==4){
+                    holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
+                }
 
-        if(position<4) {
-            holder.timelineView.setEndLineColor(Color.parseColor("#262626"), holder.getItemViewType());
-            holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
-        }
-        if(position==4){
-            holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
-        }
+
+
+
         //Log.d("Hey","Yo"+lists.get(position).size());
     }
 

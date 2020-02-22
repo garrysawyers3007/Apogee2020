@@ -41,7 +41,7 @@ import java.util.Locale;
  */
 public class Home extends Fragment {
 
-    VerticalAdapter adapter;
+    private VerticalAdapter adapter;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
     public Home() {
@@ -56,6 +56,7 @@ public class Home extends Fragment {
         View view=inflater.inflate(R.layout.fragment_home, container, false);
 
         String userid=mAuth.getCurrentUser().getUid();
+
         FirebaseFirestore db=FirebaseFirestore.getInstance();
 
         db.collection("Users").document(userid)
@@ -63,25 +64,21 @@ public class Home extends Fragment {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                         ArrayList<String> ev=(ArrayList<String>) documentSnapshot.get("Types");
-
-
-                        ArrayList<ArrayList<Event_Details>> lists=new ArrayList<>();
-
-                        ArrayList<Event_Details> list=new ArrayList<>();
-
+                        ArrayList<String> attended=(ArrayList<String>) documentSnapshot.get("Attended");
 
                         RecyclerView vertical=view.findViewById(R.id.vertical);
-
                         vertical.setHasFixedSize(true);
 
                         LinearLayoutManager llm=new LinearLayoutManager(getContext());
                         vertical.setLayoutManager(llm);
 
-                        if(ev.size()!=0) {
+                        if(ev!=null) {
                             db.collection("Events").whereIn("Type", ev)
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
                                         public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                                            ArrayList<ArrayList<Event_Details>> lists=new ArrayList<>();
+                                            ArrayList<Event_Details> list=new ArrayList<>();
 
                                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                                 Log.d("TAG", document.getId() + " => " + document.get("Name"));
@@ -144,7 +141,7 @@ public class Home extends Fragment {
                                                 Log.d("Date", list.get(i).getTime().toDate().toString());
                                                 Log.d("Time", "" + list.get(i).getTime().getSeconds());
                                             }
-                                            adapter = new VerticalAdapter(lists, getContext());
+                                            adapter = new VerticalAdapter(lists, getContext(),attended);
                                             vertical.setAdapter(adapter);
                                         }
                                     });
@@ -152,9 +149,6 @@ public class Home extends Fragment {
 
                     }
                 });
-
-
-
 
         return view;
     }
@@ -166,7 +160,6 @@ public class Home extends Fragment {
 
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -177,7 +170,5 @@ public class Home extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-
 
 }
