@@ -34,6 +34,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -50,14 +52,6 @@ import com.vuforia.Vuforia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
-
- * to handle interaction events.
- */
 public class Map extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
@@ -78,7 +72,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -97,9 +90,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -107,7 +98,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         map = googleMap;
         // Theme customization
         try { // Customise the styling of the base map using a JSON object defined
@@ -153,12 +143,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
                     }
                 }
             });
-
         }else{
             showGPSDisabledAlertToUser();
         }
         mapClickListener();
-
     }
 
     private void mapClickListener() {
@@ -166,7 +154,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng) {
-
                 // on click marker appereance
                 markerOptions1 = new MarkerOptions();
                 markerOptions1.position(latLng);

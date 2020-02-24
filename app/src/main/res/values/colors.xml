@@ -99,4 +99,8 @@
 
     <color name="dark_alpha">#4d000000</color>
 
+    <color name="green_frag">#4ECE60</color>
+    <color name="blue_frag">#54C3DD</color>
+    <color name="orange_frag">#FF5E4D</color>
+
 </resources>

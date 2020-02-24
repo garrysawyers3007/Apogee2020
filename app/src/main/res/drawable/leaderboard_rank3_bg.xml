@@ -3,5 +3,7 @@
     <solid android:color="@android:color/transparent"/>
     <corners android:radius="10dp"/>
     <stroke android:color="@color/black" android:width="1dp"/>
-
+    <gradient android:gradientRadius="150dp" android:type="linear"
+        android:startColor="#F1AB66"
+        android:endColor="#F8B17C" />
 </shape>

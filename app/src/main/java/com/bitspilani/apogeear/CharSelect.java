@@ -9,9 +9,13 @@ import android.widget.Adapter;
 
 import com.bitspilani.apogeear.Adapters.CharAdapter;
 import com.bitspilani.apogeear.Models.CharacterModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CharSelect extends AppCompatActivity {
 
@@ -20,6 +24,8 @@ public class CharSelect extends AppCompatActivity {
     List<CharacterModel> list;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +33,9 @@ public class CharSelect extends AppCompatActivity {
         setContentView(R.layout.activity_char_select);
 
         list = new ArrayList<>();
-        list.add(new CharacterModel("Anubhav",R.drawable.coinimage));
-        list.add(new CharacterModel("Naman",R.drawable.coinimage));
-        list.add(new CharacterModel("Gauransh",R.drawable.coinimage));
+        list.add(new CharacterModel("The HackerMan",R.drawable.coinimage));
+        list.add(new CharacterModel("Mech",R.drawable.coinimage));
+        list.add(new CharacterModel("Tech",R.drawable.coinimage));
 
         adapter = new CharAdapter(list,this);
 

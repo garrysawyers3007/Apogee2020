@@ -41,7 +41,7 @@ public class Leaderboard extends Fragment {
     ArrayList<Rank> list;
     LeaderBoardAdapter leaderBoardAdapter;
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    TextView rank,name,coins;
+    TextView rank,name,coins,charName;
 
     public Leaderboard() {
         // Required empty public constructor
@@ -56,6 +56,7 @@ public class Leaderboard extends Fragment {
         rank=view.findViewById(R.id.user_rank);
         name=view.findViewById(R.id.user_name);
         coins=view.findViewById(R.id.user_score);
+        charName = view.findViewById(R.id.user_char_name);
         db=FirebaseFirestore.getInstance();
 
         String userid=mAuth.getCurrentUser().getUid();
@@ -66,7 +67,7 @@ public class Leaderboard extends Fragment {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 int i=1;
                 for(QueryDocumentSnapshot document:queryDocumentSnapshots){
-                    Rank ob=new Rank(document.get("name").toString(),document.getDouble("score"),document.get("username").toString(),i);
+                    Rank ob=new Rank(document.get("name").toString(),document.getDouble("score"),document.get("username").toString(),document.get("char").toString(),i);
                     list.add(ob);
                     i++;
                 }
@@ -83,6 +84,7 @@ public class Leaderboard extends Fragment {
                         rank.setText(rc.getRank()+"");
                         name.setText(rc.getUsername());
                         coins.setText(rc.getCoins()+"");
+                        charName.setText(rc.getCharName());
                     }
                 }
             }

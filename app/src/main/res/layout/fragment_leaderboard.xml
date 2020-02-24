@@ -21,7 +21,7 @@
             android:layout_marginRight="64dp"
             android:layout_marginTop="20dp"
             android:alpha=".90"
-            app:cardBackgroundColor="@color/green_hue"
+            app:cardBackgroundColor="@color/green_frag"
             app:cardCornerRadius="20.5dp"
             app:cardElevation="6dp">
 
@@ -45,64 +45,106 @@
                     android:text="Leaderboard"
                     android:textStyle="bold"
                     android:fontFamily="@font/convergence"
-                    android:textColor="@color/green_hue"
+                    android:textColor="@color/green_frag"
                     android:textSize="30sp" />
 
             </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/user_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:layout_below="@+id/leader_board"
-            android:alpha="1"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/leaderboard_title_bg">
+            android:layout_marginTop="10dp"
+            android:elevation="25dp"
+            android:background="@drawable/leaderboard_list_bg"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/leader_board">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rank"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textAllCaps="true"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/user_rank"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/convergence"
+                        android:text="R"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        android:textColor="@color/green_frag"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/user_rank"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/circle"
-                    android:fontFamily="@font/convergence"
-                    android:text="R"
-                    android:textColor="#ffffff"
-                    android:textStyle="bold" />
+                android:layout_weight="2.2"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_image"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/dice" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:src="@drawable/hackerman" />
 
                 <TextView
                     android:id="@+id/user_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="5"
                     android:fontFamily="@font/convergence"
                     android:maxLines="3"
                     android:text="Name"
-                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:textColor="#fff"
                     android:textSize="15sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/user_char_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/convergence"
+                    android:maxLines="3"
+                    android:gravity="center"
+                    android:text="CharName"
+                    android:textColor="@color/green_frag"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/user_score"
@@ -114,22 +156,13 @@
                     android:fontFamily="@font/convergence"
                     android:gravity="center"
                     android:text="Score"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/green_frag"
                     android:textSize="15sp" />
 
             </LinearLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_below="@+id/user_card"
-                android:layout_marginEnd="8dp"
-                android:elevation="25dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/leaderboard_list_bg">
 
                 <com.andexert.library.RippleView
                     android:id="@+id/more"
@@ -141,14 +174,20 @@
                         android:id="@+id/leader_rv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingTop="25dp"
+                        android:paddingTop="200dp"
                         android:paddingBottom="10dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_below="@+id/user_card"
+                        android:layout_marginEnd="8dp"
+                        android:elevation="20dp"
+                        android:clipToPadding="false"
+                        android:layout_marginTop="20dp"
                         android:divider="@android:color/transparent"
                         android:overScrollMode="never" />
 
                 </com.andexert.library.RippleView>
 
-            </RelativeLayout>
+
 
     </RelativeLayout>
 

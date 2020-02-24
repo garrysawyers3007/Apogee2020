@@ -8,6 +8,13 @@
     android:scrollbars="none"
     tools:context=".Fragments.Profile">
 
+    <RelativeLayout
+        android:id="@+id/header_profile"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/coding_bg"/>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/frag_profile"
         android:layout_width="wrap_content"
@@ -16,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:alpha=".90"
-        app:cardBackgroundColor="@color/green_hue"
+        app:cardBackgroundColor="@color/orange_frag"
         app:cardCornerRadius="20.5dp"
         app:cardElevation="6dp">
 
@@ -40,7 +47,7 @@
                 android:paddingEnd="40dp"
                 android:paddingBottom="5dp"
                 android:text="Profile"
-                android:textColor="@color/green_hue"
+                android:textColor="@color/orange_frag"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -58,59 +65,50 @@
 
     <RelativeLayout
         android:id="@+id/user_img"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/frag_profile"
-        android:layout_marginHorizontal="18dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/profile_user_info_bg"
-        android:elevation="20dp">
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:background="@drawable/profile_user_info_bg_orange"
+        android:elevation="30dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/yyyy"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_weight="0.5"
-                android:src="@drawable/spider" />
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/hackerman" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/zzzz"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_toEndOf="@+id/yyyy"
-                android:layout_weight="1">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/zzzz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
-                    android:text="Name"
-                    android:textColor="@color/gold"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/zzzz"
-                    android:layout_centerHorizontal="true"
-                    android:text="The HackerMan"
-                    android:textColor="@color/gold"
-                    android:textSize="15sp" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/aaaa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The HackerMan"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/orange_frag"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </RelativeLayout>
-
 
     <LinearLayout
         android:id="@+id/coins"
@@ -128,8 +126,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="Total Coins :"
-            android:textColor="#a6a6a6"
+            android:text="Total Coins     "
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -139,8 +137,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:gravity="center"
-            android:text="0"
-            android:textColor="@color/gold"
+            android:text="455"
+            android:textColor="@color/orange_frag"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -150,8 +148,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/coins"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="#151515"
         android:orientation="horizontal">
 
@@ -159,13 +158,11 @@
             android:id="@+id/progressbar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
-            android:layout_height="170dip"
+            android:layout_height="120dip"
             android:layout_centerVertical="true"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:background="@drawable/circle_shape"
             android:indeterminate="false"
-            android:outlineAmbientShadowColor="#ffffff"
-            android:outlineSpotShadowColor="#ffffff"
             android:progress="0"
             android:progressDrawable="@drawable/circle" />
 
@@ -193,7 +190,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_horizontal"
                 android:text="0 hrs 0 min 0 sec"
-                android:textColor="@color/gold"
+                android:textColor="@color/orange_frag"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
@@ -215,76 +212,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/universal_coin"
-        android:orientation="horizontal"
-        android:background="@drawable/step_set_go_bg"
-        android:layout_margin="8dp">
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/profile_steps_bg_orange"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
 
-        <com.app.progresviews.ProgressWheel
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            android:id="@+id/wheelprogress"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:barWidth="17dp"
-            app:countText="931,199"
-            app:countTextColor="@android:color/black"
-            app:countTextSize="15sp"
-            app:defTextColor="@android:color/black"
-            app:defTextSize="10sp"
-            app:definitionText="Steps"
-            app:marginBtwText="15dp"
-            app:percentage="90"
-            app:progressColor="#64b324"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/steps_orange" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Steps"
+                    android:textColor="@color/orange_frag" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/no_of_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6110"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/txt_steps"
+                android:textColor="@color/orange_frag" />
+
+            <TextView
+                android:id="@+id/txt_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Steps"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/orange_frag" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_marginTop="8dp">
 
-            <com.app.progresviews.ProgressLine
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                android:id="@+id/progress_line1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                app:definition="daily steps"
-                app:lineBarWidth="7dp"
-                app:lineProgressColor="#43bd9f"
-                app:underLineColor="@android:color/darker_gray"
-                app:value="6,986"
-                app:valueDefTextSize="20sp"
-                app:valuePercentage="20" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/kcal_orange"/>
 
-            <com.app.progresviews.ProgressLine
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kcal"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/orange_frag"/>
 
-                android:id="@+id/progress_line2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                app:definition="daily calories"
-                app:lineBarWidth="7dp"
-                app:lineProgressColor="#E65100"
-                app:underLineColor="@android:color/darker_gray"
-                app:value="742"
-                app:valueDefTextSize="20sp"
-                app:valuePercentage="50" />
+            </LinearLayout>
 
-            <com.app.progresviews.ProgressLine
+            <TextView
+                android:id="@+id/no_of_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2000"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/txt_cal"
+                android:textColor="@color/orange_frag" />
 
-                android:id="@+id/progress_line3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                app:definition="daily active minutes"
-                app:lineBarWidth="7dp"
-                app:lineProgressColor="#FFB300"
-                app:underLineColor="@android:color/darker_gray"
-                app:value="24"
-                app:valueDefTextSize="20sp"
-                app:valuePercentage="80" />
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txt_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kcal"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/orange_frag" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>

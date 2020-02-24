@@ -138,12 +138,9 @@ public class LoginActivity extends AppCompatActivity {
                             updateUI(user);
                             //             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             //           finish();
-
                         } else {
-
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-
                             Toast.makeText(getApplicationContext(), R.string.app_name, Toast.LENGTH_LONG).show();
                         }
                     }
@@ -160,15 +157,76 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            updateUIOut(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            updateUI(null);
+                            updateUIOut(null);
                         }
 
                     }
                 });
+    }
+
+    private void updateUIOut(FirebaseUser user){
+        if (user != null) {
+            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+            FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                    .setPersistenceEnabled(true)
+                    .build();
+            db.setFirestoreSettings(settings);
+
+            db.collection("Users").whereEqualTo("username", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.getResult().getDocuments().isEmpty()) {
+
+                        SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("username", user.getUid());
+                        editor.apply();
+
+                        ArrayList<String> types=new ArrayList<>();
+                        ArrayList<Event_Details> events=new ArrayList<>();
+                        Map<String, Object> data = new HashMap<>();
+                        email = email.trim();
+                        int index = email.indexOf("@");
+                        String name = email.substring(0,index);
+                        data.put("email", email);
+                        data.put("name", name);
+                        data.put("username", user.getUid());
+                        data.put("score", 0.0);
+                        data.put("slot_time", FieldValue.serverTimestamp());
+                        StringTokenizer stringTokenizer = new StringTokenizer(user.getEmail(), "@");
+                        String qrcode = stringTokenizer.nextToken();
+                        data.put("qr_code", qrcode);
+                        data.put("Types",types);
+                        data.put("Attended",events);
+
+                        db.collection("Users").document(user.getUid()).set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Intent i = new Intent(LoginActivity.this,  CharSelect.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+
+                                    finish();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Connection error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                    else{
+                        Intent i = new Intent(LoginActivity.this, CharSelect.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+            });
+        }
     }
 
     private void updateUI(FirebaseUser user) {
@@ -203,13 +261,13 @@ public class LoginActivity extends AppCompatActivity {
                         data.put("Types",types);
                         data.put("Attended",events);
 
-                        Log.d("test2", user.getUid().toString());
                         db.collection("Users").document(user.getUid()).set(data, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Intent i = new Intent(LoginActivity.this,  MainActivity.class);
+                                    Intent i = new Intent(LoginActivity.this,  CharSelect.class);
                                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    i.putExtra("user_id",user.getUid());
                                     startActivity(i);
 
                                     finish();
@@ -222,7 +280,7 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                     else{
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent i = new Intent(LoginActivity.this, CharSelect.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         finish();
