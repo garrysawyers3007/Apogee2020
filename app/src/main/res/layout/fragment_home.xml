@@ -39,15 +39,24 @@
                 android:text="My Story"
                 android:textStyle="bold"
                 android:fontFamily="@font/convergence"
-                android:textColor="@color/green_hue"
+                android:textColor="@color/green_frag"
                 android:textSize="30sp" />
 
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/filter"
+        android:src="@drawable/ic_filter"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/leader_board"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/filter"
         android:clipToPadding="false"
         android:paddingTop="80dp"
         android:scrollbars="none"

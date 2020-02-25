@@ -101,7 +101,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
             score=itemView.findViewById(R.id.player_score);
             img = itemView.findViewById(R.id.badge);
             charName = itemView.findViewById(R.id.player_char_name);
-            relativeLayout = itemView.findViewById(R.id.card_rel);
+            relativeLayout = itemView.findViewById(R.id.parent);
         }
     }
 

@@ -60,8 +60,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                 holder.hor1.setVisibility(View.GONE);
                 holder.hor2.setVisibility(View.VISIBLE);
                 if(exists) {
-                    holder.hor2.setBackgroundColor(Color.parseColor("#00fdbc"));
-                    holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                    holder.hor2.setBackgroundColor(Color.parseColor("#4ECE60"));
+                    holder.text.setTextColor(Color.parseColor("#4ECE60"));
                 }
 
             } else if (position == 0) {
@@ -71,12 +71,12 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
 //            holder.hor.setVisibility(View.GONE);
                 if(exists) {
                     if (event_details.get(position).getName().equals(attend)) {
-                        holder.hor.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                        holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     } else if (!check) {
-                        holder.or1.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.hor.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.or1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
                     }
                 }
             } else if (position == event_details.size() - 1) {
@@ -85,21 +85,21 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
 
                 if(exists) {
                     if (event_details.get(position).getName().equals(attend)) {
-                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                        holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     }
                 }
             } else {
                 holder.hor.setVisibility(View.INVISIBLE);
                 if(exists) {
                     if (!check) {
-                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.or1.setBackgroundColor(Color.parseColor("#00fdbc"));
+                        holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or1.setBackgroundColor(Color.parseColor("#4ECE60"));
                     } else if (event_details.get(position).getName().equals(attend)) {
-                        holder.or.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.hor1.setBackgroundColor(Color.parseColor("#00fdbc"));
-                        holder.text.setTextColor(Color.parseColor("#00fdbc"));
+                        holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     }
                 }
             }

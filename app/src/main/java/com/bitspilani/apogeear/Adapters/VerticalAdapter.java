@@ -56,15 +56,21 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull VerticalAdapter.ViewHolder holder, int position) {
 
-        Calendar c1=Calendar.getInstance(),c2=Calendar.getInstance();
+        Calendar c1=Calendar.getInstance(),c2=Calendar.getInstance(),c3=Calendar.getInstance();
         c1.setTimeInMillis(lists.get(position).get(0).getTime().getSeconds()*1000);
         c2.setTimeInMillis(lists.get(position).get(lists.get(position).size()-1).getTime().getSeconds()*1000);
+        c3.setTimeInMillis(lists.get(position>0?position-1:position).get(0).getTime().getSeconds()*1000);
+
+        if(position==0 ||(position>0 && c1.get(Calendar.DATE)>c3.get(Calendar.DATE))) {
+            holder.date.setText(c1.get(Calendar.DATE)+" March");
+            holder.date.setVisibility(View.VISIBLE);
+        }
 
         if(lists.get(position).size()==1 || lists.get(position).get(0).getTime().compareTo(lists.get(position).get(lists.get(position).size()-1).getTime())==0)
-        holder.text.setText(c1.get(Calendar.DATE)+" "+"Mar"+" "+c1.get(Calendar.HOUR)+":"+(c1.get(Calendar.MINUTE)==0?"00":c1.get(Calendar.MINUTE))+" "+(c1.get(Calendar.AM_PM)==0?"AM":"PM"));
+        holder.text.setText(c1.get(Calendar.HOUR)+":"+(c1.get(Calendar.MINUTE)==0?"00":c1.get(Calendar.MINUTE))+" "+(c1.get(Calendar.AM_PM)==0?"AM":"PM"));
 
         else
-            holder.text.setText(c1.get(Calendar.DATE)+" "+"Mar"+" "+c1.get(Calendar.HOUR)+":"+(c1.get(Calendar.MINUTE)==0?"00":c1.get(Calendar.MINUTE))+" "+(c1.get(Calendar.AM_PM)==0?"AM":"PM")+"-"+c2.get(Calendar.HOUR)+":"+(c2.get(Calendar.MINUTE)==0?"00":c2.get(Calendar.MINUTE))+" "+(c2.get(Calendar.AM_PM)==0?"AM":"PM"));
+            holder.text.setText(c1.get(Calendar.HOUR)+":"+(c1.get(Calendar.MINUTE)==0?"00":c1.get(Calendar.MINUTE))+" "+(c1.get(Calendar.AM_PM)==0?"AM":"PM")+"-"+c2.get(Calendar.HOUR)+":"+(c2.get(Calendar.MINUTE)==0?"00":c2.get(Calendar.MINUTE))+" "+(c2.get(Calendar.AM_PM)==0?"AM":"PM"));
 
         SharedPreferences sharedPref=context.getSharedPreferences("userinfo",MODE_PRIVATE);
         String user=sharedPref.getString("username","");
@@ -112,7 +118,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView text;
+        TextView text,date;
         RecyclerView horizontalrv;
         public TimelineView timelineView;
         Drawable fail,incomplete;
@@ -123,6 +129,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
             text=itemView.findViewById(R.id.course_item_name_tv);
             horizontalrv=itemView.findViewById(R.id.horizontal_list);
             timelineView=itemView.findViewById(R.id.timeline);
+            date=itemView.findViewById(R.id.date);
             timelineView.initLine(viewType);
 
             fail=itemView.getResources().getDrawable(R.drawable.fail);

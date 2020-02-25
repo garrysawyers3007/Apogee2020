@@ -113,7 +113,14 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
+                String email1=account.getEmail();
+                if(email1.substring(email1.indexOf('@')+1).equals("pilani.bits-pilani.ac.in"))
+                    firebaseAuthWithGoogle(account);
+                else {
+                    Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+                    mGoogleSignInClient.signOut();
+                    mAuth.signOut();
+                }
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -133,11 +140,11 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            //             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                            //           finish();
+                                Log.d(TAG, "signInWithCredential:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

@@ -12,11 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bitspilani.apogeear.EventDialog;
 import com.bitspilani.apogeear.Models.Event_Details;
 import com.bitspilani.apogeear.R;
 import com.bitspilani.apogeear.Adapters.VerticalAdapter;
 import com.github.vipulasri.timelineview.TimelineView;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -43,6 +46,7 @@ public class Home extends Fragment {
 
     private VerticalAdapter adapter;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private ImageView filter;
 
     public Home() {
         // Required empty public constructor
@@ -57,7 +61,25 @@ public class Home extends Fragment {
 
         String userid=mAuth.getCurrentUser().getUid();
 
+        filter=view.findViewById(R.id.filter);
+
         FirebaseFirestore db=FirebaseFirestore.getInstance();
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("Users").document(userid)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                ArrayList<String> types=(ArrayList<String>) documentSnapshot.get("Types");
+                                EventDialog eventDialog=new EventDialog(getContext(),types,userid);
+                                eventDialog.show();
+                            }
+                        });
+            }
+        });
 
         db.collection("Users").document(userid)
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -72,7 +94,7 @@ public class Home extends Fragment {
                         LinearLayoutManager llm=new LinearLayoutManager(getContext());
                         vertical.setLayoutManager(llm);
 
-                        if(ev!=null) {
+                        if(ev.size()!=0) {
                             db.collection("Events").whereIn("Type", ev)
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
