@@ -12,21 +12,21 @@
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav"
+        android:overScrollMode="never"
         android:id="@+id/viewpager"/>
 
     <com.gauravk.bubblenavigation.BubbleNavigationLinearView
         android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/bottom_nav_bg"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/dark"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:elevation="8dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="0dp"
+        android:elevation="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:orientation="horizontal"
         app:bnc_mode="inside"
         android:padding="10dp">
@@ -41,7 +41,8 @@
             android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/ic_person"
             app:bt_title="Profile"
-            app:bt_padding="10dp"
+            app:bt_titleSize="10sp"
+            app:bt_padding="8dp"
             app:bt_titlePadding="8dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -54,7 +55,8 @@
             android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/maps_icon"
             app:bt_title="Map"
-            app:bt_padding="10dp"
+            app:bt_titleSize="10sp"
+            app:bt_padding="8dp"
             app:bt_titlePadding="8dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -67,7 +69,8 @@
             android:layout_marginEnd="5dp"
             app:bt_icon="@drawable/ic_home"
             app:bt_title="Home"
-            app:bt_padding="10dp"
+            app:bt_titleSize="10sp"
+            app:bt_padding="8dp"
             app:bt_titlePadding="8dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -78,9 +81,10 @@
             app:bt_colorInactive="@color/color_green"
             app:bt_badgeBackgroundColor="@color/color_green"
             android:layout_marginEnd="5dp"
-            app:bt_icon="@drawable/ic_leaderboard"
+            app:bt_icon="@drawable/ic_leaderboards"
             app:bt_title="Leaderboard"
-            app:bt_padding="10dp"
+            app:bt_padding="8dp"
+            app:bt_titleSize="10sp"
             app:bt_titlePadding="8dp" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
@@ -92,27 +96,10 @@
             app:bt_badgeBackgroundColor="@color/custom_red"
             app:bt_icon="@drawable/ic_more"
             app:bt_title="More"
-            app:bt_padding="10dp"
+            app:bt_padding="8dp"
+            app:bt_titleSize="10sp"
             app:bt_titlePadding="8dp" />
 
     </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
-
-
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:id="@+id/bottom_nav"-->
-    <!--        android:layout_gravity="bottom"-->
-    <!--        android:background="@drawable/bottom_nav_bg"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        app:menu="@menu/bottomnav"-->
-    <!--        app:itemIconTint="@drawable/bottom_nav_colors"-->
-    <!--        app:itemTextColor="@android:color/holo_green_light"-->
-    <!--        android:layout_marginLeft="8dp"-->
-    <!--        android:layout_marginRight="8dp"-->
-    <!--        android:layout_marginBottom="12dp"-->
-    <!--        app:itemRippleColor="@android:color/white"-->
-    <!--        app:labelVisibilityMode="labeled"-->
-    <!--        android:elevation="10dp"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"/>-->
 
 </RelativeLayout>

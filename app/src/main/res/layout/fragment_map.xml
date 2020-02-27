@@ -36,4 +36,16 @@
         android:layout_marginBottom="20dp"
         android:visibility="gone" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/gradient_bg_app"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:rotation="180"
+        android:background="@drawable/gradient_bg_app"/>
+
 </RelativeLayout>

@@ -17,7 +17,7 @@
         android:id="@+id/home"/>
     <item
         android:title="Leaderboard"
-        android:icon="@drawable/ic_leaderboard"
+        android:icon="@drawable/ic_leaderboards"
         android:id="@+id/leaderboard"/>
     <item
         android:title="More"

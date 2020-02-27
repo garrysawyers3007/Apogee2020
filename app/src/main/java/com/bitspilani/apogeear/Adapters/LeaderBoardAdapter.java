@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.ViewHolder> {
 
-    ArrayList<Rank> list;
-    Context context;
-    View view;
+    private ArrayList<Rank> list;
+    private Context context;
+    private View view;
 
     public LeaderBoardAdapter (ArrayList<Rank> list, Context context){
         this.list=list;
@@ -35,19 +35,18 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         view= LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboard_new,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
-
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         switch (position){
+
             case 0:holder.name.setText(list.get(position).getUsername());
+                holder.name.setTextColor(Color.parseColor("#000000"));
                 holder.charName.setText(list.get(position).getCharName());
                 holder.charName.setTextColor(Color.parseColor("#000000"));
-                holder.name.setTextColor(Color.parseColor("#000000"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
                 holder.score.setTextColor(Color.parseColor("#000000"));
                 holder.rank.setText(""+(position+1));
@@ -60,6 +59,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 holder.charName.setTextColor(Color.parseColor("#000000"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
                 holder.score.setTextColor(Color.parseColor("#000000"));
+                holder.rank.setText(""+(position+1));
                 holder.img.setImageDrawable(context.getDrawable(R.drawable.topimg));
                 holder.relativeLayout.setBackground(context.getDrawable(R.drawable.leaderboard_rank2_bg));
                 holder.rank.setText(""+(position+1));
@@ -101,7 +101,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
             score=itemView.findViewById(R.id.player_score);
             img = itemView.findViewById(R.id.badge);
             charName = itemView.findViewById(R.id.player_char_name);
-            relativeLayout = itemView.findViewById(R.id.parent);
+            relativeLayout = itemView.findViewById(R.id.card_name);
         }
     }
 

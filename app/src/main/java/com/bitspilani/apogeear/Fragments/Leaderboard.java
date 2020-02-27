@@ -36,12 +36,12 @@ import java.util.Comparator;
  */
 public class Leaderboard extends Fragment {
 
-    RecyclerView leaderboard;
-    FirebaseFirestore db;
-    ArrayList<Rank> list;
-    LeaderBoardAdapter leaderBoardAdapter;
-    FirebaseAuth mAuth=FirebaseAuth.getInstance();
-    TextView rank,name,coins,charName;
+    private RecyclerView leaderboard;
+    private FirebaseFirestore db;
+    private ArrayList<Rank> list;
+    private LeaderBoardAdapter leaderBoardAdapter;
+    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private TextView rank,name,coins,charName;
 
     public Leaderboard() {
         // Required empty public constructor

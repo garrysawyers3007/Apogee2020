@@ -38,10 +38,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Profile extends Fragment {
 
     private CountDownTimer countDownTimer;
@@ -95,21 +91,6 @@ public class Profile extends Fragment {
                         charName.setText(documentSnapshot.get("char").toString());
                     }
                 });
-
-//        user_char = charName.getText().toString();
-//        if (user_char.equals("Mech")){
-//            view = inflater.inflate(R.layout.fragment_profile_orange,container,false);
-//            setLogout();
-//        }else if (user_char.equals("Tech")){
-//            view = inflater.inflate(R.layout.fragment_profile_green,container,false);
-//            setLogout();
-//        }else if (user_char.equals("The HackerMan")){
-//            view = inflater.inflate(R.layout.fragment_profile_blue,container,false);
-//            setLogout();
-//        }else{
-//            view = inflater.inflate(R.layout.fragment_profile_green,container,false);
-//            setLogout();
-//        }
 
         db.collection("Coins").document("Universal Coins").get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -33,9 +33,10 @@ public class CharSelect extends AppCompatActivity {
         setContentView(R.layout.activity_char_select);
 
         list = new ArrayList<>();
-        list.add(new CharacterModel("The HackerMan",R.drawable.coinimage));
-        list.add(new CharacterModel("Mech",R.drawable.coinimage));
-        list.add(new CharacterModel("Tech",R.drawable.coinimage));
+        list.add(new CharacterModel("The HackerMan",R.drawable.hackerman_charpage));
+        list.add(new CharacterModel("Maestro",R.drawable.maestro));
+        list.add(new CharacterModel("Paint Slinger",R.drawable.coinimage));
+        list.add(new CharacterModel("Grease Monkey",R.drawable.coinimage));
 
         adapter = new CharAdapter(list,this);
 

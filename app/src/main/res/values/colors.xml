@@ -97,10 +97,17 @@
     <color name="violet_hue">#6a4ab9</color>
     <color name="purple_hue">#7775df</color>
 
-    <color name="dark_alpha">#4d000000</color>
+    <color name="dark_alpha">#cc000000</color>
 
     <color name="green_frag">#4ECE60</color>
     <color name="blue_frag">#54C3DD</color>
     <color name="orange_frag">#FF5E4D</color>
+
+    <color name="grad_app">#3a393a</color>
+    <color name="grad_app_trans">#003a393a</color>
+
+    <color name="bottom_nav_bg">#cc3a393a</color>
+
+    <color name="green_frag_name">#011e23</color>
 
 </resources>

@@ -12,8 +12,7 @@
         android:id="@+id/header_profile"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/coding_bg"/>
-
+        android:background="@drawable/backg_hackerman"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/frag_profile"
@@ -21,18 +20,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:alpha=".90"
+            android:layout_marginTop="20dp"
+            android:alpha=".80"
             app:cardBackgroundColor="@color/green_frag"
-            app:cardCornerRadius="20.5dp"
-            app:cardElevation="6dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                app:cardBackgroundColor="@color/back_shade4"
-                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/green_frag_name"
+                app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
 
                 <TextView
@@ -40,15 +39,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/convergence"
+                    android:fontFamily="@font/comfortaa_bold"
                     android:gravity="center"
-                    android:paddingStart="40dp"
+                    android:paddingStart="20dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="40dp"
+                    android:paddingEnd="20dp"
                     android:paddingBottom="5dp"
                     android:text="Profile"
-                    android:textColor="@color/green_frag"
-                    android:textSize="30sp"
+                    android:textColor="@color/white_text"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -65,25 +64,25 @@
 
     <RelativeLayout
         android:id="@+id/user_img"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/frag_profile"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
-        android:background="@drawable/profile_user_info_bg_green"
         android:elevation="30dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_centerInParent="true"
             android:padding="10dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/yyyy"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/hackerman" />
 
@@ -94,6 +93,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:text="Name"
+                    android:fontFamily="@font/pt_sans_regular"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -103,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="The HackerMan"
+                    android:fontFamily="@font/proximanova_regular"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/green_frag"
                     android:textSize="15sp" />
@@ -117,7 +118,7 @@
         android:layout_below="@id/user_img"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:background="#151515"
         android:orientation="horizontal">
 
@@ -128,6 +129,7 @@
             android:gravity="end"
             android:text="Total Coins     "
             android:textColor="@color/white"
+            android:fontFamily="@font/pt_sans_regular"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -137,6 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:gravity="center"
+            android:fontFamily="@font/pt_bold"
             android:text="455"
             android:textColor="@color/green_frag"
             android:textSize="20sp" />
@@ -148,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/coins"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="#151515"
@@ -179,6 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Universal Coins"
+                android:fontFamily="@font/pt_sans_regular"
                 android:textColor="#fff"
                 android:textSize="18sp" />
 
@@ -188,6 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/univ_coin"
                 android:layout_alignParentRight="true"
+                android:fontFamily="@font/pt_sans_regular"
                 android:layout_gravity="center_horizontal"
                 android:text="0 hrs 0 min 0 sec"
                 android:textColor="@color/green_frag"
@@ -223,7 +228,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -231,15 +237,17 @@
                 android:orientation="vertical">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/steps_green"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Steps"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/pt_sans_regular"
                 android:textColor="@color/green_frag"/>
 
             </LinearLayout>
@@ -250,6 +258,7 @@
                 android:layout_height="wrap_content"
                 android:text="6110"
                 android:textSize="20sp"
+                android:fontFamily="@font/pt_bold"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/txt_steps"
                 android:textColor="@color/green_frag" />
@@ -260,7 +269,8 @@
                 android:layout_height="wrap_content"
                 android:text="Steps"
                 android:textSize="12sp"
-                android:layout_marginStart="10dp"
+                android:textStyle="italic"
+                android:layout_marginStart="5dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/green_frag" />
@@ -270,7 +280,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="17dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -278,14 +288,16 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/kcal_green"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kcal"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/pt_sans_regular"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/green_frag"/>
 
@@ -299,6 +311,7 @@
                 android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/txt_cal"
+                android:fontFamily="@font/pt_bold"
                 android:textColor="@color/green_frag" />
 
             <TextView
@@ -307,7 +320,9 @@
                 android:layout_height="wrap_content"
                 android:text="Kcal"
                 android:textSize="12sp"
-                android:layout_marginStart="10dp"
+                android:textStyle="italic"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/pt_sans_regular"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/green_frag" />
@@ -316,5 +331,17 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_below="@+id/header_profile"
+        android:background="@drawable/gradient_bg_app"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:rotation="180"
+        android:background="@drawable/gradient_bg_app"/>
 
 </RelativeLayout>

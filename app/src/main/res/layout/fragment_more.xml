@@ -12,18 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:alpha=".90"
-        android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/green_hue"
-        app:cardCornerRadius="20.5dp"
-        app:cardElevation="6dp">
+        android:alpha=".80"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/green_frag"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            app:cardBackgroundColor="@color/back_shade4"
-            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/green_frag_name"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <TextView
@@ -32,15 +32,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:paddingStart="40dp"
-                android:paddingEnd="40dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="More"
                 android:textStyle="bold"
                 android:fontFamily="@font/convergence"
-                android:textColor="@color/green_hue"
-                android:textSize="30sp" />
+                android:textColor="@color/green_frag"
+                android:textSize="25sp" />
 
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
@@ -55,6 +55,18 @@
         android:clipToPadding="false"
         android:paddingTop="70dp"
         android:scrollbars="none" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/gradient_bg_app"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:rotation="180"
+        android:background="@drawable/gradient_bg_app"/>
 
 </RelativeLayout>
 
