@@ -6,6 +6,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.fxn.OnBubbleClickListener;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.text.SimpleDateFormat;
@@ -73,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(2);
-        bubbleNavigationLinearView.setCurrentActiveItem(2);
 
+        viewPager.setOffscreenPageLimit(2);
+        //viewPager.setPageTransformer(true,new FadeOutTransformation());
+
+        bubbleNavigationLinearView.setCurrentActiveItem(2);
         bubbleNavigationLinearView.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
@@ -146,6 +153,32 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        return false;
 //    }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(viewPager.getCurrentItem()!=2)
+            viewPager.setCurrentItem(2);
+        else
+            super.onBackPressed();
     }
 }
 

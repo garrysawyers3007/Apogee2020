@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Settings"
-                android:textColor="@color/color_green"/>
+                android:textColor="@color/green_frag"/>
 
             <View
                 android:layout_width="fill_parent"

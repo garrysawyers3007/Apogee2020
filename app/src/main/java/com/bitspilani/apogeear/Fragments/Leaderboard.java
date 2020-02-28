@@ -89,6 +89,9 @@ public class Leaderboard extends Fragment {
                 }
             }
         });
+
         return view;
     }
+
+
 }

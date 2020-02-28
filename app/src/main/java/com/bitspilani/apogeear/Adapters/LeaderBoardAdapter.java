@@ -85,7 +85,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return 10;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

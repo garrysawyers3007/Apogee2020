@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/gradient_bg_app_black"
     tools:context=".Fragments.Leaderboard">
 
     <RelativeLayout
@@ -90,7 +89,7 @@
                         android:id="@+id/user_rank"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
-                        android:text="R"
+                        android:text="-"
                         android:fontFamily="@font/pt_bold"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
@@ -125,7 +124,7 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/proximanova_regular"
                     android:maxLines="3"
-                    android:text="Name"
+                    android:text="-"
                     android:gravity="center"
                     android:textColor="#fff"
                     android:textSize="12sp"
@@ -140,7 +139,7 @@
                     android:fontFamily="@font/proximanova_regular"
                     android:maxLines="3"
                     android:gravity="center"
-                    android:text="CharName"
+                    android:text="-"
                     android:textColor="@color/green_frag"
                     android:textSize="10sp"
                     android:textStyle="normal" />
@@ -172,7 +171,7 @@
                     android:fontFamily="@font/pt_sans_regular"
                     android:gravity="center"
                     android:layout_marginTop="0dp"
-                    android:text="Score"
+                    android:text="-"
                     android:textColor="@color/green_frag"
                     android:textSize="18sp" />
 
@@ -207,13 +206,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="72dp"
-            android:background="@drawable/gradient_bg_app"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_alignParentBottom="true"
-            android:rotation="180"
             android:background="@drawable/gradient_bg_app"/>
 
 

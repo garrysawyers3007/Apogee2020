@@ -35,7 +35,7 @@
             android:textSize="13dp"
             android:paddingStart="12dp"
             android:background="@drawable/more_heading_bg"
-            android:textColor="@color/green_hue"
+            android:textColor="@color/green_frag"
             android:text="Notifications"/>
 
         <View

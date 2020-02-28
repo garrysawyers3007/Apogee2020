@@ -1,6 +1,8 @@
 package com.bitspilani.apogeear.Fragments;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -140,7 +142,7 @@ public class Home extends Fragment {
                                                 if (toDate(list.get(i).getTime().toDate()).equals(toDate(list.get(prev).getTime().toDate())))
                                                     seconds = list.get(i).getTime().getSeconds() - list.get(prev).getTime().getSeconds();
 
-                                                if (seconds <= 3600)
+                                                if (seconds == 0)
                                                     temp.add(list.get(i));
                                                 else {
 
@@ -180,6 +182,23 @@ public class Home extends Fragment {
         String currentTime = sdf.format(new Date());
         return currentTime.trim();
 
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bitspilani.apogeear.Models.Event_Details;
@@ -54,28 +55,28 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
 
             if (event_details.size() == 1) {
 
-                holder.hor.setVisibility(View.GONE);
                 holder.or.setVisibility(View.INVISIBLE);
                 holder.or1.setVisibility(View.INVISIBLE);
-                holder.hor1.setVisibility(View.GONE);
-                holder.hor2.setVisibility(View.VISIBLE);
+
                 if(exists) {
-                    holder.hor2.setBackgroundColor(Color.parseColor("#4ECE60"));
+                    holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
+                    holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
                     holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                    holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                 }
 
             } else if (position == 0) {
                 holder.or.setVisibility(View.INVISIBLE);
-//            holder.hor1.setVisibility(View.GONE);
-//            holder.hor2.setVisibility(View.VISIBLE);
-//            holder.hor.setVisibility(View.GONE);
+
                 if(exists) {
                     if (event_details.get(position).getName().equals(attend)) {
                         holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     } else if (!check) {
                         holder.or1.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
                     }
                 }
@@ -86,6 +87,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                 if(exists) {
                     if (event_details.get(position).getName().equals(attend)) {
                         holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     }
@@ -95,9 +97,11 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                 if(exists) {
                     if (!check) {
                         holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.or1.setBackgroundColor(Color.parseColor("#4ECE60"));
                     } else if (event_details.get(position).getName().equals(attend)) {
                         holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
+                        holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.text.setTextColor(Color.parseColor("#4ECE60"));
                     }
@@ -115,15 +119,18 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView text;
-        View hor,hor1,hor2,or,or1;
+        CardView Event;
+        View hor,hor1,or,or1,or2;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text=itemView.findViewById(R.id.horizontal_item_text);
             hor=itemView.findViewById(R.id.hor);
             hor1=itemView.findViewById(R.id.hor1);
-            hor2=itemView.findViewById(R.id.hor2);
+
             or=itemView.findViewById(R.id.or);
             or1=itemView.findViewById(R.id.or1);
+            or2=itemView.findViewById(R.id.or2);
+            Event=itemView.findViewById(R.id.Event);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

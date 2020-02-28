@@ -86,7 +86,9 @@ public class Profile extends Fragment {
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        coins.setText(documentSnapshot.getDouble("score").toString());
+
+                        long coinval=Math.round(documentSnapshot.getDouble("score"));
+                        coins.setText(coinval+"");
                         name.setText(documentSnapshot.get("name").toString());
                         charName.setText(documentSnapshot.get("char").toString());
                     }

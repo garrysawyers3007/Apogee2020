@@ -4,20 +4,29 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#151515">
+    >
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="16dp"
         android:visibility="gone"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/convergence"
         android:text="Date"
         android:textColor="#D0D3D4"
-        android:textSize="21sp" />
+        android:textSize="25sp" />
+    <View
+        android:id="@+id/timext"
+        android:layout_width="2dp"
+        android:layout_height="51dp"
+        android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:background="#D0D3D4"
+        android:layout_marginStart="154.477dp"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,10 +43,10 @@
         android:layout_width="wrap_content"
         android:textColor="#D0D3D4"
         android:text="Time"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/convergence"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content" />
     </RelativeLayout>
 
@@ -46,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:markerSize="20dp"
+        app:marker="@drawable/complete"
         app:markerInCenter="false"
         app:markerPaddingTop="20dp"
         android:layout_marginLeft="5dp"
@@ -66,16 +76,12 @@
         android:id="@+id/card"
         android:layout_weight="1.65">
 
-        <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        app:cardBackgroundColor="#151515">
 
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
             android:paddingBottom="8dp"
             android:layout_alignParentLeft="true">
 
@@ -86,12 +92,10 @@
             android:id="@+id/horizontal_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-
+            android:layout_marginTop="5dp"
             android:visibility="visible" />
             </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
     </RelativeLayout>
     </LinearLayout>
 

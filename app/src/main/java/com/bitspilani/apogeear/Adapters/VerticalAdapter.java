@@ -64,6 +64,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
         if(position==0 ||(position>0 && c1.get(Calendar.DATE)>c3.get(Calendar.DATE))) {
             holder.date.setText(c1.get(Calendar.DATE)+" March");
             holder.date.setVisibility(View.VISIBLE);
+            if(position!=0) {
+                holder.timext.setVisibility(View.VISIBLE);
+                holder.timext.setBackgroundColor(Color.parseColor("#262626"));
+            }
+            if(position>lists.size()-3)
+                holder.timext.setBackgroundColor(Color.parseColor("#d0d3d4"));
         }
 
         if(lists.get(position).size()==1 || lists.get(position).get(0).getTime().compareTo(lists.get(position).get(lists.get(position).size()-1).getTime())==0)
@@ -95,13 +101,13 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
 
                 if(attend.equals(""))
                     holder.timelineView.setMarker(holder.fail);
-                if(position==5 || position==6)
+                if(position==lists.size()-1 || position==lists.size()-2)
                     holder.timelineView.setMarker(holder.incomplete);
-                if(position<4) {
+                if(position<lists.size()-3) {
                     holder.timelineView.setEndLineColor(Color.parseColor("#262626"), holder.getItemViewType());
                     holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
                 }
-                if(position==4){
+                if(position==lists.size()-3){
                     holder.timelineView.setStartLineColor(Color.parseColor("#262626"), holder.getItemViewType());
                 }
 
@@ -119,6 +125,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView text,date;
+        View timext;
         RecyclerView horizontalrv;
         public TimelineView timelineView;
         Drawable fail,incomplete;
@@ -131,6 +138,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
             timelineView=itemView.findViewById(R.id.timeline);
             date=itemView.findViewById(R.id.date);
             timelineView.initLine(viewType);
+            timext=itemView.findViewById(R.id.timext);
 
             fail=itemView.getResources().getDrawable(R.drawable.fail);
             incomplete=itemView.getResources().getDrawable(R.drawable.incomplete);
