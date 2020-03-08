@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,6 +65,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
         if(position==0 ||(position>0 && c1.get(Calendar.DATE)>c3.get(Calendar.DATE))) {
             holder.date.setText(c1.get(Calendar.DATE)+" March");
             holder.date.setVisibility(View.VISIBLE);
+            holder.datecard.setVisibility(View.VISIBLE);
             if(position!=0) {
                 holder.timext.setVisibility(View.VISIBLE);
                 holder.timext.setBackgroundColor(Color.parseColor("#262626"));
@@ -125,6 +127,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView text,date;
+        CardView datecard;
         View timext;
         RecyclerView horizontalrv;
         public TimelineView timelineView;
@@ -139,6 +142,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
             date=itemView.findViewById(R.id.date);
             timelineView.initLine(viewType);
             timext=itemView.findViewById(R.id.timext);
+            datecard=itemView.findViewById(R.id.datecard);
 
             fail=itemView.getResources().getDrawable(R.drawable.fail);
             incomplete=itemView.getResources().getDrawable(R.drawable.incomplete);

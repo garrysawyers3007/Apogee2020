@@ -6,24 +6,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/datecard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:alpha=".80"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/green_frag"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        app:cardBackgroundColor="@color/green_frag_name"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:visibility="gone"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+       android:layout_margin="5dp"
         android:fontFamily="@font/convergence"
         android:text="Date"
         android:textColor="#D0D3D4"
         android:textSize="25sp" />
+    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
     <View
         android:id="@+id/timext"
         android:layout_width="2dp"
-        android:layout_height="51dp"
-        android:visibility="gone"
+        android:layout_height="63dp"
+        android:layout_toRightOf="@+id/datecard"
         android:layout_alignParentLeft="true"
+        android:visibility="gone"
         android:background="#D0D3D4"
         android:layout_marginStart="154.477dp"
         />
@@ -31,7 +54,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date">
+        android:layout_below="@+id/datecard">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -43,12 +66,14 @@
         android:layout_width="wrap_content"
         android:textColor="#D0D3D4"
         android:text="Time"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/convergence"
         android:textSize="18sp"
         android:layout_height="wrap_content" />
+
     </RelativeLayout>
+
 
     <com.github.vipulasri.timelineview.TimelineView
         android:id="@+id/timeline"
@@ -92,7 +117,7 @@
             android:id="@+id/horizontal_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:visibility="visible" />
             </LinearLayout>
 

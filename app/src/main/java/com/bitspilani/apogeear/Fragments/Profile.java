@@ -1,10 +1,11 @@
 package com.bitspilani.apogeear.Fragments;
 
-
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -19,22 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bitspilani.apogeear.LoginActivity;
-import com.bitspilani.apogeear.Models.Rank;
 import com.bitspilani.apogeear.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 
 import java.util.Calendar;
 
@@ -94,11 +88,13 @@ public class Profile extends Fragment {
                     }
                 });
 
-        db.collection("Coins").document("Universal Coins").get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+        db.collection("Coins").document("Universal Coins")
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot documentSnapshot = task.getResult();
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                        c = Calendar.getInstance();
                         totalTimeCountInMilliseconds = documentSnapshot.getTimestamp("Expire Time").getSeconds() - c.getTimeInMillis() / 1000;
                         startTime = documentSnapshot.getTimestamp("Start Time").getSeconds() * 1000;
                         endTime = documentSnapshot.getTimestamp("Expire Time").getSeconds() * 1000;
@@ -107,6 +103,7 @@ public class Profile extends Fragment {
                         setTimer();
                     }
                 });
+
         return view;
 
     }
@@ -119,8 +116,7 @@ public class Profile extends Fragment {
         name = view.findViewById(R.id.zzzz);
         charName = view.findViewById(R.id.aaaa);
 
-        c = Calendar.getInstance();
-        c.getTimeInMillis();
+
         setLogout();
     }
 
@@ -139,7 +135,6 @@ public class Profile extends Fragment {
     }
 
     private void setTimer() {
-        int time = 0;
         //Toast.makeText(getContext(), "Please Enter Minutes...",
         //      Toast.LENGTH_LONG).show();
         totalTimeCountInMilliseconds = totalTimeCountInMilliseconds * 1000;
@@ -149,11 +144,17 @@ public class Profile extends Fragment {
     }
 
     private void startTimer() {
+
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 1000) {
             // 500 means, onTick function will be called at every 500
             // milliseconds
             @Override
             public void onFinish() {
+                timer.setProgress(0);
+                showtime.setVisibility(View.VISIBLE);
             }
             @Override
             public void onTick(long leftTimeInMilliseconds) {
@@ -164,26 +165,27 @@ public class Profile extends Fragment {
                 int hours = (int) ((leftTimeInMilliseconds / (1000 * 60 * 60)) % 24);
                 //i++;
                 //Setting the Progress Bar to decrease wih the timer
+                Log.d("timeleft", "" + totalTimeCountInMilliseconds);
                 Log.d("total count", "" + (endTime - startTime));
                 Log.d("lefttt", "" + leftTimeInMilliseconds);
                 if (endTime != startTime) {
                     timer.setMax((int) (endTime - startTime));
-                    timer.setProgress((int) (endTime - startTime - leftTimeInMilliseconds));
+                    timer.setProgress((int) (0.83*(endTime - startTime - leftTimeInMilliseconds)));
                 } else
                     timer.setProgress(0);
-                if (leftTimeInMilliseconds < timeBlinkInMilliseconds) {
-                    // change the style of the textview .. giving a red
-                    // alert style
-
-                    if (blink) {
-                        showtime.setVisibility(View.VISIBLE);
-                        // if blink is true, textview will be visible
-                    } else {
-                        showtime.setVisibility(View.INVISIBLE);
-                    }
-
-                    blink = !blink; // toggle the value of blink
-                }
+//                if (leftTimeInMilliseconds < timeBlinkInMilliseconds) {
+//                    // change the style of the textview .. giving a red
+//                    // alert style
+//
+//                    if (blink) {
+//                        showtime.setVisibility(View.VISIBLE);
+//                        // if blink is true, textview will be visible
+//                    } else {
+//                        showtime.setVisibility(View.INVISIBLE);
+//                    }
+//
+//                    blink = !blink; // toggle the value of blink
+//                }
                 showtime.setText(hours + " hrs " + minutes + " min " + seconds + " sec");
                 // format the textview to show the easily readable format
 
@@ -191,4 +193,5 @@ public class Profile extends Fragment {
 
         }.start();
     }
+
 }

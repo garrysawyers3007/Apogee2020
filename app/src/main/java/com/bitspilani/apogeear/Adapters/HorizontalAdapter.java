@@ -2,6 +2,7 @@ package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,11 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.text.setText(event_details.get(position).getName());
+        holder.text.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        holder.text.setSingleLine(true);
+        holder.text.setSelected(true);
+        holder.text.setMarqueeRepeatLimit(-1);
+
         Log.d("Event",event_details.get(position).getName());
 
 
