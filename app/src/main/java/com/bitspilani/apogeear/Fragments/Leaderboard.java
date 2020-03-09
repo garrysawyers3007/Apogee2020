@@ -94,24 +94,26 @@ public class Leaderboard extends Fragment {
                         charName.setText(rc.getCharName());
                     }
                 }
-
-                switch (charName.getText().toString()){
-                    case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
-                                            break;
-                    case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
-                                    break;
-                    default: charRef = storageRef.child("Characters/Hackerman.png");
-                             break;
-                }
-
-                charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Glide.with(getContext()).load(uri.toString()).into(userImage);
-                    }
-                });
             }
         });
+
+
+        switch (charName.getText().toString()){
+            case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
+                break;
+            case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
+                break;
+            default: charRef = storageRef.child("Characters/Hackerman.png");
+                break;
+        }
+
+        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext()).load(uri.toString()).into(userImage);
+            }
+        });
+
         return view;
     }
 

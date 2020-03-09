@@ -117,6 +117,8 @@ public class Map extends Fragment implements OnMapReadyCallback {
         if (mLocationPermissionsGranted){
             getDeviceLocation();
 
+            cameraZoom(currentLocation);
+
             map.setMyLocationEnabled(true);
             map.getUiSettings().setMyLocationButtonEnabled(true);
             map.getUiSettings().setCompassEnabled(false);
@@ -331,23 +333,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
                             Log.d(TAG,"onComplete: found location");
                             currentLocation = (Location)task.getResult();
                             if (currentLocation != null) {
-                                CameraPosition position = new CameraPosition.Builder()
-                                        .target(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())) // Sets the new camera position
-                                        .zoom(DEFAULT_ZOOM) // Sets the zoom
-                                        .bearing(0) // Rotate the camera
-                                        .tilt(70) // Set the camera tilt
-                                        .build(); // Creates a CameraPosition from the builder
-                                map.animateCamera(CameraUpdateFactory
-                                        .newCameraPosition(position), new GoogleMap.CancelableCallback() {
-                                    @Override
-                                    public void onFinish() {
-                                        // Code to execute when the animateCamera task has finished
-                                    }
-                                    @Override
-                                    public void onCancel() {
-                                        // Code to execute when the user has canceled the animateCamera task
-                                    }
-                                });
+                                cameraZoom(currentLocation);
                             }else{
                                 showGPSDisabledAlertToUser();
                             }
@@ -368,6 +354,26 @@ public class Map extends Fragment implements OnMapReadyCallback {
         assert getFragmentManager() != null;
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void cameraZoom(Location location){
+        CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(location.getLatitude(), location.getLongitude())) // Sets the new camera position
+                .zoom(DEFAULT_ZOOM) // Sets the zoom
+                .bearing(0) // Rotate the camera
+                .tilt(70) // Set the camera tilt
+                .build(); // Creates a CameraPosition from the builder
+        map.animateCamera(CameraUpdateFactory
+                .newCameraPosition(position), new GoogleMap.CancelableCallback() {
+            @Override
+            public void onFinish() {
+                // Code to execute when the animateCamera task has finished
+            }
+            @Override
+            public void onCancel() {
+                // Code to execute when the user has canceled the animateCamera task
+            }
+        });
     }
 
     private void getLocationPermission(){
