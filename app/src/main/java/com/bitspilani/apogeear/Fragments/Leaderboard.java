@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,6 +46,7 @@ public class Leaderboard extends Fragment {
     private TextView rank,name,coins,charName;
     private ImageView userImage;
     private StorageReference charRef;
+    private String userChar;
 
     public Leaderboard() {
         // Required empty public constructor
@@ -97,20 +99,25 @@ public class Leaderboard extends Fragment {
             }
         });
 
-
-        switch (charName.getText().toString()){
-            case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
-                break;
-            case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
-                break;
-            default: charRef = storageRef.child("Characters/Hackerman.png");
-                break;
-        }
-
-        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        db.collection("Users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getContext()).load(uri.toString()).into(userImage);
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                userChar = documentSnapshot.get("char").toString();
+                switch (userChar){
+                    case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
+                        break;
+                    case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
+                        break;
+                    default: charRef = storageRef.child("Characters/Hackerman.png");
+                        break;
+                }
+
+                charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getContext()).load(uri.toString()).into(userImage);
+                    }
+                });
             }
         });
 

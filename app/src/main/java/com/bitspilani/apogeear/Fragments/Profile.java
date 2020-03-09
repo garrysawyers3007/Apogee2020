@@ -59,7 +59,6 @@ public class Profile extends Fragment {
     private Calendar c;
     private GoogleSignInOptions gso;
     private GoogleSignInClient googleSignInClient;
-    String user_char;
     private String userid;
     View view;
 
@@ -79,8 +78,6 @@ public class Profile extends Fragment {
 
         bgProfile = view.findViewById(R.id.header_profile);
         usercharImage = view.findViewById(R.id.yyyy);
-
-
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         userid = mAuth.getCurrentUser().getUid();
@@ -103,6 +100,36 @@ public class Profile extends Fragment {
                         coins.setText(coinval+"");
                         name.setText(documentSnapshot.get("name").toString());
                         charName.setText(documentSnapshot.get("char").toString());
+
+                        String userChar = documentSnapshot.get("char").toString();
+
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                        StorageReference storageRef = storage.getReference();
+                        StorageReference bgRef,charRef;
+
+                        switch (userChar){
+                            case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                                charRef = storageRef.child("Characters/Hackerman.png");
+                                break;
+                            case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                                charRef = storageRef.child("Characters/Maestro.png");
+                                break;
+                            default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                                charRef = storageRef.child("Characters/Hackerman.png");
+                                break;
+                        }
+                        bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(getContext()).load(uri.toString()).into(bgProfile);
+                            }
+                        });
+                        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(getContext()).load(uri.toString()).into(usercharImage);
+                            }
+                        });
                     }
                 });
 
@@ -120,35 +147,6 @@ public class Profile extends Fragment {
                         setTimer();
                     }
                 });
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference bgRef,charRef;
-
-        switch (charName.getText().toString()){
-            case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                charRef = storageRef.child("Characters/Hackerman.png");
-                break;
-            case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                charRef = storageRef.child("Characters/Maestro.png");
-                break;
-            default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                charRef = storageRef.child("Characters/Hackerman.png");
-                break;
-        }
-        bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getContext()).load(uri.toString()).into(bgProfile);
-            }
-        });
-        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getContext()).load(uri.toString()).into(usercharImage);
-            }
-        });
-
         return view;
     }
 

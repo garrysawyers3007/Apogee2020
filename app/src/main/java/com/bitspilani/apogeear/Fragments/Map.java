@@ -117,8 +117,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         if (mLocationPermissionsGranted){
             getDeviceLocation();
 
-            cameraZoom(currentLocation);
-
             map.setMyLocationEnabled(true);
             map.getUiSettings().setMyLocationButtonEnabled(true);
             map.getUiSettings().setCompassEnabled(false);
