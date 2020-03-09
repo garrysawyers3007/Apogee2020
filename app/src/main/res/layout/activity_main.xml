@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg_app_black"
+    android:background="#151515"
     tools:context=".MainActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:id="@+id/viewpager"
-        android:layout_above="@id/bottom_nav"/>
+        android:layout_above="@+id/bottom_nav"
+        android:id="@+id/viewpager"/>
 
     <com.gauravk.bubblenavigation.BubbleNavigationLinearView
         android:id="@+id/bottom_nav"
@@ -23,9 +23,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/bottom_nav_bg"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="@color/dark"
-        android:elevation="15dp"
+        android:elevation="5dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:orientation="horizontal"

@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#151515"
     tools:context=".Fragments.Leaderboard">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_bg_app">
+        android:background="#151515">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/leader_board"
@@ -59,8 +60,8 @@
             android:elevation="25dp"
             android:padding="5dp"
             android:background="@drawable/leaderboard_list_bg"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_below="@+id/leader_board">
 
             <RelativeLayout
@@ -113,18 +114,19 @@
                 <ImageView
                     android:id="@+id/user_image"
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:src="@drawable/hackerman" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="80dp" />
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
+                    android:layout_marginTop="10dp"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/proximanova_regular"
                     android:maxLines="3"
-                    android:text="-"
+                    android:text="Name"
                     android:gravity="center"
                     android:textColor="#fff"
                     android:textSize="12sp"
@@ -181,27 +183,31 @@
 
 
 
-                <com.andexert.library.RippleView
-                    android:id="@+id/more"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:rv_color="@color/green_hue">
+<!--                <com.andexert.library.RippleView-->
+<!--                    android:id="@+id/more"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:rv_color="@color/green_hue">-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/leader_rv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingTop="235dp"
+                        android:paddingTop="245dp"
                         android:paddingBottom="10dp"
                         android:layout_marginStart="8dp"
-                        android:layout_below="@+id/user_card"
                         android:layout_marginEnd="8dp"
                         android:elevation="20dp"
                         android:clipToPadding="false"
                         android:divider="@android:color/transparent"
                         android:overScrollMode="never" />
 
-                </com.andexert.library.RippleView>
+        </RelativeLayout>
+<!--                </com.andexert.library.RippleView>-->
 
         <View
             android:layout_width="match_parent"
@@ -209,6 +215,8 @@
             android:background="@drawable/gradient_bg_app"/>
 
 
+
     </RelativeLayout>
+
 
 </LinearLayout>

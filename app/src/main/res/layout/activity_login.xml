@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@drawable/gradient_bg_app_black">
+    android:background="#151515">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -106,5 +106,17 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/gradient_bg_app"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:rotation="180"
+        android:background="@drawable/gradient_bg_app"/>
 
 </RelativeLayout>

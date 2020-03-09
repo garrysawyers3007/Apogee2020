@@ -34,7 +34,8 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"clicked", Toast.LENGTH_SHORT).show();
+                switch (viewType){
+                }
             }
         });
         return new MoreViewHolder(view);
@@ -66,6 +67,17 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
             textView = itemView.findViewById(R.id.more);
             imageView = itemView.findViewById(R.id.mark);
             textView2 = itemView.findViewById(R.id.sub_more);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0){
+            return 0;
+        }else if (position == 1){
+            return 1;
+        }else{
+            return 2;
         }
     }
 }

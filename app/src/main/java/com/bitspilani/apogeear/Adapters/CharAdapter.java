@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,10 +60,10 @@ public class CharAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.char_select,container,false);
 
         TextView textView = view.findViewById(R.id.user_name1);
-        CircleImageView circleImageView = view.findViewById(R.id.user_icon1);
+        ImageView imageView = view.findViewById(R.id.user_icon1);
 
         textView.setText(list.get(position).getName());
-        circleImageView.setImageResource(list.get(position).getImage());
+        imageView.setImageResource(list.get(position).getImage());
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();

@@ -2,6 +2,7 @@ package com.bitspilani.apogeear.Fragments;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,30 +14,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bitspilani.apogeear.Adapters.LeaderBoardAdapter;
 import com.bitspilani.apogeear.R;
 import com.bitspilani.apogeear.Models.Rank;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * create an instance of this fragment.
- */
 public class Leaderboard extends Fragment {
 
     private RecyclerView leaderboard;
@@ -45,6 +43,8 @@ public class Leaderboard extends Fragment {
     private LeaderBoardAdapter leaderBoardAdapter;
     private FirebaseAuth mAuth=FirebaseAuth.getInstance();
     private TextView rank,name,coins,charName;
+    private ImageView userImage;
+    private StorageReference charRef;
 
     public Leaderboard() {
         // Required empty public constructor
@@ -60,7 +60,11 @@ public class Leaderboard extends Fragment {
         name=view.findViewById(R.id.user_name);
         coins=view.findViewById(R.id.user_score);
         charName = view.findViewById(R.id.user_char_name);
+        userImage = view.findViewById(R.id.user_image);
         db=FirebaseFirestore.getInstance();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
 
         String userid=mAuth.getCurrentUser().getUid();
         list=new ArrayList<>();
@@ -90,9 +94,24 @@ public class Leaderboard extends Fragment {
                         charName.setText(rc.getCharName());
                     }
                 }
+
+                switch (charName.getText().toString()){
+                    case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
+                                            break;
+                    case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
+                                    break;
+                    default: charRef = storageRef.child("Characters/Hackerman.png");
+                             break;
+                }
+
+                charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getContext()).load(uri.toString()).into(userImage);
+                    }
+                });
             }
         });
-
         return view;
     }
 

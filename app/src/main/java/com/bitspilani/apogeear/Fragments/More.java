@@ -63,12 +63,6 @@ public class More extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_more,container,false);
 
-        recyclerView = view.findViewById(R.id.recycler_more2);
-
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         list = new ArrayList<>();
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
@@ -85,13 +79,15 @@ public class More extends Fragment {
         list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
         list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
         list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
-        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
-        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
-        list3.add(new MoreModel("Terms And Conditions",R.drawable.next));
 
         list.add(new MoreNestedModel("My Account",list1));
         list.add(new MoreNestedModel("Notifications",list2));
         list.add(new MoreNestedModel("About",list3));
+
+        recyclerView = view.findViewById(R.id.recycler_more2);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         MoreNestedAdapter moreNestedAdapter = new MoreNestedAdapter(getActivity(),list);
 

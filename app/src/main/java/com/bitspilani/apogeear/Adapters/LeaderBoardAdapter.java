@@ -3,6 +3,7 @@ package com.bitspilani.apogeear.Adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bitspilani.apogeear.R;
 import com.bitspilani.apogeear.Models.Rank;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     private ArrayList<Rank> list;
     private Context context;
     private View view;
+    private StorageReference charRef;
 
     public LeaderBoardAdapter (ArrayList<Rank> list, Context context){
         this.list=list;
@@ -50,9 +56,11 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
                 holder.score.setTextColor(Color.parseColor("#000000"));
                 holder.rank.setText(""+(position+1));
-                holder.img.setImageDrawable(context.getDrawable(R.drawable.topimg));
+                getTagFromDatabase(holder.img);
                 holder.relativeLayout.setBackground(context.getDrawable(R.drawable.leaderboard_rank1_bg));
+                getImageFromDatabase(holder.img1,list.get(position).getCharName());
                 break;
+
             case 1:holder.name.setText(list.get(position).getUsername());
                 holder.charName.setText(list.get(position).getCharName());
                 holder.name.setTextColor(Color.parseColor("#000000"));
@@ -60,25 +68,30 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
                 holder.score.setTextColor(Color.parseColor("#000000"));
                 holder.rank.setText(""+(position+1));
-                holder.img.setImageDrawable(context.getDrawable(R.drawable.topimg));
+                getTagFromDatabase(holder.img);
                 holder.relativeLayout.setBackground(context.getDrawable(R.drawable.leaderboard_rank2_bg));
                 holder.rank.setText(""+(position+1));
+                getImageFromDatabase(holder.img1,list.get(position).getCharName());
                 break;
+
             case 2:holder.name.setText(list.get(position).getUsername());
                 holder.charName.setText(list.get(position).getCharName());
                 holder.name.setTextColor(Color.parseColor("#000000"));
                 holder.charName.setTextColor(Color.parseColor("#000000"));
                 holder.score.setTextColor(Color.parseColor("#000000"));
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
-                holder.img.setImageDrawable(context.getDrawable(R.drawable.topimg));
                 holder.rank.setText(""+(position+1));
+                getTagFromDatabase(holder.img);
                 holder.relativeLayout.setBackground(context.getDrawable(R.drawable.leaderboard_rank3_bg));
+                getImageFromDatabase(holder.img1,list.get(position).getCharName());
                 break;
+
             default:  holder.name.setText(list.get(position).getUsername());
                 holder.charName.setText(list.get(position).getCharName());
                 holder.score.setText(String.valueOf(list.get(position).getCoins()));
-                holder.img.setImageDrawable(context.getDrawable(R.drawable.topimg));
+                getTagFromDatabase(holder.img);
                 holder.rank.setText(""+(position+1));
+                getImageFromDatabase(holder.img1,list.get(position).getCharName());
                 break;
         }
     }
@@ -91,7 +104,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,rank,score,charName;
-        ImageView img;
+        ImageView img,img1;
         RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -100,6 +113,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
             rank=itemView.findViewById(R.id.player_rank);
             score=itemView.findViewById(R.id.player_score);
             img = itemView.findViewById(R.id.badge);
+            img1 = itemView.findViewById(R.id.circleImageView);
             charName = itemView.findViewById(R.id.player_char_name);
             relativeLayout = itemView.findViewById(R.id.card_name);
         }
@@ -117,4 +131,40 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
             return 3;
         }
     }
+
+    private void getImageFromDatabase(ImageView v,String charName){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        switch (charName){
+            case "The HackerMan": charRef = storageRef.child("Characters/Hackerman.png");
+                break;
+            case "Maestro": charRef = storageRef.child("Characters/Maestro.png");
+                break;
+            default: charRef = storageRef.child("Characters/Maestro.png");
+                break;
+        }
+
+        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri.toString()).into(v);
+            }
+        });
+    }
+
+    private void getTagFromDatabase(ImageView v){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference charRef = storageRef.child("Badges/topimg.png");
+
+        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri.toString()).into(v);
+            }
+        });
+    }
+
 }

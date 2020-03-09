@@ -2,10 +2,12 @@ package com.bitspilani.apogeear.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -16,19 +18,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bitspilani.apogeear.LoginActivity;
+import com.bitspilani.apogeear.Models.Rank;
 import com.bitspilani.apogeear.R;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 
 import java.util.Calendar;
 
@@ -38,7 +51,7 @@ public class Profile extends Fragment {
     private long totalTimeCountInMilliseconds;
     private long startTime, endTime;
     private TextView showtime, coins, name, charName;
-    private ImageView logout;
+    private ImageView logout,bgProfile,usercharImage;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ProgressBar timer;
     private long timeBlinkInMilliseconds; // start time of start blinking
@@ -64,6 +77,11 @@ public class Profile extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile_green,container,false);
 
+        bgProfile = view.findViewById(R.id.header_profile);
+        usercharImage = view.findViewById(R.id.yyyy);
+
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         userid = mAuth.getCurrentUser().getUid();
 
@@ -88,7 +106,6 @@ public class Profile extends Fragment {
                     }
                 });
 
-
         db.collection("Coins").document("Universal Coins")
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -104,8 +121,35 @@ public class Profile extends Fragment {
                     }
                 });
 
-        return view;
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference bgRef,charRef;
 
+        switch (charName.getText().toString()){
+            case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                charRef = storageRef.child("Characters/Hackerman.png");
+                break;
+            case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                charRef = storageRef.child("Characters/Maestro.png");
+                break;
+            default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                charRef = storageRef.child("Characters/Hackerman.png");
+                break;
+        }
+        bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext()).load(uri.toString()).into(bgProfile);
+            }
+        });
+        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getContext()).load(uri.toString()).into(usercharImage);
+            }
+        });
+
+        return view;
     }
 
     private void initalize(){
@@ -115,7 +159,6 @@ public class Profile extends Fragment {
         logout = view.findViewById(R.id.logout);
         name = view.findViewById(R.id.zzzz);
         charName = view.findViewById(R.id.aaaa);
-
 
         setLogout();
     }
@@ -135,6 +178,7 @@ public class Profile extends Fragment {
     }
 
     private void setTimer() {
+        int time = 0;
         //Toast.makeText(getContext(), "Please Enter Minutes...",
         //      Toast.LENGTH_LONG).show();
         totalTimeCountInMilliseconds = totalTimeCountInMilliseconds * 1000;

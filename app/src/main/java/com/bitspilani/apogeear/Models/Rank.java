@@ -37,4 +37,5 @@ public class Rank {
     public void setCharName(String charName) {
         this.charName = charName;
     }
+
 }
