@@ -122,98 +122,81 @@ public class Map extends Fragment implements OnMapReadyCallback {
             map.getUiSettings().setCompassEnabled(false);
 
             //setMarkers();
-            db.collection("Events").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    for (QueryDocumentSnapshot document:queryDocumentSnapshots){
-                        double lat = document.getDouble("lat");
-                        double lng = document.getDouble("long");
+           addCoinsForEvents();
+           addUniversalCoins();
 
-                        LatLng latLng = new LatLng(lat,lng);
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                                return true;
-                            }
-                        });
-                    }
-                }
-            });
 
-            db.collection("Coins").document("Universal Coins").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    List<Double> latA,lngA,latB,lngB,latC,lngC;
-
-                    latA = (List<Double>) documentSnapshot.get("latA");
-                    lngA = (List<Double>) documentSnapshot.get("lngA");
-                    latB = (List<Double>) documentSnapshot.get("latB");
-                    lngB = (List<Double>) documentSnapshot.get("lngB");
-                    latC = (List<Double>) documentSnapshot.get("latC");
-                    lngC = (List<Double>) documentSnapshot.get("lngC");
-
-                    int coinsa =  Integer.parseInt(documentSnapshot.get("CoinsA").toString());
-                    int coinsb =  Integer.parseInt(documentSnapshot.get("CoinsB").toString());
-                    int coinsc =  Integer.parseInt(documentSnapshot.get("CoinsC").toString());
-
-                    for (int i=0;i<coinsa;i++){
-                        LatLng latLng = new LatLng(latA.get(i),lngA.get(i));
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                                return true;
-                            }
-                        });
-                    }
-                    for (int i=0;i<coinsb;i++){
-                        LatLng latLng = new LatLng(latB.get(i),lngB.get(i));
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_green)));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                                return true;
-                            }
-                        });
-                    }
-                    for (int i=0;i<coinsc;i++){
-                        LatLng latLng = new LatLng(latC.get(i),lngC.get(i));
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_red)));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                                return true;
-                            }
-                        });
-                    }
-                }
-            });
         }else{
             showGPSDisabledAlertToUser();
         }
         mapClickListener();
+    }
+
+    private void addUniversalCoins() {
+        db.collection("Coins").document("Universal Coins").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                List<Double> latA,lngA,latB,lngB,latC,lngC;
+
+                latA = (List<Double>) documentSnapshot.get("latA");
+                lngA = (List<Double>) documentSnapshot.get("lngA");
+                latB = (List<Double>) documentSnapshot.get("latB");
+                lngB = (List<Double>) documentSnapshot.get("lngB");
+                latC = (List<Double>) documentSnapshot.get("latC");
+                lngC = (List<Double>) documentSnapshot.get("lngC");
+
+                int coinsa =  Integer.parseInt(documentSnapshot.get("CoinsA").toString());
+                int coinsb =  Integer.parseInt(documentSnapshot.get("CoinsB").toString());
+                int coinsc =  Integer.parseInt(documentSnapshot.get("CoinsC").toString());
+
+                for (int i=0;i<coinsa;i++){
+                    LatLng latLng = new LatLng(latA.get(i),lngA.get(i));
+                    map.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(@NonNull Marker marker) {
+                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
+                    });
+                }
+                for (int i=0;i<coinsb;i++){
+                    LatLng latLng = new LatLng(latB.get(i),lngB.get(i));
+                    map.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_green)));
+                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(@NonNull Marker marker) {
+                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
+                    });
+                }
+                for (int i=0;i<coinsc;i++){
+                    LatLng latLng = new LatLng(latC.get(i),lngC.get(i));
+                    map.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_red)));
+                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(@NonNull Marker marker) {
+                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void mapClickListener() {
@@ -305,6 +288,32 @@ public class Map extends Fragment implements OnMapReadyCallback {
 //            });
 //        }
 //    }
+
+    private void addCoinsForEvents(){
+        db.collection("Events").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot document:queryDocumentSnapshots){
+                    double lat = document.getDouble("lat");
+                    double lng = document.getDouble("long");
+
+                    LatLng latLng = new LatLng(lat,lng);
+                    map.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(@NonNull Marker marker) {
+                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
+                    });
+                }
+            }
+        });
+    }
 
     private void addImages(){
         List<LatLng> locationList = new ArrayList<>();

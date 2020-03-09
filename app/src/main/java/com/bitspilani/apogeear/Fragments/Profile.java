@@ -1,5 +1,6 @@
 package com.bitspilani.apogeear.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -61,6 +62,7 @@ public class Profile extends Fragment {
     private GoogleSignInClient googleSignInClient;
     private String userid;
     View view;
+    private Activity mActivity;
 
     public Profile() {
         // Required empty public constructor
@@ -76,6 +78,8 @@ public class Profile extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile_green,container,false);
 
+        initalize();
+
         bgProfile = view.findViewById(R.id.header_profile);
         usercharImage = view.findViewById(R.id.yyyy);
 
@@ -88,9 +92,6 @@ public class Profile extends Fragment {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        initalize();
-        setLogout();
-
         db.collection("Users").document(userid)
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -100,38 +101,43 @@ public class Profile extends Fragment {
                         coins.setText(coinval+"");
                         name.setText(documentSnapshot.get("name").toString());
                         charName.setText(documentSnapshot.get("char").toString());
-
-                        String userChar = documentSnapshot.get("char").toString();
-
-                        FirebaseStorage storage = FirebaseStorage.getInstance();
-                        StorageReference storageRef = storage.getReference();
-                        StorageReference bgRef,charRef;
-
-                        switch (userChar){
-                            case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                                charRef = storageRef.child("Characters/Hackerman.png");
-                                break;
-                            case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                                charRef = storageRef.child("Characters/Maestro.png");
-                                break;
-                            default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
-                                charRef = storageRef.child("Characters/Hackerman.png");
-                                break;
-                        }
-                        bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri.toString()).into(bgProfile);
-                            }
-                        });
-                        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri.toString()).into(usercharImage);
-                            }
-                        });
                     }
                 });
+
+        db.collection("Users").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String userCharacter = documentSnapshot.get("char").toString();
+
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference bgRef,charRef;
+
+                switch (userCharacter){
+                    case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                        charRef = storageRef.child("Characters/Hackerman.png");
+                        break;
+                    case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                        charRef = storageRef.child("Characters/Maestro.png");
+                        break;
+                    default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                        charRef = storageRef.child("Characters/Hackerman.png");
+                        break;
+                }
+                bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(mActivity).load(uri.toString()).into(bgProfile);
+                    }
+                });
+                charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(mActivity).load(uri.toString()).into(usercharImage);
+                    }
+                });
+            }
+        });
 
         db.collection("Coins").document("Universal Coins")
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -234,6 +240,19 @@ public class Profile extends Fragment {
             }
 
         }.start();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mActivity = getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity = null;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.bitspilani.apogeear.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -47,6 +48,7 @@ public class Leaderboard extends Fragment {
     private ImageView userImage;
     private StorageReference charRef;
     private String userChar;
+    private Activity mActivity;
 
     public Leaderboard() {
         // Required empty public constructor
@@ -115,14 +117,24 @@ public class Leaderboard extends Fragment {
                 charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(getContext()).load(uri.toString()).into(userImage);
+                        Glide.with(mActivity).load(uri.toString()).into(userImage);
                     }
                 });
             }
         });
-
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
+        mActivity = getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity = null;
+    }
 }
