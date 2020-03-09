@@ -117,7 +117,9 @@ public class Leaderboard extends Fragment {
                 charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(mActivity).load(uri.toString()).into(userImage);
+                        if (getContext() != null) {
+                            Glide.with(getContext()).load(uri.toString()).into(userImage);
+                        }
                     }
                 });
             }

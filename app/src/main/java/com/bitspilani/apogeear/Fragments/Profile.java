@@ -127,13 +127,17 @@ public class Profile extends Fragment {
                 bgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(mActivity).load(uri.toString()).into(bgProfile);
+                        if (getContext() != null) {
+                            Glide.with(getContext()).load(uri.toString()).into(bgProfile);
+                        }
                     }
                 });
                 charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(mActivity).load(uri.toString()).into(usercharImage);
+                        if (getContext() != null) {
+                            Glide.with(getContext()).load(uri.toString()).into(usercharImage);
+                        }
                     }
                 });
             }
