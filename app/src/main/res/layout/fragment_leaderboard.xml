@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#151515"
     tools:context=".Fragments.Leaderboard">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#151515">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/leader_board"
@@ -29,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                app:cardBackgroundColor="@color/green_frag_name"
+                app:cardBackgroundColor="#151515"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
 
@@ -69,19 +64,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/rank"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rank"
                         android:fontFamily="@font/pt_sans_regular"
                         android:textStyle="bold"
-                        android:layout_marginTop="15dp"
+                        android:layout_centerInParent="true"
                         android:textColor="@color/white"
                         android:textAllCaps="true"
                         android:textSize="15sp"/>
@@ -91,6 +82,8 @@
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:text="-"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/rank"
                         android:fontFamily="@font/pt_bold"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
@@ -99,7 +92,6 @@
                         android:textColor="@color/green_frag"
                         android:textStyle="bold" />
 
-                </LinearLayout>
 
             </RelativeLayout>
 
@@ -153,16 +145,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/coin"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_centerInParent="true"
                     android:src="@drawable/coin_leaderboard"/>
 
                 <TextView
@@ -172,12 +160,12 @@
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/pt_sans_regular"
                     android:gravity="center"
+                    android:layout_below="@+id/coin"
                     android:layout_marginTop="0dp"
                     android:text="-"
                     android:textColor="@color/green_frag"
                     android:textSize="18sp" />
 
-            </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 
@@ -216,7 +204,6 @@
 
 
 
-    </RelativeLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

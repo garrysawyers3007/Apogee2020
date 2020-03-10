@@ -44,6 +44,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.ViewHo
         this.attended=attended;
     }
 
+    public VerticalAdapter(){
+
+    }
+
 
     @NonNull
     @Override

@@ -5,10 +5,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bitspilani.apogeear.Adapters.InterestAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,10 +25,11 @@ import java.util.ArrayList;
 public class EventDialog extends Dialog {
 
     private Context context;
-    private TextView e1,e2;
+    RecyclerView gridView;
     private ArrayList<String> types;
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private String userId;
+    InterestAdapter interestAdapter;
 
     public EventDialog(@NonNull Context context, ArrayList<String> types,String userId) {
         super(context);
@@ -38,27 +44,13 @@ public class EventDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_filter);
 
+        gridView=findViewById(R.id.mygridview);
 
-        e1=findViewById(R.id.team11);
-        e2=findViewById(R.id.team);
-        if(types.contains(e1.getText().toString().toLowerCase()))
-            e1.setTextColor(Color.parseColor("#D0D3D4"));
-        if(types.contains(e2.getText().toString().toLowerCase()))
-            e2.setTextColor(Color.parseColor("#D0D3D4"));
+        GridLayoutManager llm = new GridLayoutManager(context,2);
+        gridView.setLayoutManager(llm);
+        interestAdapter=new InterestAdapter(types);
 
-        e1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                set(e1,e1.getText().toString());
-            }
-        });
-
-        e2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                set(e2,e2.getText().toString());
-            }
-        });
+        gridView.setAdapter(interestAdapter);
     }
 
     private void set(TextView textView,String ele){

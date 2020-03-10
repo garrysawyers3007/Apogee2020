@@ -6,11 +6,10 @@ public class Rank {
     private double coins;
     private int rank;
 
-    public Rank(String username, double coins,String userId,String charName,int rank) {
+    public Rank(String username, double coins,String userId,String charName) {
         this.username = username;
         this.coins = coins;
         this.userId=userId;
-        this.rank=rank;
         this.charName=charName;
     }
 
@@ -24,10 +23,6 @@ public class Rank {
 
     public String getUserId() {
         return userId;
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public String getCharName() {

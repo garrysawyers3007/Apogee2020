@@ -1,14 +1,9 @@
 package com.bitspilani.apogeear.Fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -19,30 +14,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bitspilani.apogeear.LoginActivity;
-import com.bitspilani.apogeear.Models.Rank;
 import com.bitspilani.apogeear.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.Calendar;
 
@@ -55,14 +45,16 @@ public class Profile extends Fragment {
     private ImageView logout,bgProfile,usercharImage;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ProgressBar timer;
+    ListenerRegistration listenerRegistration1,listenerRegistration2;
     private long timeBlinkInMilliseconds; // start time of start blinking
     private boolean blink;
     private Calendar c;
     private GoogleSignInOptions gso;
+    FirebaseFirestore db ;
     private GoogleSignInClient googleSignInClient;
     private String userid;
     View view;
-    private Activity mActivity;
+
 
     public Profile() {
         // Required empty public constructor
@@ -71,7 +63,14 @@ public class Profile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //user=mAuth.getCurrentUser();
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,7 +82,7 @@ public class Profile extends Fragment {
         bgProfile = view.findViewById(R.id.header_profile);
         usercharImage = view.findViewById(R.id.yyyy);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         userid = mAuth.getCurrentUser().getUid();
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -92,15 +91,39 @@ public class Profile extends Fragment {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        db.collection("Users").document(userid)
+        initalize();
+        setLogout();
+
+        db= FirebaseFirestore.getInstance();
+
+        db= FirebaseFirestore.getInstance();
+        listenerRegistration1=db.collection("Users").document(userid)
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
 
-                        long coinval=Math.round(documentSnapshot.getDouble("score"));
-                        coins.setText(coinval+"");
-                        name.setText(documentSnapshot.get("name").toString());
-                        charName.setText(documentSnapshot.get("char").toString());
+                        if(documentSnapshot!=null) {
+                            long coinval = Math.round(documentSnapshot.getDouble("score"));
+                            coins.setText(coinval + "");
+                            name.setText(documentSnapshot.get("name").toString());
+                            charName.setText(documentSnapshot.get("char").toString());
+                        }
+                    }
+                });
+        listenerRegistration2=db.collection("Coins").document("Universal Coins")
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        if(documentSnapshot!=null) {
+
+                            c = Calendar.getInstance();
+                            totalTimeCountInMilliseconds = documentSnapshot.getTimestamp("Expire Time").getSeconds() - c.getTimeInMillis() / 1000;
+                            startTime = documentSnapshot.getTimestamp("Start Time").getSeconds() * 1000;
+                            endTime = documentSnapshot.getTimestamp("Expire Time").getSeconds() * 1000;
+//                            if (startTime > c.getTimeInMillis())
+//                                totalTimeCountInMilliseconds = 0;
+                            setTimer();
+                        }
                     }
                 });
 
@@ -111,16 +134,19 @@ public class Profile extends Fragment {
 
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageRef = storage.getReference();
-                StorageReference bgRef,charRef;
+                StorageReference bgRef, charRef;
 
-                switch (userCharacter){
-                    case "The HackerMan":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                switch (userCharacter) {
+                    case "The HackerMan":
+                        bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
                         charRef = storageRef.child("Characters/Hackerman.png");
                         break;
-                    case "Maestro":bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                    case "Maestro":
+                        bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
                         charRef = storageRef.child("Characters/Maestro.png");
                         break;
-                    default:bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
+                    default:
+                        bgRef = storageRef.child("Backgrounds/backg_hackerman.png");
                         charRef = storageRef.child("Characters/Hackerman.png");
                         break;
                 }
@@ -143,20 +169,6 @@ public class Profile extends Fragment {
             }
         });
 
-        db.collection("Coins").document("Universal Coins")
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-                        c = Calendar.getInstance();
-                        totalTimeCountInMilliseconds = documentSnapshot.getTimestamp("Expire Time").getSeconds() - c.getTimeInMillis() / 1000;
-                        startTime = documentSnapshot.getTimestamp("Start Time").getSeconds() * 1000;
-                        endTime = documentSnapshot.getTimestamp("Expire Time").getSeconds() * 1000;
-                        if (startTime > c.getTimeInMillis())
-                            totalTimeCountInMilliseconds = 0;
-                        setTimer();
-                    }
-                });
         return view;
     }
 
@@ -175,9 +187,21 @@ public class Profile extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (listenerRegistration1!= null) {
+                    listenerRegistration1.remove();
+                    listenerRegistration1 = null;
+                }
+                if (listenerRegistration2!= null) {
+                    listenerRegistration2.remove();
+                    listenerRegistration2 = null;
+                }
+
                 googleSignInClient.signOut();
                 mAuth.signOut();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                Intent i=new Intent(getActivity(), LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
                 getActivity().finish();
                 Toast.makeText(getContext(), "Signed Out",
                         Toast.LENGTH_SHORT).show();
@@ -207,6 +231,8 @@ public class Profile extends Fragment {
             public void onFinish() {
                 timer.setProgress(0);
                 showtime.setVisibility(View.VISIBLE);
+
+                showtime.setText(0 + " hrs " + 0 + " min " + 0 + " sec");
             }
             @Override
             public void onTick(long leftTimeInMilliseconds) {
@@ -220,11 +246,14 @@ public class Profile extends Fragment {
                 Log.d("timeleft", "" + totalTimeCountInMilliseconds);
                 Log.d("total count", "" + (endTime - startTime));
                 Log.d("lefttt", "" + leftTimeInMilliseconds);
-                if (endTime != startTime) {
+                if (endTime != startTime && endTime-startTime>leftTimeInMilliseconds) {
                     timer.setMax((int) (endTime - startTime));
                     timer.setProgress((int) (0.83*(endTime - startTime - leftTimeInMilliseconds)));
-                } else
+                    showtime.setText(hours + " hrs " + minutes + " min " + seconds + " sec");
+                } else {
                     timer.setProgress(0);
+                    showtime.setText(0 + " hrs " + 0 + " min " + 0 + " sec");
+                }
 //                if (leftTimeInMilliseconds < timeBlinkInMilliseconds) {
 //                    // change the style of the textview .. giving a red
 //                    // alert style
@@ -238,7 +267,7 @@ public class Profile extends Fragment {
 //
 //                    blink = !blink; // toggle the value of blink
 //                }
-                showtime.setText(hours + " hrs " + minutes + " min " + seconds + " sec");
+
                 // format the textview to show the easily readable format
 
             }
@@ -246,17 +275,20 @@ public class Profile extends Fragment {
         }.start();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mActivity = getActivity();
-    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity = null;
+    public void onPause() {
+//
+//        if (listenerRegistration1!= null) {
+//            listenerRegistration1.remove();
+//            listenerRegistration1 = null;
+//        }
+//        if (listenerRegistration2!= null) {
+//            listenerRegistration2.remove();
+//            listenerRegistration2 = null;
+//        }
+        Log.d("pause","profilepaused");
+        super.onPause();
     }
 
 }

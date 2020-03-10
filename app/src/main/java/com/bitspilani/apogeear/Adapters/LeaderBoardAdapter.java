@@ -1,5 +1,6 @@
 package com.bitspilani.apogeear.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,14 +15,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bitspilani.apogeear.Fragments.Leaderboard;
 import com.bitspilani.apogeear.R;
 import com.bitspilani.apogeear.Models.Rank;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,12 +33,14 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     private ArrayList<Rank> list;
     private Context context;
+    private Activity activity;
     private View view;
     private StorageReference charRef;
 
-    public LeaderBoardAdapter (ArrayList<Rank> list, Context context){
+    public LeaderBoardAdapter (ArrayList<Rank> list, Context context, Activity activity){
         this.list=list;
         this.context=context;
+        this.activity=activity;
     }
     @NonNull
     @Override
@@ -46,6 +52,11 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        holder.name.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        holder.name.setSingleLine(true);
+        holder.name.setSelected(true);
+        holder.name.setMarqueeRepeatLimit(-1);
 
         switch (position){
 
@@ -145,12 +156,15 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
                 break;
         }
 
-        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri.toString()).into(v);
-            }
-        });
+
+            charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    if(context!=null && activity!=null)
+                    Glide.with(activity).load(uri.toString()).into(v);
+                }
+            });
+
     }
 
     private void getTagFromDatabase(ImageView v){
@@ -159,12 +173,16 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
         StorageReference charRef = storageRef.child("Badges/topimg.png");
 
-        charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context).load(uri.toString()).into(v);
-            }
-        });
+            charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+//                    if(context!=null && activity!=null)
+//                    Glide.with(context).load(uri.toString()).into(v);
+
+                    if(context!=null && activity!=null)
+                        Picasso.get().load(uri.toString()).into(v);
+                }
+            });
     }
 
 }

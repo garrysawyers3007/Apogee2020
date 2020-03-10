@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/mainac"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="#151515"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
+        android:id="@+id/myCoordinatorLayout"
         android:layout_above="@+id/bottom_nav"
+        android:elevation="1dp"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:overScrollMode="never"
+        android:layout_above="@id/bottom_nav"
         android:id="@+id/viewpager"/>
 
     <com.gauravk.bubblenavigation.BubbleNavigationLinearView

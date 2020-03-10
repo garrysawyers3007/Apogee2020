@@ -30,6 +30,8 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CharAdapter extends PagerAdapter {
 
     private List<CharacterModel> list;
@@ -78,8 +80,15 @@ public class CharAdapter extends PagerAdapter {
                 db.collection("Users").document(user.getUid()).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+
+                        SharedPreferences sharedPref=context.getSharedPreferences("userinfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("char",textView.getText().toString().trim());
+                        editor.apply();
                         Intent i = new Intent(context, MainActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(i);
+                        ((Activity) context).finish();
                     }
                 });
             }

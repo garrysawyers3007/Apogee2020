@@ -67,7 +67,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                 if(exists) {
                     holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
                     holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
-                    holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                    //holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                    holder.Event.setBackground(context.getDrawable(R.drawable.attended_bg));
                     holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                 }
 
@@ -79,7 +80,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                         holder.hor.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
-                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                        //holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                        holder.Event.setBackground(context.getDrawable(R.drawable.attended_bg));
                     } else if (!check) {
                         holder.or1.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
@@ -95,7 +97,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                         holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
-                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                       // holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                        holder.Event.setBackground(context.getDrawable(R.drawable.attended_bg));
                     }
                 }
             } else {
@@ -109,7 +112,8 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
                         holder.or.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.or2.setBackgroundColor(Color.parseColor("#4ECE60"));
                         holder.hor1.setBackgroundColor(Color.parseColor("#4ECE60"));
-                        holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                        //holder.text.setTextColor(Color.parseColor("#4ECE60"));
+                        holder.Event.setBackground(context.getDrawable(R.drawable.attended_bg));
                     }
                 }
             }

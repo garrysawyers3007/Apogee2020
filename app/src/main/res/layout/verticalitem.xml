@@ -44,7 +44,6 @@
         android:id="@+id/timext"
         android:layout_width="2dp"
         android:layout_height="63dp"
-        android:layout_toRightOf="@+id/datecard"
         android:layout_alignParentLeft="true"
         android:visibility="gone"
         android:background="#D0D3D4"

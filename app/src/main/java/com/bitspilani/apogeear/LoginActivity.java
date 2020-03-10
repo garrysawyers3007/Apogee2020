@@ -20,12 +20,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -67,15 +69,52 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-
+        FirebaseFirestore db1=FirebaseFirestore.getInstance();
         if (user != null) {
 
             SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("username", user.getUid());
             editor.apply();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+
+            if(sharedPref.getString("char","").equals("")) {
+                db1.collection("Users").document(user.getUid()).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot DocumentSnapshot) {
+                                if(DocumentSnapshot.get("char")==null) {
+                                    SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("char", DocumentSnapshot.get("char").toString());
+                                    editor.apply();
+                                    startActivity(new Intent(LoginActivity.this, CharSelect.class));
+                                    finish();
+                                }
+                                else if (DocumentSnapshot.get("char").toString().equals("none")){
+                                    SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("char", DocumentSnapshot.get("char").toString());
+                                    editor.apply();
+                                    startActivity(new Intent(LoginActivity.this, CharSelect.class));
+                                    finish();
+                                }
+                                else{
+                                    SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString("char", DocumentSnapshot.get("char").toString());
+                                    editor.apply();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                }
+
+                            }
+                        });
+
+            }
+            else {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
         }
 
         button.setOnClickListener(
@@ -191,6 +230,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("username", user.getUid());
+                        editor.putString("char","none");
                         editor.apply();
 
                         ArrayList<String> types=new ArrayList<>();
@@ -201,6 +241,7 @@ public class LoginActivity extends AppCompatActivity {
                         String name = email.substring(0,index);
                         data.put("email", email);
                         data.put("name", name);
+                        data.put("char","none");
                         data.put("username", user.getUid());
                         data.put("score", 0.0);
                         data.put("slot_time", FieldValue.serverTimestamp());
@@ -226,6 +267,14 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                     else{
+                        email = email.trim();
+                        int index = email.indexOf("@");
+                        String name = email.substring(0,index);
+                        SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("username", name);
+                        editor.putString("char","none");
+                        editor.apply();
                         Intent i = new Intent(LoginActivity.this, CharSelect.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
@@ -259,6 +308,7 @@ public class LoginActivity extends AppCompatActivity {
                         Map<String, Object> data = new HashMap<>();
                         data.put("email", user.getEmail());
                         data.put("name", user.getDisplayName());
+                        data.put("char","none");
                         data.put("username", user.getUid());
                         data.put("score", 0.0);
                         data.put("slot_time", FieldValue.serverTimestamp());
@@ -287,6 +337,12 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                     else{
+
+                        SharedPreferences sharedPref=getSharedPreferences("userinfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("username", user.getUid());
+                        editor.putString("char","none");
+                        editor.apply();
                         Intent i = new Intent(LoginActivity.this, CharSelect.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);

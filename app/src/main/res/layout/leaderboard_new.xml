@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/parent">
@@ -34,7 +36,7 @@
     <RelativeLayout
     android:id="@+id/card_name"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:elevation="6dp"
         android:background="@drawable/leaderboard_title_bg"
     android:layout_marginEnd="10dp"
@@ -42,77 +44,93 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp">
 
-    <RelativeLayout
-        android:id="@+id/card_rel"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_centerInParent="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginStart="15dp">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.80"/>
+
 
             <ImageView
                 android:id="@+id/circleImageView"
-                android:layout_width="0dp"
+                android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1.5" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="6">
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/player_name"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/pt_sans_regular"
                 android:gravity="center_vertical"
-                android:maxLines="3"
+                android:scrollHorizontally="true"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:text="Name"
                 android:textColor="#ffffff"
                 android:textSize="13sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.297"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.262" />
 
-                <TextView
-                    android:id="@+id/player_char_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/proximanova_regular"
-                   android:maxLines="3"
-                    android:text="CharName"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+            <TextView
+                android:id="@+id/player_char_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/proximanova_regular"
+                android:maxLines="3"
+                android:text="CharName"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.315"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/player_name"
+                app:layout_constraintVertical_bias="0.407" />
 
-            </LinearLayout>
             <TextView
                 android:id="@+id/player_score"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.1"
-                android:fontFamily="@font/pt_bold"
-                android:text="Score"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="5dp"
-                android:textSize="13sp" />
+                android:fontFamily="@font/pt_bold"
+                android:gravity="center"
+                android:text="Score"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.508" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
 
 </RelativeLayout>
 </RelativeLayout>

@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#151515">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/leader_board"
@@ -22,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            app:cardBackgroundColor="@color/green_frag_name"
+            app:cardBackgroundColor="#151515"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
@@ -48,18 +47,18 @@
     <ImageView
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="20dp"
         android:id="@+id/filter"
         android:elevation="10dp"
         android:src="@drawable/ic_filter"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/leader_board"/>
+        android:layout_alignParentEnd="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingTop="125dp"
+        android:paddingTop="100dp"
         android:scrollbars="none"
         android:id="@+id/vertical"/>
 

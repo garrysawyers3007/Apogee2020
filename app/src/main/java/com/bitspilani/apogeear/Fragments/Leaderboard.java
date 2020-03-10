@@ -1,11 +1,6 @@
 package com.bitspilani.apogeear.Fragments;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,14 +19,12 @@ import com.bitspilani.apogeear.Models.Rank;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +41,6 @@ public class Leaderboard extends Fragment {
     private ImageView userImage;
     private StorageReference charRef;
     private String userChar;
-    private Activity mActivity;
 
     public Leaderboard() {
         // Required empty public constructor
@@ -76,9 +68,10 @@ public class Leaderboard extends Fragment {
         db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                list.clear();
                 int i=1;
                 for(QueryDocumentSnapshot document:queryDocumentSnapshots){
-                    Rank ob=new Rank(document.get("name").toString(),document.getDouble("score"),document.get("username").toString(),document.get("char").toString(),i);
+                    Rank ob=new Rank(document.get("name").toString(),document.getDouble("score"),document.get("username").toString(),document.get("char").toString());
                     list.add(ob);
                     i++;
                 }
@@ -86,13 +79,13 @@ public class Leaderboard extends Fragment {
                 Comparator<Rank> comparebycoins=(Rank o1,Rank o2)-> (int)(o2.getCoins()-o1.getCoins());
                 Collections.sort(list,comparebycoins);
 
-                leaderBoardAdapter=new LeaderBoardAdapter(list,getContext());
+                leaderBoardAdapter=new LeaderBoardAdapter(list,getContext(),getActivity());
                 leaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
                 leaderboard.setAdapter(leaderBoardAdapter);
 
                 for(Rank rc: list){
                     if(rc.getUserId().equals(userid)){
-                        rank.setText(rc.getRank()+"");
+                        rank.setText((list.indexOf(rc)+1)+"");
                         name.setText(rc.getUsername());
                         coins.setText(rc.getCoins()+"");
                         charName.setText(rc.getCharName());
@@ -114,29 +107,18 @@ public class Leaderboard extends Fragment {
                         break;
                 }
 
-                charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        if (getContext() != null) {
+
+                    charRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if(getContext()!=null)
                             Glide.with(getContext()).load(uri.toString()).into(userImage);
                         }
-                    }
-                });
+                    });
+
             }
         });
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mActivity = getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity = null;
-    }
 }
