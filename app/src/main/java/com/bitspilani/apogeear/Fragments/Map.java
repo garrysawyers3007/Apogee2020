@@ -56,6 +56,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.maps.android.SphericalUtil;
 import com.vuforia.INIT_FLAGS;
 import com.vuforia.Vuforia;
 
@@ -70,6 +71,8 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
     private boolean rmvMark = false;
     private List<Marker> m = new ArrayList<>();
     private Button navBtn,removeMarkerBtn;
+    float RADIUS = 2000f;
+    float[] res= new float[1];
     GeofencingRequest geofencingRequest;
     GoogleApiClient googleApiClient;
     FirebaseFirestore db;
@@ -167,14 +170,25 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                    });
+
+                  //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
+                  //  Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latA.get(i),lngA.get(i),res);
+                    Location l = new Location("");
+                    l.setLatitude(latA.get(i));
+                    l.setLongitude(lngA.get(i));
+                    res[0] = currentLocation.distanceTo(l);
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                if (res[0]<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
+                            }
+                        });
                 }
                 for (int i=0;i<coinsb;i++){
                     LatLng latLng = new LatLng(latB.get(i),lngB.get(i));
@@ -182,14 +196,25 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_green)));
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                    });
+
+                  //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
+                  //  Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latB.get(i),lngB.get(i),res);
+                    Location l = new Location("");
+                    l.setLatitude(latB.get(i));
+                    l.setLongitude(lngB.get(i));
+                    res[0] = currentLocation.distanceTo(l);
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                if (res[0]<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
+                            }
+                        });
                 }
                 for (int i=0;i<coinsc;i++){
                     LatLng latLng = new LatLng(latC.get(i),lngC.get(i));
@@ -197,16 +222,27 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_red)));
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                    });
+
+                  //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
+                //    Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latC.get(i),lngC.get(i),res);
+                    Location l = new Location("");
+                    l.setLatitude(latC.get(i));
+                    l.setLongitude(lngC.get(i));
+                    res[0] = currentLocation.distanceTo(l);
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                if (res[0]<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
+                            }
+                        });
+                    }
                 }
-            }
         });
     }
 
@@ -239,8 +275,12 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(@NonNull Marker marker) {
-                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                    startActivity(intent);
+                                    if (res[0]<RADIUS) {
+                                        Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                        startActivity(intent);
+                                    }else {
+                                        Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                                    }
                                     return true;
                                 }
                             });
@@ -322,6 +362,13 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                   // res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
+                    Location l = new Location("");
+                    l.setLatitude(lat);
+                    l.setLongitude(lng);
+                   res[0] = currentLocation.distanceTo(l);
+              //      Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),lat,lng,res);
                     if (rmvMark==true){
                         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
@@ -333,8 +380,12 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
+                                if (res[0]<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Be close to mark"+res[0], Toast.LENGTH_SHORT).show();
+                                }
                                 return true;
                             }
                         });
@@ -524,15 +575,4 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
         alert.show();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        googleApiClient.connect();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        googleApiClient.disconnect();
-//    }
 }
