@@ -1,11 +1,13 @@
 package com.bitspilani.apogeear.Fragments;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +29,12 @@ import com.bitspilani.apogeear.MainActivity;
 import com.bitspilani.apogeear.R;
 
 import com.bitspilani.arapogee.UnityPlayerActivity;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -49,19 +56,22 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.vuforia.INIT_FLAGS;
 import com.vuforia.Vuforia;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-public class Map extends Fragment implements OnMapReadyCallback {
+public class Map extends Fragment implements OnMapReadyCallback , ResultCallback<Status> {
 
     private GoogleMap map;
     private Location currentLocation;
     private MarkerOptions markerOptions1;
     private boolean rmvMark = false;
-    private Marker m;
+    private List<Marker> m = new ArrayList<>();
     private Button navBtn,removeMarkerBtn;
+    GeofencingRequest geofencingRequest;
+    GoogleApiClient googleApiClient;
     FirebaseFirestore db;
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
@@ -84,6 +94,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
         db=FirebaseFirestore.getInstance();
 
         db.collection("Events").get();
+      //  createGoogleApi();
 
         getLocationPermission();
         return rootView;
@@ -124,11 +135,12 @@ public class Map extends Fragment implements OnMapReadyCallback {
             //setMarkers();
            addCoinsForEvents();
            addUniversalCoins();
-
+         //   startGeofence();
         }else{
             showGPSDisabledAlertToUser();
         }
         mapClickListener();
+    //    startGeofence();
     }
 
     private void addUniversalCoins() {
@@ -207,8 +219,11 @@ public class Map extends Fragment implements OnMapReadyCallback {
                 markerOptions1 = new MarkerOptions();
                 markerOptions1.position(latLng);
                // map.clear();
-                m = map.addMarker(markerOptions1);
-                m.setVisible(true);
+                m.add(0,map.addMarker(markerOptions1));
+                for (int i=0;i<m.size();i++){
+                    if (i==0) m.get(i).setVisible(true);
+                    else m.get(i).setVisible(false);
+                }
                 rmvMark = true;
 
         //        addImages();
@@ -217,7 +232,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
                         @Override
                         public void onClick(View v) {
                             // removeMarker(m);
-                            m.setVisible(false);
+                            for (int i=0;i<m.size();i++){
+                                m.get(i).setVisible(false);
+                            }
                             rmvMark = false;
                             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
@@ -368,12 +385,69 @@ public class Map extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    private void createGoogleApi() {
+        Log.d(TAG, "createGoogleApi()");
+        if ( googleApiClient == null ) {
+            googleApiClient = new GoogleApiClient.Builder( getContext() )
+                    .addApi( LocationServices.API )
+                    .build();
+        }
+    }
+
     private void initMap(){
         // Obtain the SupportMapFragment and get notified when map is ready to be used
         assert getFragmentManager() != null;
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+    private void startGeofence(){
+        Geofence geofence = createGeofence(new LatLng(28.467545,75.465756),400f);
+        geofencingRequest = createGeorequest(geofence);
+        addGeoFence(geofence);
+    }
+
+    @Override
+    public void onResult(@NonNull Status status) {
+        drawGeofence();
+    }
+
+    Circle geoFenceLimits;
+    private void drawGeofence() {
+        CircleOptions circleOptions = new CircleOptions()
+                .center(m.get(0).getPosition())
+                .strokeColor(Color.argb(50,70,70,70))
+                .fillColor(Color.argb(100,150,150,150))
+                .radius(400f);
+        geoFenceLimits = map.addCircle(circleOptions);
+    }
+
+    private void addGeoFence(Geofence geofence){
+        LocationServices.GeofencingApi.addGeofences(googleApiClient,geofencingRequest,createGeofencingPendingIntent())
+        .setResultCallback(this);
+    }
+
+    private PendingIntent createGeofencingPendingIntent() {
+        Intent i = new Intent(getContext(),GeofenceTransitionService.class);
+        return PendingIntent.getService(getContext(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    private GeofencingRequest createGeorequest(Geofence geofence){
+        return new GeofencingRequest.Builder()
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .addGeofence(geofence)
+                .build();
+    }
+
+    private Geofence createGeofence(LatLng position,float v){
+        return new Geofence.Builder()
+                .setRequestId("My Geofence")
+                .setCircularRegion(position.latitude,position.longitude,v)
+                .setExpirationDuration(60*60*1000)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build();
+    }
+
 
     private void cameraZoom(Location location){
         CameraPosition position = new CameraPosition.Builder()
@@ -449,4 +523,16 @@ public class Map extends Fragment implements OnMapReadyCallback {
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        googleApiClient.connect();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        googleApiClient.disconnect();
+//    }
 }
