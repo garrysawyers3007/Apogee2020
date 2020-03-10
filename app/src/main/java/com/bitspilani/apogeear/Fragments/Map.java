@@ -125,7 +125,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
            addCoinsForEvents();
            addUniversalCoins();
 
-
         }else{
             showGPSDisabledAlertToUser();
         }
@@ -207,32 +206,37 @@ public class Map extends Fragment implements OnMapReadyCallback {
                 // on click marker appereance
                 markerOptions1 = new MarkerOptions();
                 markerOptions1.position(latLng);
-                map.clear();
+               // map.clear();
                 m = map.addMarker(markerOptions1);
                 m.setVisible(true);
                 rmvMark = true;
 
         //        addImages();
-
-                removeMarkerBtn.setVisibility(View.VISIBLE);
-                removeMarkerBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // removeMarker(m);
-                        m.setVisible(false);
-                        rmvMark = false;
-                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                Intent intent = new Intent(getActivity(), Vuforia.class);
-                                startActivity(intent);
-                                return true;
-                            }
-                        });
-                    }
-                });
-
-                navBtn.setVisibility(View.VISIBLE);
+                if (rmvMark==true) {
+                    removeMarkerBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // removeMarker(m);
+                            m.setVisible(false);
+                            rmvMark = false;
+                            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(@NonNull Marker marker) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                    return true;
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    removeMarkerBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "Please place a marker to remove", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 navBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -256,7 +260,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
                         }
                     }
                 });
-
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
@@ -302,31 +305,40 @@ public class Map extends Fragment implements OnMapReadyCallback {
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                    });
+                    if (rmvMark==true){
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                               return true;
+                            }
+                        });
+                    }else{
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                startActivity(intent);
+                                return true;
+                            }
+                        });
+                    }
                 }
             }
         });
     }
 
-    private void addImages(){
-        List<LatLng> locationList = new ArrayList<>();
-        locationList.add(new LatLng(28.362334, 75.585614));
-        locationList.add(new LatLng(28.362230, 75.585002));
-        locationList.add(new LatLng(28.361645, 75.585753));
-
-        for (int i = 0; i < 3; i++) {
-            map.addMarker(new MarkerOptions()
-                    .position(locationList.get(i))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-        }
-    }
+//    private void addImages(){
+//        List<LatLng> locationList = new ArrayList<>();
+//        locationList.add(new LatLng(28.362334, 75.585614));
+//        locationList.add(new LatLng(28.362230, 75.585002));
+//        locationList.add(new LatLng(28.361645, 75.585753));
+//
+//        for (int i = 0; i < 3; i++) {
+//            map.addMarker(new MarkerOptions()
+//                    .position(locationList.get(i))
+//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+//        }
+//    }
 
     private void getDeviceLocation(){
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));

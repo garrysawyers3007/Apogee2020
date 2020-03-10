@@ -15,26 +15,24 @@
 
     <Button
         android:id="@+id/nav_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:padding="2dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
         android:background="@drawable/navimage"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
         android:layout_marginBottom="18dp" />
 
     <Button
         android:id="@+id/remove_marker"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/nav_btn"
         android:padding="5dp"
         android:background="@drawable/removemarker"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone" />
+        android:layout_marginBottom="20dp" />
 
     <View
         android:layout_width="match_parent"

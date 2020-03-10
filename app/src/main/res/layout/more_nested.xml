@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:paddingEnd="12dp"
-            android:fontFamily="@font/pt_sans_regular"
+            android:fontFamily="@font/proximanova_regular"
             android:textSize="13dp"
             android:paddingStart="12dp"
             android:background="@drawable/more_heading_bg"

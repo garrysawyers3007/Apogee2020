@@ -1,6 +1,7 @@
 package com.bitspilani.apogeear.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bitspilani.apogeear.DevelopersActivity;
 import com.bitspilani.apogeear.Models.MoreModel;
 import com.bitspilani.apogeear.R;
 
@@ -31,13 +33,6 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
     public MoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.more_item_view,null);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (viewType){
-                }
-            }
-        });
         return new MoreViewHolder(view);
     }
 
@@ -48,6 +43,22 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
         holder.textView.setText(moreModel.getName());
         holder.imageView.setImageDrawable(context.getResources().getDrawable(moreModel.getImage()));
         holder.textView2.setText(moreModel.getSubName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView t = v.findViewById(R.id.more);
+                String a = t.getText().toString();
+                Toast.makeText(context, a, Toast.LENGTH_SHORT).show();
+
+                switch (a){
+                    case "Developers":
+                        context.startActivity(new Intent(context,DevelopersActivity.class));
+                        break;
+                }
+
+            }
+        });
 
     }
 
@@ -67,6 +78,7 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
             textView = itemView.findViewById(R.id.more);
             imageView = itemView.findViewById(R.id.mark);
             textView2 = itemView.findViewById(R.id.sub_more);
+
         }
     }
 

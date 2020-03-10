@@ -151,7 +151,6 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Vi
         void onItemClicked(int position, View v);
     }
 
-
     public void setOnItemClickListener(ClickListener clickListener) {
         HorizontalAdapter.clickListener = clickListener;
     }

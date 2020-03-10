@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:alpha=".90"
+        android:alpha=".80"
         android:layout_marginTop="15dp"
         app:cardBackgroundColor="@color/green_frag"
         app:cardCornerRadius="10dp"
