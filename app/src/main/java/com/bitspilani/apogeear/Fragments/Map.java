@@ -63,19 +63,17 @@ import com.vuforia.Vuforia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-public class Map extends Fragment implements OnMapReadyCallback , ResultCallback<Status> {
+public class Map extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap map;
     private Location currentLocation;
     private MarkerOptions markerOptions1;
     private boolean rmvMark = false;
     private List<Marker> m = new ArrayList<>();
+    private double RADIUS = 200f;
     private Button navBtn,removeMarkerBtn;
-    float RADIUS = 2000f;
-    float[] res= new float[1];
-    GeofencingRequest geofencingRequest;
-    GoogleApiClient googleApiClient;
     FirebaseFirestore db;
+    private int i,j,k;
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
 
     private static final String TAG = "MapFragment";
@@ -97,7 +95,6 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
         db=FirebaseFirestore.getInstance();
 
         db.collection("Events").get();
-      //  createGoogleApi();
 
         getLocationPermission();
         return rootView;
@@ -135,15 +132,12 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
             map.getUiSettings().setMyLocationButtonEnabled(true);
             map.getUiSettings().setCompassEnabled(false);
 
-            //setMarkers();
            addCoinsForEvents();
            addUniversalCoins();
-         //   startGeofence();
         }else{
             showGPSDisabledAlertToUser();
         }
         mapClickListener();
-    //    startGeofence();
     }
 
     private void addUniversalCoins() {
@@ -160,122 +154,103 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                 latC = (List<Double>) documentSnapshot.get("latC");
                 lngC = (List<Double>) documentSnapshot.get("lngC");
 
-                int coinsa = Integer.parseInt(documentSnapshot.get("CoinsA").toString());
-                int coinsb = Integer.parseInt(documentSnapshot.get("CoinsB").toString());
-                int coinsc = Integer.parseInt(documentSnapshot.get("CoinsC").toString());
-                try{
-                for (int i = 0; i < coinsa; i++) {
-                    LatLng latLng = new LatLng(latA.get(i), lngA.get(i));
+                int coinsa =  Integer.parseInt(documentSnapshot.get("CoinsA").toString().trim());
+                int coinsb =  Integer.parseInt(documentSnapshot.get("CoinsB").toString().trim());
+                int coinsc =  Integer.parseInt(documentSnapshot.get("CoinsC").toString().trim());
+
+                for (i=0;i<coinsa;i++){
+                    LatLng latLng = new LatLng(latA.get(i),lngA.get(i));
                     map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                //    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
-                    //  Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latA.get(i),lngA.get(i),res);
-                    Log.d("Location", "" + currentLocation.getLatitude());
-                    Log.d("loca", "" + lngA.get(i));
-                    Location l = new Location("");
-                    l.setLatitude(latA.get(i));
-                    l.setLongitude(lngA.get(i));
-                    res[0] = currentLocation.distanceTo(l);
-
-                    Log.d("dist", "" + res[0]);
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            if (res[0] < RADIUS) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Location l = new Location("");
+                                l.setLatitude(marker.getPosition().latitude);
+                                l.setLongitude(marker.getPosition().longitude);
+                                double d = (double) currentLocation.distanceTo(l);
+                                if (d<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
                             }
-                            return true;
-                        }
-                    });
+                        });
                 }
-                for (int i = 0; i < coinsb; i++) {
-                    LatLng latLng = new LatLng(latB.get(i), lngB.get(i));
+                for (j=0;j<coinsb;j++){
+                    LatLng latLng = new LatLng(latB.get(j),lngB.get(j));
                     map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_green)));
-                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                   // map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
-                    //  Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latB.get(i),lngB.get(i),res);
-                    Location l = new Location("");
-                    l.setLatitude(latB.get(i));
-                    l.setLongitude(lngB.get(i));
-                    res[0] = currentLocation.distanceTo(l);
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            if (res[0] < RADIUS) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Location l = new Location("");
+                                l.setLatitude(marker.getPosition().latitude);
+                                l.setLongitude(marker.getPosition().longitude);
+                                double d = (double) currentLocation.distanceTo(l);
+                                if (d<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
+                                }
+                                return true;
                             }
-                            return true;
-                        }
-                    });
+                        });
                 }
-                for (int i = 0; i < coinsc; i++) {
-                    LatLng latLng = new LatLng(latC.get(i), lngC.get(i));
+                for (k=0;k<coinsc;k++){
+                    LatLng latLng = new LatLng(latC.get(k),lngC.get(k));
                     map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.coin_red)));
-                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                 //   map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    //  res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
-                    //    Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),latC.get(i),lngC.get(i),res);
-                    Location l = new Location("");
-                    l.setLatitude(latC.get(i));
-                    l.setLongitude(lngC.get(i));
-                    res[0] = currentLocation.distanceTo(l);
-                    map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(@NonNull Marker marker) {
-                            if (res[0] < RADIUS) {
-                                Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                    Location l = new Location("");
+                                    l.setLatitude(marker.getPosition().latitude);
+                                    l.setLongitude(marker.getPosition().longitude);
+                                    double d = (double) currentLocation.distanceTo(l);
+                                    if (d<RADIUS) {
+                                        Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                        startActivity(intent);
+                                    }else {
+                                        Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
+                                    }
+                                    return true;
                             }
-                            return true;
-                        }
-                    });
+                        });
+                    }
                 }
-            }catch (NullPointerException e){
-                    Toast.makeText(getContext(),"Can't access location",Toast.LENGTH_LONG).show();
-                }
-            }
         });
-
     }
 
     private void mapClickListener() {
-
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng) {
                 // on click marker appereance
                 markerOptions1 = new MarkerOptions();
                 markerOptions1.position(latLng);
-               // map.clear();
                 m.add(0,map.addMarker(markerOptions1));
                 for (int i=0;i<m.size();i++){
                     if (i==0) m.get(i).setVisible(true);
                     else m.get(i).setVisible(false);
                 }
                 rmvMark = true;
-
-        //        addImages();
                 if (rmvMark==true) {
                     removeMarkerBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // removeMarker(m);
                             for (int i=0;i<m.size();i++){
                                 m.get(i).setVisible(false);
                             }
@@ -283,12 +258,8 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
                             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(@NonNull Marker marker) {
-                                    if (res[0]<RADIUS) {
                                         Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                         startActivity(intent);
-                                    }else {
-                                        Toast.makeText(getContext(), "Be close to mark", Toast.LENGTH_SHORT).show();
-                                    }
                                     return true;
                                 }
                             });
@@ -335,90 +306,50 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
         });
     }
 
-//    private void setMarkers(){
-//        List<LatLng> locationList = new ArrayList<>();
-//        locationList.add(new LatLng(28.362334, 75.585614));
-//        locationList.add(new LatLng(28.362230, 75.585002));
-//        locationList.add(new LatLng(28.361645, 75.585753));
-//
-//        for (int i = 0; i < 3; i++) {
-//            map.addMarker(new MarkerOptions()
-//                    .position(locationList.get(i))
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-//            map.moveCamera(CameraUpdateFactory.newLatLng(locationList.get(i)));
-//            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//                @Override
-//                public boolean onMarkerClick(@NonNull Marker marker) {
-//                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-//                    startActivity(intent);
-//                    return true;
-//                }
-//            });
-//        }
-//    }
 
     private void addCoinsForEvents(){
         db.collection("Events").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                try {
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        double lat = document.getDouble("lat");
-                        double lng = document.getDouble("long");
+                for (QueryDocumentSnapshot document:queryDocumentSnapshots){
+                    double lat = document.getDouble("lat");
+                    double lng = document.getDouble("long");
 
-                        LatLng latLng = new LatLng(lat, lng);
-                        map.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    LatLng latLng = new LatLng(lat,lng);
+                    map.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
+                 //   map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                        // res[0] = (float) SphericalUtil.computeDistanceBetween(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),latLng);
-                        Location l = new Location("");
-                        l.setLatitude(lat);
-                        l.setLongitude(lng);
-                        res[0] = currentLocation.distanceTo(l);
-                        //      Location.distanceBetween(currentLocation.getLatitude(),currentLocation.getLongitude(),lat,lng,res);
-                        if (rmvMark == true) {
-                            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                                @Override
-                                public boolean onMarkerClick(@NonNull Marker marker) {
-                                    return true;
+                    if (rmvMark==true){
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                               return true;
+                            }
+                        });
+                    }else{
+                        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Location l = new Location("");
+                                l.setLatitude(marker.getPosition().latitude);
+                                l.setLongitude(marker.getPosition().longitude);
+                                double d = (double) currentLocation.distanceTo(l);
+                                if (d<RADIUS) {
+                                    Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                 }
-                            });
-                        } else {
-                            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                                @Override
-                                public boolean onMarkerClick(@NonNull Marker marker) {
-                                    if (res[0] < RADIUS) {
-                                        Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(getContext(), "Be close to mark" + res[0], Toast.LENGTH_SHORT).show();
-                                    }
-                                    return true;
-                                }
-                            });
-                        }
+                                return true;
+                            }
+                        });
                     }
-                } catch (NullPointerException e){
-                    Toast.makeText(getContext(),"Can't access location",Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
-
-//    private void addImages(){
-//        List<LatLng> locationList = new ArrayList<>();
-//        locationList.add(new LatLng(28.362334, 75.585614));
-//        locationList.add(new LatLng(28.362230, 75.585002));
-//        locationList.add(new LatLng(28.361645, 75.585753));
-//
-//        for (int i = 0; i < 3; i++) {
-//            map.addMarker(new MarkerOptions()
-//                    .position(locationList.get(i))
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.coinimage)));
-//        }
-//    }
 
     private void getDeviceLocation(){
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
@@ -445,19 +376,9 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
             }
         }catch (SecurityException e){
             Log.e(TAG,"getDeviceLocation: SecurityException: "+ e.getMessage());
-        }catch (NullPointerException e){
-            Toast.makeText(getContext(),"Can't access location",Toast.LENGTH_LONG).show();
         }
     }
 
-    private void createGoogleApi() {
-        Log.d(TAG, "createGoogleApi()");
-        if ( googleApiClient == null ) {
-            googleApiClient = new GoogleApiClient.Builder( getContext() )
-                    .addApi( LocationServices.API )
-                    .build();
-        }
-    }
 
     private void initMap(){
         // Obtain the SupportMapFragment and get notified when map is ready to be used
@@ -465,54 +386,6 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
-    private void startGeofence(){
-        Geofence geofence = createGeofence(new LatLng(28.467545,75.465756),400f);
-        geofencingRequest = createGeorequest(geofence);
-        addGeoFence(geofence);
-    }
-
-    @Override
-    public void onResult(@NonNull Status status) {
-        drawGeofence();
-    }
-
-    Circle geoFenceLimits;
-    private void drawGeofence() {
-        CircleOptions circleOptions = new CircleOptions()
-                .center(m.get(0).getPosition())
-                .strokeColor(Color.argb(50,70,70,70))
-                .fillColor(Color.argb(100,150,150,150))
-                .radius(400f);
-        geoFenceLimits = map.addCircle(circleOptions);
-    }
-
-    private void addGeoFence(Geofence geofence){
-        LocationServices.GeofencingApi.addGeofences(googleApiClient,geofencingRequest,createGeofencingPendingIntent())
-        .setResultCallback(this);
-    }
-
-    private PendingIntent createGeofencingPendingIntent() {
-        Intent i = new Intent(getContext(),GeofenceTransitionService.class);
-        return PendingIntent.getService(getContext(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    private GeofencingRequest createGeorequest(Geofence geofence){
-        return new GeofencingRequest.Builder()
-                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-                .addGeofence(geofence)
-                .build();
-    }
-
-    private Geofence createGeofence(LatLng position,float v){
-        return new Geofence.Builder()
-                .setRequestId("My Geofence")
-                .setCircularRegion(position.latitude,position.longitude,v)
-                .setExpirationDuration(60*60*1000)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER|Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build();
-    }
-
 
     private void cameraZoom(Location location){
         CameraPosition position = new CameraPosition.Builder()
@@ -588,5 +461,4 @@ public class Map extends Fragment implements OnMapReadyCallback , ResultCallback
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
-
 }

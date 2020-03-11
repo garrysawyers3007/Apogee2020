@@ -42,8 +42,7 @@ import java.util.StringTokenizer;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText userEmail,userPassword;
-    private SignInButton button;
-    private Button loginBtn;
+    private Button loginBtn,button;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     String email,password;
