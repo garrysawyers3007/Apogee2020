@@ -258,8 +258,16 @@ public class Map extends Fragment implements OnMapReadyCallback {
                             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(@NonNull Marker marker) {
+                                    Location l = new Location("");
+                                    l.setLatitude(marker.getPosition().latitude);
+                                    l.setLongitude(marker.getPosition().longitude);
+                                    double d = (double) currentLocation.distanceTo(l);
+                                    if (d<RADIUS) {
                                         Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                         startActivity(intent);
+                                    }else {
+                                        Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
+                                    }
                                     return true;
                                 }
                             });
