@@ -70,8 +70,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private MarkerOptions markerOptions1;
     private boolean rmvMark = false;
     private List<Marker> m = new ArrayList<>();
-    private double RADIUS = 200f;
+    private double RADIUS = 2000f;
     private Button navBtn,removeMarkerBtn;
+    private Boolean collected = false;
     FirebaseFirestore db;
     private int i,j,k;
     FirebaseAuth mAuth=FirebaseAuth.getInstance();
@@ -172,9 +173,11 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                 l.setLatitude(marker.getPosition().latitude);
                                 l.setLongitude(marker.getPosition().longitude);
                                 double d = (double) currentLocation.distanceTo(l);
-                                if (d<RADIUS) {
+                                if (d<RADIUS&&!collected) {
+                                    marker.setVisible(false);
                                     Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                     startActivity(intent);
+                                    collected = true;
                                 }else {
                                     Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                 }
@@ -196,9 +199,11 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                 l.setLatitude(marker.getPosition().latitude);
                                 l.setLongitude(marker.getPosition().longitude);
                                 double d = (double) currentLocation.distanceTo(l);
-                                if (d<RADIUS) {
+                                if (d<RADIUS&&!collected) {
+                                    marker.setVisible(false);
                                     Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                     startActivity(intent);
+                                    collected = true;
                                 }else {
                                     Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                 }
@@ -220,9 +225,11 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                     l.setLatitude(marker.getPosition().latitude);
                                     l.setLongitude(marker.getPosition().longitude);
                                     double d = (double) currentLocation.distanceTo(l);
-                                    if (d<RADIUS) {
+                                    if (d<RADIUS&&!collected) {
+                                        marker.setVisible(false);
                                         Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                         startActivity(intent);
+                                        collected = true;
                                     }else {
                                         Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                     }
@@ -262,9 +269,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                     l.setLatitude(marker.getPosition().latitude);
                                     l.setLongitude(marker.getPosition().longitude);
                                     double d = (double) currentLocation.distanceTo(l);
-                                    if (d<RADIUS) {
+                                    if (d<RADIUS&&!collected) {
                                         Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                         startActivity(intent);
+                                        collected = true;
                                     }else {
                                         Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                     }
@@ -344,9 +352,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
                                 l.setLatitude(marker.getPosition().latitude);
                                 l.setLongitude(marker.getPosition().longitude);
                                 double d = (double) currentLocation.distanceTo(l);
-                                if (d<RADIUS) {
+                                if (d<RADIUS&&!collected) {
                                     Intent intent = new Intent(getActivity(), UnityPlayerActivity.class);
                                     startActivity(intent);
+                                    collected = true;
                                 }else {
                                     Toast.makeText(getContext(), "Go close to coin", Toast.LENGTH_SHORT).show();
                                 }
